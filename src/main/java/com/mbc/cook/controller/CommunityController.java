@@ -67,7 +67,7 @@ public class CommunityController {
         return "redirect:/community/list";
     }
 
-    @GetMapping(value = "/updatecom")
+    @GetMapping(value = "/update")
     public String communityUpdate(Model model, @RequestParam("num") long num) {
         model.addAttribute("cssPath", "/community/update");//css 패스 경로(바꾸지X)
         model.addAttribute("pageTitle", "커뮤니티 수정");//타이틀 제목
@@ -95,7 +95,7 @@ public class CommunityController {
         return "redirect:/community/list";
     }
 
-    @GetMapping(value = "/deletecom")
+    @GetMapping(value = "/delete")
     public String communityDelete(Model model, @RequestParam("num") long num) {
         model.addAttribute("cssPath", "/community/delete");//css 패스 경로(바꾸지X)
         model.addAttribute("pageTitle", "커뮤니티 삭제");//타이틀 제목

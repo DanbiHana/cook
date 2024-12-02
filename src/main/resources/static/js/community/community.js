@@ -16,13 +16,13 @@ function confirmOk(value){
     //삭제
     if(value == 'commu_delete'){
         var commu_num = $('#commu_num').val();
-        location.href = '/community/deletecom?num='+commu_num;
+        location.href = '/community/delete?num='+commu_num;
         return alertShow('삭제 확인','삭제되었습니다.');
     }
     //수정
     else if(value == 'commu_update'){
             var commu_num = $('#commu_num').val();
-            location.href = '/community/updatecom?num='+commu_num;
+            location.href = '/community/update?num='+commu_num;
             console.log("받은 번호 : "+commu_num);
     }
 }
