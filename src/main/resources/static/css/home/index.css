@@ -1,4 +1,9 @@
 @charset "UTF-8";
+.index_whole{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
 .main_whole h2{
     text-align: center;
     margin-top: 0;
@@ -9,6 +14,9 @@ p.commu_subtitle{
     font-size: 20px;
     line-height: 29px;
     font-weight: bold;
+}
+p.commu_subtitle{
+    margin-bottom: 20px;
 }
 .commu_inner{
     width: 100%;
@@ -44,6 +52,10 @@ p.commu_subtitle{
     height: auto;
     margin: 40px auto 0 auto;
 }
+.commu_in .display_flex.commu_flex,
+.commu_in .display_flex.commu_flex2{
+    margin-top: 0;
+}
 .commu_row{
     width: 100%;
     height: auto;
@@ -61,17 +73,17 @@ p.commu_subtitle{
     color: var(--second-color);
     margin-top: 10px;
 }
-.commu_in .display_flex span{
+.commu_in .commu_flex span.span_between{
     display: block;
     background-color: var(--lt-gray);
 }
-.commu_box1 .commu_in .display_flex span{
+.commu_box1 .commu_in .commu_flex span.span_between{
     min-width: 2px;
     width: 2px;
     height: 50px;
     margin: 0 40px;
 }
-.commu_box2 .commu_in .display_flex span{
+.commu_box2 .commu_in .commu_flex span.span_between{
     width: 80%;
     height: 2px;
     margin: 30px auto;
@@ -83,23 +95,48 @@ p.commu_subtitle{
     margin: 0 auto;
     overflow: hidden;
 }
-.commu_box.commu_box2 .commu_in .display_flex{
+.commu_flex{
     display: block;
     margin-top: 0;
 }
+.commu_flex2{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.commu_flex2 a{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.commu_flex2 a:hover{
+    text-decoration: underline;
+}
+.commu_flex2 a img{
+    display: inline-block;
+    min-width: 16px;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    margin-left: 5px;
+}
 .commu_box.commu_box2 .commu_row{
+    width: calc(100% - 10px);
     max-width: none;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+.commu_box.commu_box2 .commu_row:hover{
+    background-color: var(--opa-blue50);
+}
+.commu_box.commu_box2 .commu_row:nth-child(2){
     margin-top: 10px;
 }
-.commu_box.commu_box2 .commu_row:first-child{
-    margin-top: 15px;
-}
 .commu_box.commu_box2 .commu_row + .commu_row{
-    padding-left: 0;
     margin-left: 0;
     border-left: none;
 }
@@ -110,16 +147,57 @@ p.commu_subtitle{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-right: 15px;
+    margin-right: 10px;
 }
-.commu_box.commu_box2 .commu_row p + p{
+.commu_box.commu_box2 .commu_row .commu_name p{
+    color: var(--bg-black);
+    margin-right: 10px;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.commu_box.commu_box2 .commu_row .commu_name p:first-child{
+    display: flex;
+    min-width: 52px;
+    padding: 0;
+    align-items: center;
+}
+.commu_box.commu_box2 .commu_row .commu_name p:first-child span:nth-child(2){
+    display: inline-block;
+    min-width: 40px;
+    width: 40px;
+    max-width: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.commu_box.commu_box2 .commu_row div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+}
+.commu_box.commu_box2 .commu_row div img{
     display: block;
+    min-width: 20px;
+    width: 20px;
+    background-size: contain;
+}
+.commu_box.commu_box2 .commu_row div p{
+    display: block;
+    min-width: 40px;
     width: max-content;
     max-width: 100%;
     font-size: 16px;
     line-height: 24px;
-    text-align: end;
+    text-align: center;
     margin-top: 0;
+    padding: 0 5px;
+}
+.commu_box.commu_box2 .commu_row div + div{
+    min-width: max-content;
+    width: max-content;
 }
 /*레시피 랜덤 리스트*/
 .list_inner{
@@ -147,16 +225,20 @@ p.commu_subtitle{
     background-color: var(--point-color);
     border-radius: 10px;
 }
+.list_flex p.no_data_txt{
+    padding: 50px 0;
+}
 .list_row{
     display: block;
-    min-width: 186px;
+    min-width: 196px;
     width: calc(100% - 24px);
+    max-width: 196px;
     height: auto;
     padding: 10px;
     border: 2px solid var(--bg-none);
     border-radius: 10px;
     background-color: var(--all-white);
-    margin: 0 auto;
+    margin: 0 10px 0 0;
     box-shadow: 0 0 rgba(31,163,194,0.2);
 }
 .list_row:first-child{
@@ -184,9 +266,9 @@ p.commu_subtitle{
 }
 img.recipe_img{
     width: 100%;
-    min-height: 160px;
-    height: 160px;
-    max-height: 160px;
+    min-height: 235px;
+    height: 235px;
+    max-height: 235px;
     object-fit: cover;
     margin: 0 auto;
     border-radius: 5px;
@@ -195,7 +277,11 @@ img.recipe_img{
 .list_box .display_flex.list_top{
     width: 100%;
     height: auto;
-    margin: 0 auto 10px auto;
+    margin: 0 auto;
+}
+.list_box .display_flex.list_top .display_flex,
+.list_box .display_flex.list_top + .display_flex{
+    padding-bottom: 0;
 }
 .list_top .display_flex{
     width: 100%;
@@ -259,6 +345,7 @@ p.food_title{
 /*랜덤*/
 .random_img{
     margin: 20px auto 10px auto;
+    padding-bottom: 10px;
 }
 /*랜덤 텍스트*/
 .random_info{
@@ -386,17 +473,17 @@ img.dish_spoon{
         width: calc(100% - 100px);
         padding: 30px 50px;
     }
-    .commu_in .display_flex span{
+    .commu_in .display_flex span.span_between{
         margin: 0;
     }
-    .commu_box.commu_box2 .commu_in .display_flex{
+    .commu_flex{
         display: flex;
     }
     /*공지사항&자유게시판*/
-    .commu_box1 .commu_in .display_flex span{
+    .commu_box1 .commu_in .commu_flex span.span_between{
         margin: 0 100px;
     }
-    .commu_box2 .commu_in .display_flex span{
+    .commu_box2 .commu_in .commu_flex span.span_between{
         min-width: 2px;
         width: 2px;
         height: 100px;
@@ -433,14 +520,14 @@ img.dish_spoon{
         font-size: 15px;
         line-height: 22px;
     }
-    .commu_box1 .commu_in .display_flex span{
+}
+@media (max-width: 1023px){
+    /*랜덤*/
+    .commu_box1 .commu_in .commu_flex span.span_between{
         width: 80%;
         height: 2px;
         margin: 30px auto;
     }
-}
-@media (max-width: 1023px){
-    /*랜덤*/
     .list_flex{
         display: block;
     }
