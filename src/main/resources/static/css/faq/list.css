@@ -11,7 +11,7 @@
 .faq_whole{
     width: 100%;
     height: auto;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
 }
 .faq_row{
     width: calc(100% - 2px);

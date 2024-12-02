@@ -13,25 +13,23 @@
             </div>
         </div>
         <form action="/faq/updatesave" method="post">
-        <div class="faq-update">
-            <div class="faq_upsub">
+            <div class="faq_main">
                 <div class="faq_info1">
-                    <label>FAQ번호</label>
+                    <p>번호</p>
                     <input type="text" name="faqnum" id="faqnum" th:value="${dto.faqnum}" readonly>
                 </div>
                 <div class="faq_info1">
-                    <label>FAQ질문</label>
+                    <p>질문</p>
                     <input type="text" name="question" id="question" th:value="${dto.question}">
                 </div>
                 <div class="faq_info1">
-                    <label>FAQ답변</label>
-                    <input type="text" name="asked" id="asked" th:value="${dto.asked}">
+                    <p>답변</p>
+                    <textarea rows="5" cols="100" name="asked" id="asked" placeholder="답변 입력" th:text="${dto.asked}"></textarea>
                 </div>
                 <div class="btn_flex">
-                    <a type="submit"><button class="btn_submit">수정완료</button></a>
+                    <button type="submit" class="btn_submit">수정완료</button>
                 </div>
             </div>
-        </div>
         </form>
     </div>
 </html>

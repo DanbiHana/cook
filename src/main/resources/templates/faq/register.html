@@ -12,21 +12,20 @@
                 <h1>FAQ 등록</h1>
             </div>
         </div>
-
-    <form action="/faq/faqsave" method="post">
-        <div class="faq_main">
-            <div>
-                <p>질문 :</p>
-                <input type="text" name="question" id="question" placeholder="질문 입력">
+        <form action="/faq/faqsave" method="post">
+            <div class="faq_main">
+                <div>
+                    <p>질문</p>
+                    <input type="text" name="question" id="question" placeholder="질문 입력">
+                </div>
+                <div>
+                    <p>답변</p>
+                    <textarea rows="5" cols="100" name="asked" id="asked" placeholder="답변 입력"></textarea>
+                </div>
             </div>
-            <div>
-                <p>답변 :</p>
-                <textarea rows="5" cols="100" name="asked" id="asked" placeholder="답변 입력"></textarea>
+            <div class="btn_flex">
+                <button type="submit" value="등록" class="btn_submit">등록</button>
             </div>
-        </div>
-        <div class="btn_flex">
-            <button type="submit" value="등록" class="btn_submit">등록</button>
-        </div>
-    </form>
+        </form>
     </div>
 </html>

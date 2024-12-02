@@ -16,19 +16,19 @@
             <div class="faq_main">
                 <div class="faq_sub">
                     <div class="faq_info">
-                        <p>FAQ번호</p>
+                        <p>번호</p>
                         <input type="text" name="faqnum" id="faqnum" th:value="${dto.faqnum}" readonly>
                     </div>
                     <div class="faq_info">
-                        <p>FAQ질문</p>
+                        <p>질문</p>
                         <input type="text" name="question" id="question" th:value="${dto.question}" readonly>
                     </div>
                     <div class="faq_info">
-                        <p>FAQ답변</p>
-                        <input type="text" name="asked" id="asked" th:value="${dto.asked}" readonly>
+                        <p>답변</p>
+                        <textarea rows="5" cols="100" name="asked" id="asked" placeholder="답변 입력" th:text="${dto.asked}" readonly></textarea>
                     </div>
                     <div class="btn_flex">
-                        <a type="submit"><button class="btn_submit">삭제하기</button></a>
+                        <button type="submit" class="btn_submit">삭제하기</button>
                     </div>
                 </div>
             </div>

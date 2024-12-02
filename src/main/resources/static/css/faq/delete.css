@@ -2,25 +2,16 @@
 .faq_main{
     width: 100%;
     height: auto;
+    margin: 30px auto;
+}
+.faq_main div{
     margin: 0 auto;
 }
-.faq_info{
-    padding: 10px;
+.faq_main div + div{
+    margin-top: 20px;
 }
-.faq_info input{
-    color: var(--bg-black);
-    border-radius: 10px;
-}
-
-.faq_sub .btn_flex{
-    width: calc(100% - 20px);
-    margin: 10px auto;
-    border-top: 1px solid var(--md-blue);
-    padding-top: 10px;
-}
-.faq_sub .btn_flex a{
-    display: inline-block;
-    width: 100%;
-    max-width: 150px;
-    height: auto;
+.faq_main p{
+    width: 60px;
+    min-width: 60px;
+    margin-bottom: 5px;
 }
