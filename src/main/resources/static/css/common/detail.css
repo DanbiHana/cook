@@ -28,7 +28,7 @@
 }
 @media (min-width: 1024px){
     .header_logo{
-        display: block!important;
+        display: flex!important;
     }
     .header_back{
         display: none!important;
