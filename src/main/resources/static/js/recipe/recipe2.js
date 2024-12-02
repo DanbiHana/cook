@@ -76,12 +76,6 @@ function recipeImgChange(event){
 var seqArray = [];//시퀀스
 var makeArray = [];//방법
 function recipeRegister(){
-    var val_img = $('input[name="image"]').val();//이미지
-    var val_food = $('input[name="food"]').val();//음식명
-    var val_cat1 = $('input[name="category1"]').val();//카테고리1
-    var val_cat2 = $('input[name="category2"]').val();//카테고리2
-    var val_ingr = $('input[name="ingredient"]').val();//재료
-    var val_way = $('input[name="recipe"]').val();//재료
     var ingre_ing = "";
     //재료 array recipe_ingre div에 값 넣기
     $('#recipe_ingre').val(seqArray);
@@ -97,28 +91,41 @@ function recipeRegister(){
         }
     });
     $('#recipe_way').val(way_make);
-    //유효성
-    if(win_href.includes('/register')
-    && val_img == ''
-    || val_food == ''
-    || val_cat1 == ''
-    || val_cat2 == ''
-    ){
-        alertShow('정보 미입력','정보를 모두 입력해주세요.');
-        return false;
-    }else if(win_href.includes('&path=update')
-    && val_food == ''
-    || val_cat1 == ''
-    || val_cat2 == ''
-    || val_ingr == ''
-    || val_way == ''
-    ){
-      alertShow('정보 미입력','정보를 모두 입력해주세요.');
-      return false;
-    }
     standbyShow('저장 중', '잠시만 기다려 주세요.');
-    $('#recipe_form').submit();
-    standbyHide();
+    setTimeout(function() {
+        var val_img = $('input[name="image"]').val();//이미지
+        var val_food = $('input[name="food"]').val();//음식명
+        var val_cat1 = $('input[name="category1"]').val();//카테고리1
+        var val_cat2 = $('input[name="category2"]').val();//카테고리2
+        var val_ingr = $('input[name="ingredient"]').val();//재료
+        var val_way = $('input[name="recipe"]').val();//레시피 방법
+        //유효성
+        if(win_href.includes('/register')
+        && val_img == ''
+        || val_food == ''
+        || val_cat1 == ''
+        || val_cat2 == ''
+        ){
+            standbyHide();
+            alertShow('정보 미입력','정보를 모두 입력해주세요.');
+            return false;
+        }else if(win_href.includes('&path=update')
+        && val_food == ''
+        || val_cat1 == ''
+        || val_cat2 == ''
+        || val_ingr == ''
+        || val_way == ''
+        ){
+            standbyHide();
+            alertShow('정보 미입력','정보를 모두 입력해주세요.');
+            return false;
+        }
+        else{
+            standbyHide();
+            alertShow('저장 완료','정보를 모두 저장했습니다.');
+            $('.btn_confirm').attr('onclick', '$("#recipe_form").submit()');
+        }
+    }, 3000);
 }
 //등록-재료 입력 크롤링 부분
 function recipeIngreSelect(object) {
