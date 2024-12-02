@@ -30,9 +30,9 @@
                     <a href="/login" sec:authorize="isAnonymous()" id="header_login"><span></span>로그인</a>
                     <a href="/signup" sec:authorize="isAnonymous()" id="header_signup"><span></span>회원가입</a>
                     <a href="javascript:void(0)" onclick="mypageChk()" sec:authorize="isAuthenticated()"><span id="header_mypage" th:text="${#authentication.name}"></span>님</a>
-                    <a th:href="@{/recipe/cart(id=${#authentication.name},status=orderprev)}" sec:authorize="isAuthenticated()" title="장바구니" id="cart"><span></span></a>
                     <a href="/admin/list" sec:authorize="hasAuthority('ADMIN')" id="header_member" th:text="회원관리"></a>
                     <a th:href="@{/recipe/cart(id=${#authentication.name},status=orderprev)}" sec:authorize="isAuthenticated()"><span id="cart2"></span>주문내역</a>
+                    <a th:href="@{/recipe/cart(id=${#authentication.name},status=orderprev)}" sec:authorize="isAuthenticated()" title="장바구니" id="cart"><span></span></a>
                     <a href="/logout" sec:authorize="isAuthenticated()"><span id="header_logout"></span>로그아웃</a>
                 </div>
                 <nav class="header_a">
