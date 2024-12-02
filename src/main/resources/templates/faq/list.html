@@ -24,9 +24,13 @@
                         <p>A.</p>
                         <p th:text="${faq.asked}"></p>
                     </div>
-                    <div class="btn_flex">
-                        <a th:href="@{/faq/update(num=${faq.faqnum})}" sec:authorize="hasAuthority('ADMIN')"><button type="button" class="btn_prev">수정</button></a>
-                        <a th:href="@{/faq/delete(num=${faq.faqnum})}" sec:authorize="hasAuthority('ADMIN')"><button type="button" class="btn_submit">삭제</button></a>
+                    <div class="btn_flex" sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/faq/update(num=${faq.faqnum})}">
+                            <button type="button" class="btn_prev">수정</button>
+                        </a>
+                        <a th:href="@{/faq/delete(num=${faq.faqnum})}">
+                            <button type="button" class="btn_submit">삭제</button>
+                        </a>
                     </div>
                 </div>
             </div>
