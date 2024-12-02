@@ -69,6 +69,9 @@
     height: 25px;
     z-index: 3;
 }
+.header_top.header_on .header_hamburger{
+    margin-bottom: -10px;
+}
 .header_hamburger span{
     position: absolute;
     display: block;
@@ -133,11 +136,24 @@
 }
 .header_side .display_flex a{
     display: block;
+    height: 25px;
     color: var(--ddp-gray);
     padding-bottom: 5px;
     border-bottom: 1px solid var(--bg-none);
     transition: 0.2s;
     margin-right: 10px;
+}
+.header_side .display_flex a#cart{
+    margin-right: 4px;
+}
+.header_side .display_flex a#cart span{
+    display: inline-block;
+    min-width: 25px;
+    width: 25px;
+    height: 25px;
+    background: url('/image/icon/recipe/cart-bu.png') no-repeat;
+    background-size: contain;
+    margin: 0;
 }
 .header_side .display_flex a:last-child{
     margin-right: 0;
@@ -267,6 +283,7 @@ a.link_on{
         flex-direction: row-reverse;
         max-width: none;
         min-height: auto;
+        height: 40px;
         padding: 0;
         background-color: var(--bg-none);
         top: auto;
@@ -279,8 +296,9 @@ a.link_on{
         margin: 0;
     }
     .header_side .display_flex a{
-        padding-bottom: 10px;
-        margin-bottom: 2px;
+        height: 18px;
+        padding-bottom: 16px;
+        margin-bottom: -2px;
         color: var(--lt-gray);
     }
     .header_side .display_flex a:hover{
@@ -288,6 +306,10 @@ a.link_on{
     }
     .header_side .display_flex a span{
         color: var(--lt-gray);
+    }
+    .header_side .display_flex a#cart span{
+        background: url('/image/icon/recipe/cart-wh.png') no-repeat;
+        background-size: contain;
     }
     .header_side .display_flex a + a{
         margin-left: 20px;
