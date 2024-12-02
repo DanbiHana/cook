@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}"
       layout:fragment="content">
+<body>
     <div class="list_whole">
         <h1>커뮤니티 리스트</h1>
         <!--페이지명을 위한 임시 작업;
@@ -12,4 +13,49 @@
         <a href="/community/update">수정</a>
         <a href="/community/delete">삭제</a>
     </div>
+
+    <table class="table table-hover">
+        <tr class="totalList" th:onclick="'goToDetail(' + ${com.communityNum} + ')'" th:each="com:${list}">
+            <td>
+                <div th:text="${com.communityTitle}" id="communityTitle"></div>
+            </td>
+            <td>
+                <label for="communityId">작성자 : </label>
+                <span th:text="${com.communityId}" class="showId" id="communityId"></span>
+            </td>
+            <td>
+                <div th:if="${com.communityDate == com.communityUpdateDate}">
+                    <label for="communityDate">등록일</label>
+                    <div th:text="${#temporals.format(com.communityDate, 'yyyy-MM-dd')}" id="communityDate"></div>
+                </div>
+                <div th:if="${com.communityDate != com.communityUpdateDate}">
+                    <label for="communityUpdateDate">마지막 수정일</label>
+                    <div th:text="${#temporals.format(com.communityUpdateDate, 'yyyy-MM-dd')}" id="communityUpdateDate"></div>
+                </div>
+            </td>
+            <td>
+                <label for="communityReadcnt">조회수</label>
+                <div th:text="${com.communityReadcnt}" id="communityReadcnt"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" th:if="${list == null} or ${list.size() == 0}" class="no_data_txt">등록된 레시피가 없습니다.</td>
+        </tr>
+    </table>
+    <!-- 페이징 처리 -->
+    <div class="pagination" align="center">
+        <ul>
+            <li th:each="page : ${#numbers.sequence(0, totalPage -1)}">
+      <span th:if="${nowpage == pageStat.index}" style="color:red">
+        <a th:href="@{/community/list(page=${pageStat.index})}" th:text="${pageStat.index+1}"></a>
+          <!-- /out은 컨트롤러 연결명 -->
+      </span>
+                <div th:if="${nowpage != pageStat.index}">
+                    <a th:href="@{/community/list(page=${pageStat.index})}" th:text="${pageStat.index+1}"></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- -->
+</body>
 </html>

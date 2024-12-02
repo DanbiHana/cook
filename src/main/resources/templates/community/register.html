@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}"
       layout:fragment="content">
+<body>
     <div class="register_whole">
         <div class="detail_title">
             <div class="display_flex flex_align_c">
@@ -12,5 +13,31 @@
                 <h1>커뮤니티 글 등록</h1>
             </div>
         </div>
+        <!-- 글 등록 input창 -->
+        <form action="/community/save" method="post" modelAttribute="communityDTO" th:object="${communityDTO}">
+            <div class="communtyInput">
+                <div>
+                    <label for="communityTitle">글 제목 : </label>
+                    <input type="text" th:field="*{communityTitle}" id="communityTitle"/>
+                    <!-- communityTitle 필드 오류 -->
+                    <p th:if="${#fields.hasErrors('communityTitle')}" th:errors="*{communityTitle}" style="color:red;"></p>
+                </div>
+                <div>
+                    <label for="communityId">작성자 : </label>
+                    <input type="text" name="communityId" id="communityId" />
+                </div>
+                <div>
+                    <label for="communityContent">글 내용 : </label>
+                    <textarea th:field="*{communityContent}" id="communityContent" rows="3" cols="25"></textarea>
+                    <!-- communityContent 필드 오류 -->
+                    <p th:if="${#fields.hasErrors('communityContent')}" th:errors="*{communityContent}" style="color:red;"></p>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary" value="글 등록">
+                    <input type="button" onclick="location.href='/community/list'" class="btn btn-info" value="돌아가기">
+                </div>
+            </div>
+        </form>
     </div>
+</body>
 </html>

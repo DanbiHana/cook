@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}"
       layout:fragment="content">
+<body>
     <div class="detail_whole">
         <div class="detail_title">
             <div class="display_flex flex_align_c">
@@ -12,5 +13,34 @@
                 <h1>커뮤니티 글 상세</h1>
             </div>
         </div>
+        <div th:each="com:${community}">
+            <input type="hidden" id="commu_num" name="commu_num" th:value="${com.communityNum}">
+            <div>
+                <p th:text="${com.communityTitle}"></p>
+                <div>
+                    <div th:if="${com.communityDate == com.communityUpdateDate}">
+                        작성자: <span th:text="${com.communityId}"></span> | 등록일: <span th:text="${#temporals.format(com.communityDate, 'yyyy-MM-dd')}"></span> | 조회수: <span th:text="${com.communityReadcnt}"></span>
+                    </div>
+                    <div th:if="${com.communityDate != com.communityUpdateDate}">
+                        작성자: <span th:text="${com.communityId}"></span> | 마지막 수정일: <span th:text="${#temporals.format(com.communityUpdateDate, 'yyyy-MM-dd')}"></span> | 조회수: <span th:text="${com.communityReadcnt}"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p th:text="${com.communityContent}"></p>
+            </div>
+            <div>
+                <input type="text" name="plusComment" id="plusComment" placeholder="댓글을 입력하세요.">
+                <button type="button" th:onclick="'goToComment(' + ${com.communityNum} + ')'">댓글달기</button>
+            </div>
+            <div>
+                <button type="button" th:onclick="location.href='/community/list'">이전으로</button>
+            </div>
+            <div>
+                <button type="button" th:onclick="goToUpdate()">수정</button>
+                <button type="button" th:onclick="goToDelete()">삭제</button>
+            </div>
+        </div>
     </div>
+</body>
 </html>
