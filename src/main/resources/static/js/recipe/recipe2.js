@@ -179,7 +179,7 @@ function ingreLoad(object){
 //재료 클릭 시
 function ingreClick(object){
     var ingre_seq = object.dataset.seq;//재료 시퀀스 넘버
-    var ingre_name = object.value;//재료 이름
+    var ingre_name = object.dataset.name;//재료 이름
     var index = seqArray.indexOf(ingre_seq);
     var ingre_br = "";
     if(index < 0)  {//시퀀스 번호가 seqArray 배열에 없으면 ingreArray 배열에 값을 넣어줌
