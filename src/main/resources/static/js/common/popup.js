@@ -55,7 +55,6 @@ function mypageChk() {
 }
 //mypage 들어갈 때 pwchk
 function pwchk() {
-    console.log("click");
     var id = $("#header_mypage").text();
     var pw= $("#chkpw").val();
     $.ajax({
@@ -82,4 +81,18 @@ function pwchk() {
                  .prev('input').attr('type','password');
              }
          });
+}
+function addrChk() {
+    $("body").css('overflow', 'hidden');
+    $('.address_whole').show();
+}
+function addrCheck(){
+    $('#changeAddr').text();
+}
+function addrChange(){
+    execDaumPostcode();
+}
+function addrHide(){
+    $('body').css('overflow', 'auto');
+    $('.address_whole').hide();
 }
