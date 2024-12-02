@@ -4,7 +4,6 @@
       layout:decorate="~{common/layout}"
       layout:fragment="content">
     <div class="index_whole">
-        <h1>메인</h1>
         <!--커뮤니티-->
         <div class="commu_inner">
             <div class="commu_box commu_box1">
@@ -70,7 +69,7 @@
         </div>
         <!--레시피-->
         <div class="list_inner">
-            <h2 th:if="${#authentication.name != 'anonymousUser'}" th:text="${#authentication.name}+'님, 이런 요리 어때요?'"></h2>
+            <h1><span th:if="${#authentication.name != 'anonymousUser'}" th:text="${#authentication.name}+'님, '"></span>이런 요리 어때요?</h1>
             <div class="list_flex display_flex flex_start flex_align_c">
                 <div class="display_flex flex_start flex_align_str">
                     <div class="list_row" th:each="recipe:${recipeList}">
