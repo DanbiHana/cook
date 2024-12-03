@@ -86,7 +86,7 @@ public class MemberController2 {
         PrintWriter prw = response.getWriter();
        String result = memberService2.pwchk(id);
        boolean chk = passwordEncoder.matches(pw,result);
-        prw.print(result);
+        prw.print(chk);
     }
 
 }

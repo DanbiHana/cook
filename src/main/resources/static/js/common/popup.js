@@ -54,45 +54,44 @@ function mypageChk() {
     $('.pwchk_whole').show();
 }
 //mypage 들어갈 때 pwchk
-function pwchk() {
-    var id = $("#header_mypage").text();
-    var pw= $("#chkpw").val();
-    $.ajax({
-        type:"post",
-        url:"/pwchk",
-        async:true,
-        data:{"id":id,"pw":pw},
-        success:function(data){
-            if(data){
-                 location.href="/mypage?id="+id;
-            } else {
+function mypagepwchk() {
+    var chkpw = $("#chkpw").val();
+    if(chkpw!='') {
+        var id = $("#header_mypage").text();
+        var pw= $("#chkpw").val();
+        $.ajax({
+            type:"post",
+            url:"/pwchk",
+            async:true,
+            data:{"id":id,"pw":pw},
+            success:function(data){
+                if(data){
+                    if(data=='true'){
+                        console.log(data);
+                        location.href="/mypage?id="+id;
+                    }else{
+                        alertShow("오류","비밀번호가 다릅니다");
+                        return false;
+                    }
+                }
+            },
+            error:function(data){
+                alertShow("오류","다시 한 번 시도해주세요");
                 return false;
             }
-        }
-    });
+        });
+    }else{
+        alertShow("비밀번호를 입력해주세요!","");
+    }
     //비밀번호 보기 구현
-         $('.pw i').on('click',function(){
-             $('input').toggleClass('active');
-             if($('input').hasClass('active')){
-                 $(this).attr('class',"fa fa-eye fa-lg")
-                 .prev('input').attr('type',"text");
-             }else{
-                 $(this).attr('class',"fa fa-eye-slash fa-lg")
-                 .prev('input').attr('type','password');
-             }
-         });
-}
-function addrChk() {
-    $("body").css('overflow', 'hidden');
-    $('.address_whole').show();
-}
-function addrCheck(){
-    $('#changeAddr').text();
-}
-function addrChange(){
-    execDaumPostcode();
-}
-function addrHide(){
-    $('body').css('overflow', 'auto');
-    $('.address_whole').hide();
+     $('.pw i').on('click',function(){
+         $('input').toggleClass('active');
+         if($('input').hasClass('active')){
+             $(this).attr('class',"fa fa-eye fa-lg")
+             .prev('input').attr('type',"text");
+         }else{
+             $(this).attr('class',"fa fa-eye-slash fa-lg")
+             .prev('input').attr('type','password');
+         }
+     });
 }
