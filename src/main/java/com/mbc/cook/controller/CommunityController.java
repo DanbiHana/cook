@@ -39,7 +39,7 @@ public class CommunityController {
         // 페이징 처리
         Page<CommunityEntity> listPage = communityService.list(page);
         int totalPage = listPage.getTotalPages();
-        int nowpage = listPage.getPageable().getPageNumber()+1;//현재페이지//
+        int nowpage = listPage.getPageable().getPageNumber();//현재페이지//
         model.addAttribute("nowpage",nowpage);
         model.addAttribute("list",listPage.getContent());
         model.addAttribute("totalPage",totalPage);
