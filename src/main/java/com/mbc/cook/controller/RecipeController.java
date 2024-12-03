@@ -150,7 +150,7 @@ public class RecipeController {
     }
 
     @ResponseBody
-    @PostMapping("/orderIngredientList")
+    @PostMapping("/order/ingredientList")
     public String [] orderIngredientList(@RequestParam("id") long id){
         String ingredientString = recipeService.selectListIngredient(id,"order");
         String [] ingreEach = ingredientString.split(",");
@@ -158,9 +158,9 @@ public class RecipeController {
         for(int i =0; i<ingreEach.length; i++){
             String [] ingreNum = ingreEach[i].split("x");
             IngreEntity ige = parseIngredient(ingreNum[0]);
-            list[i] = ige.getName()+"@"+ige.getPrice()+"@"+ingreNum[1];
+            list[i] = ige.getIngre_seq()+"@"+ige.getName()+"@"+ige.getPrice()+"@"+ingreNum[1];
+            System.out.println(i+": "+list[i]);
         }
-        System.out.println(list);
         return list;
     }
 
