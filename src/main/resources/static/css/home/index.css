@@ -215,6 +215,10 @@ p.commu_subtitle{
     overflow: hidden;
     overflow-x: auto;
     padding-bottom: 15px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 .list_flex .display_flex::-webkit-scrollbar{
     width: auto;

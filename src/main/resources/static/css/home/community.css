@@ -1,0 +1,211 @@
+@charset "UTF-8";
+.main_whole h2{
+    text-align: center;
+    margin-top: 0;
+}
+/*커뮤니티*/
+.main_whole h2,
+p.commu_subtitle{
+    font-size: 20px;
+    line-height: 29px;
+    font-weight: bold;
+}
+p.commu_subtitle{
+    margin-bottom: 20px;
+}
+.commu_inner{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.commu_box{
+    width: calc(100% - 30px);
+    height: auto;
+    padding: 20px 15px;
+    background-color: var(--all-white);
+    border-radius: 5px;
+    margin: 10px auto 0 auto;
+}
+.commu_box + .commu_box{
+    margin-top: 0;
+}
+.commu_box p{
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.commu_in{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.commu_in .display_flex{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+/*내 게시글*/
+.commu_row{
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.commu_row2{
+    display: flex;
+    align-items: center;
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.commu_flex2 + .commu_row2{
+    margin-top: 15px;
+}
+.commu_row2:hover{
+    background-color: var(--opa-blue50);
+}
+.commu_flex{
+    margin-top: 0;
+}
+.commu_flex2 a{
+    min-width: max-content;
+    width: max-content;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.commu_flex2 a:hover{
+    text-decoration: underline;
+}
+.commu_flex a img{
+    display: inline-block;
+    min-width: 16px;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    margin-left: 5px;
+}
+.commu_row p{
+    text-align: start;
+}
+.commu_name{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 auto 0 0;
+}
+.commu_name p{
+    color: var(--bg-black);
+    margin-right: 10px;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.commu_name p:first-child{
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: max-content;
+    padding: 0;
+    align-items: center;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+}
+.commu_name p:first-child span:nth-child(2){
+    display: inline-block;
+    min-width: 125px;
+    width: 125px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.commu_row div.commu_name p + p{
+    width: calc(100% - 10px);
+    text-align: start;
+}
+.commu_row2 div + div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+}
+.commu_row div img{
+    display: block;
+    min-width: 20px;
+    width: 20px;
+    background-size: contain;
+}
+.commu_row button img{
+    margin-right: 5px;
+}
+.commu_row div p{
+    display: block;
+    min-width: 40px;
+    width: max-content;
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 0;
+    padding: 0 5px;
+}
+.commu_row div{
+    width: 100%;
+    margin: 0 auto 0 0;
+}
+.commu_row div + div{
+    min-width: max-content;
+    width: max-content;
+}
+@media (min-width: 1024px){
+    /*커뮤니티*/
+    .commu_box{
+        width: calc(100% - 100px);
+        padding: 20px 50px;
+    }
+    .commu_flex{
+        display: flex;
+    }
+}
+@media (max-width: 359px){
+    .list_inner h1,
+    .list_inner h1 span{
+        font-size: 15px;
+        line-height: 22px;
+    }
+}
+@media (max-width: 1023px){
+    .commu_flex2{
+        flex-wrap: wrap;
+    }
+    .commu_flex2 a{
+        margin-top: 5px;
+        margin-left: auto;
+    }
+    .commu_flex2 .display_flex{
+        width: max-content;
+        max-width: 100%;
+        margin: 0 10px 0 0;
+    }
+    .commu_row2{
+        display: block;
+    }
+    .commu_row2 + .commu_row2{
+        margin-top: 20px;
+        padding-top: 30px;
+        border-top: 1px solid var(--md-blue);
+    }
+    .commu_name{
+        display: block;
+    }
+    .commu_row div.commu_name p + p{
+        font-size: 18px;
+        margin-top: 5px;
+    }
+    .commu_row div + div{
+        margin: 0 0 0 auto;
+    }
+}

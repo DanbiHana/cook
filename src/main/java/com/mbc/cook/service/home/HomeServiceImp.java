@@ -30,4 +30,9 @@ public class HomeServiceImp implements HomeService {
     public HomeInterface countComment(String id) {
         return homeRepository.countComment(id);
     }
+
+    @Override
+    public List<CommunityEntity> findMyCommu(String id) {
+        return homeRepository.findMyCommu(id);
+    }
 }

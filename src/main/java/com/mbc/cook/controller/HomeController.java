@@ -12,11 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
-
 @Slf4j
+
 @Controller
 public class HomeController {
     @Autowired
@@ -42,5 +40,17 @@ public class HomeController {
             model.addAttribute("commentLen", comentnum.getCommentCount());//글 갯수
         }
         return "home/index";
+    }
+
+    @GetMapping(value = "/home/community")
+    public String faqList(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        model.addAttribute("cssPath", "/home/community");//css 패스 경로(바꾸지X)
+        model.addAttribute("pageTitle", "내가 쓴 글");//타이틀 제목
+        if(userDetails != null){
+            String id = userDetails.getUsername();
+            List<CommunityEntity> commulist = homeService.findMyCommu(id);
+            model.addAttribute("Mycommu", commulist);//타이틀 제목
+        }
+        return "home/community";
     }
 }
