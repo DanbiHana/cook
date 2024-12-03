@@ -13,7 +13,7 @@ public interface HomeService {
 
     HomeInterface countCommu(String id);
 
-    HomeInterface countComment(String id);
-
     List<CommunityEntity> findMyCommu(String id);
+
+    List<CommunityEntity> findAll();
 }

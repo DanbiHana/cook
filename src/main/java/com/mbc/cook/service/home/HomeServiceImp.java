@@ -27,12 +27,12 @@ public class HomeServiceImp implements HomeService {
     }
 
     @Override
-    public HomeInterface countComment(String id) {
-        return homeRepository.countComment(id);
+    public List<CommunityEntity> findMyCommu(String id) {
+        return homeRepository.findMyCommu(id);
     }
 
     @Override
-    public List<CommunityEntity> findMyCommu(String id) {
-        return homeRepository.findMyCommu(id);
+    public List<CommunityEntity> findAll() {
+        return homeRepository.findAll();
     }
 }

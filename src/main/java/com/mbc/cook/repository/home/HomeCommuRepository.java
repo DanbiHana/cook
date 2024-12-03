@@ -31,11 +31,6 @@ public interface HomeCommuRepository extends JpaRepository<CommunityEntity, Long
     @Query(value = "select count(community_id) as commuCount " +
             "from cookcommunity c where c.community_id=:id", nativeQuery = true)
     HomeInterface countCommu(@Param(value = "id") String id);
-    //내 댓글 갯수
-    @Transactional
-    @Query(value = "select count(community_id) as commentCount " +
-            "from cookcommunity c where c.community_id=:id", nativeQuery = true)
-    HomeInterface countComment(@Param(value = "id") String id);
     //내가 쓴 글
     @Transactional
     @Query(value = "select community_num, community_date, " +

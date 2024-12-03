@@ -18,8 +18,8 @@
                             </div>
                             <span class="span_between"></span>
                             <div class="commu_row">
-                                <p>내가 쓴 댓글</p>
-                                <p th:text="${commentLen}">0</p>
+                                <p>총 글</p>
+                                <p th:text="${commuWhole.size()}" onclick="location.href='/community/list'">0</p>
                             </div>
                         </div>
                     </div>
