@@ -494,7 +494,7 @@ img.dish_spoon{
         min-width: 2px;
         width: 2px;
         height: 150px;
-        margin: 0 100px;
+        margin: auto 100px;
     }
     /*랜덤*/
     .list_inner h1{
