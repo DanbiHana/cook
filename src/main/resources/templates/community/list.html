@@ -1,61 +1,56 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{common/layout}"
       layout:fragment="content">
-<body>
-    <div class="list_whole">
-        <h1>커뮤니티 리스트</h1>
-        <!--페이지명을 위한 임시 작업;
-        리스트 작업 완료 시 주석도 지워주세요-->
-        <a href="/community/detail">상세</a>
-        <a href="/community/register">등록</a>
-        <a href="/community/update">수정</a>
-        <a href="/community/delete">삭제</a>
-    </div>
-
-    <table class="table table-hover">
-        <tr class="totalList" th:onclick="'goToDetail(' + ${com.communityNum} + ')'" th:each="com:${list}">
-            <td>
-                <div th:text="${com.communityTitle}" id="communityTitle"></div>
-            </td>
-            <td>
-                <label for="communityId">작성자 : </label>
-                <span th:text="${com.communityId}" class="showId" id="communityId"></span>
-            </td>
-            <td>
-                <div th:if="${com.communityDate == com.communityUpdateDate}">
-                    <label for="communityDate">등록일</label>
-                    <div th:text="${#temporals.format(com.communityDate, 'yyyy-MM-dd')}" id="communityDate"></div>
+    <body>
+        <div class="community_whole">
+            <div class="list_title display_flex flex_between flex_align_c">
+                <h1>커뮤니티</h1>
+                <button type="button" onclick="location.href='/community/register'" class="register_btn">등록 +</button>
+            </div>
+            <div class="community_inner">
+                <div class="commu_admin">
+                    <div class="admin_inner">
+                        <div class="community_row" th:each="commu:${adminList}" th:onclick="'goToDetail(' + ${commu.communityNum} + ')'">
+                            <p><span>[</span><span th:text="${commu.communityId}"></span><span>]</span></p>
+                            <p th:text="${commu.communityTitle}">제목</p>
+                            <th:block th:if="${commu.communityDate == commu.communityUpdateDate}">
+                                <p th:text="${#temporals.format(commu.communityDate, 'yy년 MM월 dd일')}">등록일</p>
+                            </th:block>
+                            <th:block th:if="${commu.communityDate != commu.communityUpdateDate}">
+                                <p th:text="${#temporals.format(commu.communityUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                            </th:block>
+                        </div>
+                        <p class="no_data_txt" th:if="${adminList == null} or ${adminList.size() == 0}">등록된 공지사항이 없습니다.</p>
+                    </div>
+                    <button type="button" th:if="${adminList.size() >= 3}" onclick="adminReadMore(this)" data-type="off" class="admin_readmore" id="admin_readmore">공지 더보기</button>
                 </div>
-                <div th:if="${com.communityDate != com.communityUpdateDate}">
-                    <label for="communityUpdateDate">마지막 수정일</label>
-                    <div th:text="${#temporals.format(com.communityUpdateDate, 'yyyy-MM-dd')}" id="communityUpdateDate"></div>
+                <div class="commu_other">
+                    <div class="community_row" th:onclick="'goToDetail(' + ${commu.communityNum} + ')'" th:each="commu:${otherList}">
+                        <p><span>[</span><span th:text="${commu.communityId}"></span><span>]</span></p>
+                        <p th:text="${commu.communityTitle}">제목</p>
+                        <th:block th:if="${commu.communityDate == commu.communityUpdateDate}">
+                            <p th:text="${#temporals.format(commu.communityDate, 'yy년 MM월 dd일')}">등록일</p>
+                        </th:block>
+                        <th:block th:if="${commu.communityDate != commu.communityUpdateDate}">
+                            <p th:text="${#temporals.format(commu.communityUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                        </th:block>
+                    </div>
                 </div>
-            </td>
-            <td>
-                <label for="communityReadcnt">조회수</label>
-                <div th:text="${com.communityReadcnt}" id="communityReadcnt"></div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4" th:if="${list == null} or ${list.size() == 0}" class="no_data_txt">등록된 레시피가 없습니다.</td>
-        </tr>
-    </table>
-    <!-- 페이징 처리 -->
-    <div class="pagination" align="center">
-        <ul>
-            <li th:each="page : ${#numbers.sequence(0, totalPage -1)}">
-      <span th:if="${nowpage == pageStat.index}" style="color:red">
-        <a th:href="@{/community/list(page=${pageStat.index})}" th:text="${pageStat.index+1}"></a>
-          <!-- /out은 컨트롤러 연결명 -->
-      </span>
-                <div th:if="${nowpage != pageStat.index}">
-                    <a th:href="@{/community/list(page=${pageStat.index})}" th:text="${pageStat.index+1}"></a>
+                <p class="no_data_txt" th:if="${otherList == null} or ${otherList.size() == 0}">등록된 자유게시글이 없습니다.</p>
+            </div>
+            <!-- 페이징 처리 -->
+            <div class="pagination" th:if="${totalPage > 0}">
+                <div th:each="page : ${#numbers.sequence(0, totalPage -1)}">
+                    <span th:if="${nowpage == pageStat.index}">
+                        <p th:text="${pageStat.index+1}"></p>
+                    </span>
+                    <span th:if="${nowpage != pageStat.index}">
+                        <a th:href="@{/community/list(page=${pageStat.index})}" th:text="${pageStat.index+1}"></a>
+                    </span>
                 </div>
-            </li>
-        </ul>
-    </div>
-    <!-- -->
-</body>
+            </div>
+        </div>
+    </body>
 </html>

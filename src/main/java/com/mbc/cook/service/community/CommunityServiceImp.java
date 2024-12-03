@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CommunityServiceImp implements CommunityService {
@@ -22,8 +22,13 @@ public class CommunityServiceImp implements CommunityService {
     }
 
     @Override
-    public Page<CommunityEntity> list(int page) {
-        return communityRepository.findAll(PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "communityDate")));
+    public List<CommunityEntity> adminList() {
+        return communityRepository.adminList();
+    }
+
+    @Override
+    public Page<CommunityEntity> otherList(int page) {
+        return communityRepository.otherList(PageRequest.of(page,10));
     }
 
     @Override

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartRequest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 //민성
 @Slf4j
@@ -36,12 +37,14 @@ public class CommunityController {
     public String communityList(Model model, @RequestParam(required = false, defaultValue = "0", value = "page")int page) {
         model.addAttribute("cssPath", "/community/list");//css 패스 경로(바꾸지X)
         model.addAttribute("pageTitle", "커뮤니티");//타이틀 제목
+        List<CommunityEntity> adminList = communityService.adminList();
         // 페이징 처리
-        Page<CommunityEntity> listPage = communityService.list(page);
-        int totalPage = listPage.getTotalPages();
-        int nowpage = listPage.getPageable().getPageNumber();//현재페이지//
+        Page<CommunityEntity> otherList = communityService.otherList(page);
+        int totalPage = otherList.getTotalPages();
+        int nowpage = otherList.getPageable().getPageNumber();//현재페이지//
+        model.addAttribute("adminList",adminList);
         model.addAttribute("nowpage",nowpage);
-        model.addAttribute("list",listPage.getContent());
+        model.addAttribute("otherList",otherList.getContent());
         model.addAttribute("totalPage",totalPage);
         //
         return "community/list";

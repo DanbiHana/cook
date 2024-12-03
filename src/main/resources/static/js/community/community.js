@@ -41,3 +41,18 @@ function goToComment(communityNum) {
         location.href = "/community/commentRegister?num="+communityNum+"&id="+id+"&comment="+comment;
     }
 }
+
+//공지사항 더보기 토글
+function adminReadMore(object){
+    var object_val = object.dataset.type;
+    if(object_val == 'off'){
+        $('#admin_readmore').text('공지 숨기기');
+        $('#admin_readmore').attr('data-type', 'on');
+        $('.admin_inner').css('height', 'auto');
+    }
+    else{
+        $('#admin_readmore').text('공지 더보기');
+        $('#admin_readmore').attr('data-type', 'off');
+        $('.admin_inner').css('height', '132px');
+    }
+}

@@ -5,13 +5,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public interface CommunityService {
     void insertcommunity(CommunityEntity centity);
 
-    Page<CommunityEntity> list(int page);
+    List<CommunityEntity> adminList();
 
+    Page<CommunityEntity> otherList(int page);
 
     CommunityEntity getCommunity(long num);
 
