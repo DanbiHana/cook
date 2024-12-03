@@ -30,14 +30,33 @@ function confirmOk(object){
     if(object == 'cartgo'){
         location.href="/recipe/cart?id="+id;
     }
+    if(object == 'cartClear'){
+        var id =$('#id').val();
+        $.ajax({
+          url:"/cart/delete",
+          type:"post",
+          async:"true",
+          data:{"id":id},
+          success:function(data){
+             setTimeout(function(){
+                $('.btn_hide').hide();
+                confirmShow("장바구니가 비워졌습니다.","","reloadok");},600);
+          },
+          error:function(){alertShow("에러","");}
+        });
+    }
+    if(object == 'reloadok'){
+        location.reload();
+    }
 }
+//장바구니 요약 창 구성
 function summary(){
     var sum=0;
     var delivery;
     $('input[name="total"]').each(function(index){
         sum += parseInt($(this).val());
     });
-    if(sum>50000){delivery=0;}
+    if(sum > 50000 || sum == 0){delivery=0;}
     else{delivery=3000;}
 
     var tot = sum + delivery;
@@ -45,6 +64,30 @@ function summary(){
     $('#delivery').text(addCommas(delivery));
     $('#total').text(addCommas(tot));
 }
+//총액 표기
+function tot(a){
+    var num = $('#num'+a).val();
+    var price = $('#eachprice'+a).val();
+    var tot = num * price;
+    $('#total'+a).val(tot);
+    $('#totChange'+a).text(addCommas(tot));
+    summary();
+    orderItem(); //주문내용 변경
+}
+function addCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function orderItem(){
+    var len = $('#listSize').val();
+    var text="";
+    $('input[name="ingreid"]').each(function(index){
+        var id = $(this).val();
+        text += id + "x"+ $('#num'+id).val();
+        if(index != len-1){text += ",";}
+    });
+    $('#order_item').val(text);
+}
+//재료 삭제
 function deleteIngredient(ingreNum){
     var id = $('#id').val();
     $.ajax({
@@ -55,23 +98,20 @@ function deleteIngredient(ingreNum){
         success:function(data){
             standbyShow("삭제 중입니다","");
             setTimeout(function(){
-            location.reload();}, 1000);
+            location.reload();}, 500);
        },
        error:function(){alertShow("에러","");}
    });
 }
-function tot(a){
-    var num = $('#num'+a).val();
-    var price = $('#eachprice'+a).val();
-    var tot = num * price;
-    $('#total'+a).val(tot);
-    $('#totChange'+a).text(addCommas(tot));
-    summary();
+//카트 비우기
+function deleteCart(){
+    confirmShow("장바구니를 비우시겠습니까?","","cartClear");
 }
-function addCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//주문 전 주소 확인
+function address(){
+    var id = $('#id').val();
+    addrCheck(id);
 }
-
 $(document).ready(function(){
     if(win_href.includes("recipe/select") && win_search.includes("path=detail")){
         var recipe = $('#recipe').val().split("<br>");
@@ -84,10 +124,11 @@ $(document).ready(function(){
         $('#recipeProcess').append(recipe_div);
 
         $('#cartClick').click(function(){
-            confirmShow("해당 상품들을 장바구니에 담으시겠습니까?","담길재료내용","cartOk");
+            confirmShow("해당 상품들을 장바구니에 담으시겠습니까?","","cartOk");
         });
     }
     if(win_href.includes("recipe/cart")){
         summary();
+        orderItem();
     }
 });

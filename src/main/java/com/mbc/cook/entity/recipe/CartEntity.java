@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -30,15 +32,18 @@ public class CartEntity {
     @Column
     String address;
     @Column
+    LocalDate orderdate;
+    @Column
     String status;
 
     @Builder
-    public CartEntity(long cart_seq, String id, String order_item, int price, String address, String status) {
+    public CartEntity(long cart_seq, String id, String order_item, int price, String address, LocalDate orderdate, String status) {
         this.cart_seq = cart_seq;
         this.id = id;
         this.order_item = order_item;
         this.price = price;
         this.address = address;
+        this.orderdate = orderdate;
         this.status = status;
     }
 }

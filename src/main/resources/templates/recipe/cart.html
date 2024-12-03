@@ -11,51 +11,60 @@
                 </button>
                 <h1>장바구니</h1>
             </div>
-            <div>
-                <input type="hidden" id="list" name="list" th:value="${cartList}">
-                <table class="cartlist">
-                    <colgroup>
-                        <col width="5">
-                        <col width="40">
-                        <col width="10">
-                        <col width="10">
-                        <col width="20">
-                    </colgroup>
-                    <tr>
-                        <th>No.</th>
-                        <th>상품명</th>
-                        <th>단가</th>
-                        <th>수량</th>
-                        <th>총금액</th>
-                    </tr>
-                    <!--
-                    <tr th:each="list,num : ${#numbers.sequence(0,cartList.size())}">
-                    -->
-                    <tr th:each="list : ${cartList}">
-                        <td th:text="${listStat.index+1}"></td>
-                        <td><div><p th:text="${list.name}"></p><button type="button" th:onclick="deleteIngredient([[${list.ingre_seq}]])"><span><img src="/image/icon/common/delete-gr.png"></span></button></div></td>
-                        <td>
-                            <input type="hidden" th:id="'id'+${list.ingre_seq}" name="id" th:value="${list.ingre_seq}">
-                            <input type="hidden" th:id="'eachprice'+${list.ingre_seq}" name="eachprice" th:value="${list.price}">
-                            <p th:text="${#numbers.formatInteger(list.price, 3, 'COMMA')}"></p>
-                        </td>
-                        <td>
-                            <input type="number" th:id="'num'+${list.ingre_seq}" name="num" min="1" th:value="${picksize[listStat.index]}" th:onchange="'tot('+${list.ingre_seq}+')'" th:onkeyup="'tot('+${list.ingre_seq}+')'">
-                        </td>
-                        <td>
-                            <p th:id="'totChange'+${list.ingre_seq}" th:text="${#numbers.formatInteger(list.price * picksize[listStat.index], 3, 'COMMA')}"></p>
-                            <input type="hidden" th:id="'total'+${list.ingre_seq}" name="total" th:value="${list.price} * ${picksize[listStat.index]}">
-                        </td>
-                    </tr>
-                </table>
+        </div>
+        <div class="detail_content">
+            <input type="hidden" id="list" name="list" th:value="${cartList}">
+            <table class="cartlist">
+                <colgroup>
+                    <col width="5">
+                    <col width="50">
+                    <col width="10">
+                    <col width="10">
+                    <col width="20">
+                </colgroup>
+                <tr>
+                    <th>No.</th>
+                    <th>상품명</th>
+                    <th>단가</th>
+                    <th>수량</th>
+                    <th>총 금액(원)</th>
+                </tr>
+                <tr th:if="${#lists.isEmpty(cartList)}">
+                    <td colspan="5" class="no_list">장바구니가 비어 있습니다.</td>
+                </tr>
+                <tr th:if="${!#lists.isEmpty(cartList)}" th:each="list : ${cartList}">
+                    <td th:text="${listStat.index+1}"></td>
+                    <td><div><p th:text="${list.name}"></p><button type="button" th:onclick="deleteIngredient([[${list.ingre_seq}]])" class="deleteIngredient"><span><img src="/image/icon/common/delete-gr.png"></span></button></div></td>
+                    <td>
+                        <input type="hidden" th:id="'id'+${list.ingre_seq}" name="ingreid" th:value="${list.ingre_seq}">
+                        <input type="hidden" th:id="'eachprice'+${list.ingre_seq}" name="eachprice" th:value="${list.price}">
+                        <p th:text="${#numbers.formatInteger(list.price, 3, 'COMMA')}"></p>
+                    </td>
+                    <td>
+                        <input type="number" th:id="'num'+${list.ingre_seq}" name="num" min="1" th:value="${picksize[listStat.index]}" th:onchange="'tot('+${list.ingre_seq}+')'" th:onkeyup="'tot('+${list.ingre_seq}+')'">
+                    </td>
+                    <td>
+                        <p th:id="'totChange'+${list.ingre_seq}" th:text="${#numbers.formatInteger(list.price * picksize[listStat.index], 3, 'COMMA')}"></p>
+                        <input type="hidden" th:id="'total'+${list.ingre_seq}" name="total" th:value="${list.price} * ${picksize[listStat.index]}">
+                    </td>
+                    <input type="hidden" id="listSize" name="listSize" th:value="${cartList.size()}">
+                </tr>
+            </table>
+            <div th:if="${#lists.isEmpty(cartList)}">
+                <div class="cartbutton">
+                    <button type="button" class="order" th:onclick="|location.href='@{/recipe/list}'|">상품 담으러가기</button>
+                </div>
+            </div>
+            <div th:if="${!#lists.isEmpty(cartList)}">
                 <form action="order" method="post">
                     <input type="hidden" name="id" id="id" th:value="${#authentication.name}">
                     <input type="hidden" name="order_item" id="order_item">
+                    <h1>최종결제</h1>
                     <table class="summary">
                         <tr>
-                            <th>구매 금액</th>
-                            <th>배 송 비<p>(5만원 이상 구매 시 베송비 무료)</p></th>
-                            <th>총 금 액</th>
+                            <th>상 품 금 액</th>
+                            <th>배 송 비<p>(5만원 이상 구매 시 배송비 무료)</p></th>
+                            <th>주 문 금 액(원)</th>
                         </tr>
                         <tr>
                             <td>
@@ -70,30 +79,12 @@
                             </td>
                         </tr>
                     </table>
-                    <button type="button">주문하기</button>
+                    <div class="btn_flex">
+                        <button type="button" class="btn_prev" onclick="deleteCart()">장바구니 비우기</button>
+                        <button type="button" class="btn_submit" onclick="address()">주문하기</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <script>
-
-    </script>
-<style>
-    .cartlist td:nth-child(2) div{
-        display:flex;
-    }
-    .cartlist td button{
-        margin: 0 10px;
-    }
-    button span{
-        display:inline-block;
-    }
-    table{
-    margin: 20px auto;
-    }
-    input::-webkit-inner-spin-button,
-    input::-webkit-outer-spin-button {
-        opacity: 1;
-    }
-</style>
 </html>

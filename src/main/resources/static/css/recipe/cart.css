@@ -1,1 +1,75 @@
 @charset "UTF-8";
+table{
+    margin: 20px auto;
+}
+.cartlist td:nth-child(2) div{
+    display:flex;
+}
+.cartlist td button{
+    margin: 0 10px;
+}
+.deleteIngredient img{
+    width:100%;
+}
+.deleteIngredient span{
+    display: inline-block;
+    width: 10px;
+    padding: 0 7px;
+}
+.cartlist td:nth-child(4) input[type="number"]{
+    width:100%;
+    text-align: center;
+}
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    opacity: 1;
+}
+.cartlist td:nth-child(5) p{
+    font-weight:bold;
+}
+.detail_content table .no_list{
+    padding: 30px 0;
+}
+.detail_content table{
+    margin : 20px auto;
+}
+.detail_content table th{
+    font-weight:bold;
+    height: 50px;
+}
+table.summary td{
+    height: 70px;
+}
+.summary #total{
+    font-weight:bold;
+    color: var(--second-color);
+    font-size:20px;
+}
+.btn_flex button{
+    min-width: 240px;
+    max-width: none;
+    width: calc(50% - 10px);
+    height: max-content;
+    padding: 10px 5px;
+}
+.cartbutton{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.cartbutton button{
+    min-width: 240px;
+    width: calc(50% - 10px);
+    height: max-content;
+    border: 1px solid var(--point-color);
+    border-radius: 5px;
+    padding: 10px 5px;
+    margin: 5px;
+    font-weight:bold;
+}
+.cartbutton button:hover{
+    background-color: #6FADCF8a;
+}
+.cartbutton .order{
+    width: 100% !important;
+}

@@ -1,16 +1,14 @@
 package com.mbc.cook.controller;
 
 import com.mbc.cook.entity.info.CategoryEntity;
+import com.mbc.cook.entity.member.MemberEntity;
 import com.mbc.cook.entity.recipe.IngreEntity;
 import com.mbc.cook.entity.recipe.RecipeEntity;
 import com.mbc.cook.service.info.InfoService;
 import com.mbc.cook.service.recipe.RecipeService;
 import com.mbc.cook.service.recipe.RecipeService2;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,12 +58,9 @@ public class RecipeController {
     public String cartSave(@RequestParam("id") String id, @RequestParam("ingredient") String ingredient) {
         try {
             long cart =recipeService.findCartByID(id);
-            System.out.println("cart: " + cart);
-            if (cart == -1) {
-                System.out.println("생성");
+            if (cart == 0) {
                 recipeService.cartSave(id, ingredient);
             }else {
-                System.out.println("기존추가");
                 recipeService.cartUpdate(id, ingredient);
             }
             return "장바구니에 담겼습니다";
@@ -79,19 +74,21 @@ public class RecipeController {
         pathSet("장바구니","cart", model);
         ArrayList<IngreEntity> list = new ArrayList<IngreEntity>();
         String ingredientArray = recipeService.selectIngredient(id,status);
-        String[] ingredientNum = ingredientArray.split(",");
-        list = parseIngredient(list, ingredientNum);
+        if(ingredientArray != null) {
+            String[] ingredientNum = ingredientArray.split(",");
+            list = parseIngredient(list, ingredientNum);
 
-        Set<IngreEntity> set = new HashSet<IngreEntity>(list); //재료들 중복값 제거
-        List<Integer> pickList = new ArrayList<>();
-        for (IngreEntity str : set) {
-            pickList.add(Collections.frequency(list, str));
+            Set<IngreEntity> set = new HashSet<IngreEntity>(list); //재료들 중복값 제거
+            List<Integer> pickList = new ArrayList<>();
+            for (IngreEntity str : set) {
+                pickList.add(Collections.frequency(list, str));
+            }
+            List<IngreEntity> ingreList = new ArrayList<>(set); //리스트로 변환
+            model.addAttribute("cartList",ingreList);
+            model.addAttribute("picksize",pickList);
+        }else{
+            cartDelete(id, status);
         }
-        List<IngreEntity> ingreList = new ArrayList<>(set); //리스트로 변환
-
-        model.addAttribute("cartList",ingreList);
-        model.addAttribute("picksize",pickList);
-
         return "recipe/cart";
     }
 
@@ -100,18 +97,29 @@ public class RecipeController {
     public String deleteIngredient(@RequestParam("ingredient") String ingredient, @RequestParam("id") String id){
         String ingredientArray = recipeService.selectIngredient(id,"orderprev");
         String [] ingreNum = ingredientArray.split(",");
-        String deleteIngreString = "";
-        for(int i=0; i<ingreNum.length; i++){
-            if(!ingreNum[i].equals(ingredient)){
-                deleteIngreString+=ingreNum[i];
-                if(i!=ingreNum.length-1){deleteIngreString+=",";}
+            String deleteIngreString = "";
+            for(int i=0; i<ingreNum.length; i++){
+                if(!ingreNum[i].equals(ingredient)){
+                    deleteIngreString+=ingreNum[i];
+                    if(i!=ingreNum.length-1){deleteIngreString+=",";}
+                }
             }
-        }
-        System.out.println(deleteIngreString);
-        recipeService.ingredientDelete(deleteIngreString,id);
+            recipeService.ingredientDelete(deleteIngreString,id);
         return "삭제되었습니다";
     }
-
+    //장바구니 비우기
+    @ResponseBody
+    @PostMapping("/cart/delete")
+    public void cartDelete(@RequestParam("id") String id,@RequestParam(value = "status",required = false,defaultValue = "orderprev") String status){
+        recipeService.deleteCart(id, status);
+    }
+    //주소지 확인
+    @ResponseBody
+    @PostMapping("/cart/orderAddress")
+    public void findAddress(@RequestParam("id") String id){
+        String add = recipeService.findAddress(id);
+        System.out.println("주소: " + add);
+    }
 
     public void pathSet(String title,String path, Model model){
         model.addAttribute("cssPath", "/recipe/"+path);//css 패스 경로(바꾸지X)

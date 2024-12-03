@@ -1,5 +1,6 @@
 package com.mbc.cook.service.recipe;
 
+import com.mbc.cook.entity.member.MemberEntity;
 import com.mbc.cook.entity.recipe.CartEntity;
 import com.mbc.cook.entity.recipe.IngreEntity;
 import com.mbc.cook.entity.recipe.RecipeEntity;
@@ -25,4 +26,8 @@ public interface RecipeService {
     String selectIngredient(String id, String status);
 
     void ingredientDelete(String ingreString, String id);
+
+    void deleteCart(String id, String status);
+
+    String findAddress(String id);
 }

@@ -53,6 +53,7 @@ $(document).ready(function(){
     || win_href.includes('/recipe/select')
     && win_search.includes('path=detail')
     ){
+        $('head').append('<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>');
         $('head').append('<script src="/js/recipe/recipe.js"></script>');
     }
     else if(win_href.includes('/recipe/list')

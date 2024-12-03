@@ -1,6 +1,6 @@
 package com.mbc.cook.service.recipe;
 
-import com.mbc.cook.entity.recipe.CartEntity;
+import com.mbc.cook.entity.member.MemberEntity;
 import com.mbc.cook.entity.recipe.IngreEntity;
 import com.mbc.cook.entity.recipe.RecipeEntity;
 import com.mbc.cook.repository.recipe.CartRepository;
@@ -8,8 +8,6 @@ import com.mbc.cook.repository.recipe.IngreRepository;
 import com.mbc.cook.repository.recipe.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class RecipeImplement implements RecipeService {
@@ -54,6 +52,14 @@ public class RecipeImplement implements RecipeService {
     @Override
     public void ingredientDelete(String ingreString, String id) {
         cartRepository.deleteIngredient(ingreString, id);
+    }
+    @Override
+    public void deleteCart(String id,String status) {
+        cartRepository.deleteCart(id, status);
+    }
+    @Override
+    public String findAddress(String id) {
+        return cartRepository.findAddress(id);
     }
 
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -13,6 +15,7 @@ public class CartDTO{
     String id, order_item;
     int price;
     String address;
+    LocalDate orderdate;
     String status;
 
     public CartEntity getRecipeEntity(){
@@ -22,6 +25,7 @@ public class CartDTO{
             .order_item(order_item)
             .price(price)
             .address(address)
+            .orderdate(orderdate)
             .status(status)
             .build();
     }
