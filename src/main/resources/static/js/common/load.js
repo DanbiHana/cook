@@ -12,6 +12,7 @@ $(document).ready(function(){
     || win_href.includes('/info/info')
     || win_href.includes('/category')
     || win_href.includes('/cart')
+    || win_href.includes('/order')
     || win_href.includes('/idsearch')
     || win_href.includes('/pwsearch')
     ){
@@ -51,6 +52,7 @@ $(document).ready(function(){
     }
     else if(win_href.includes('/recipe/cart')
     || win_href.includes('/recipe/select')
+    || win_href.includes('/recipe/order')
     && win_search.includes('path=detail')
     ){
         $('head').append('<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>');

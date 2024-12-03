@@ -38,7 +38,7 @@
                 <i class="fa fa-eye-slash fa-lg"></i>
             </div>
             <div class="btn_flex">
-                <button type="button" class="btn_prev" onclick="location.href='/'">메인으로</button>
+                <button type="button" class="btn_prev" onclick="mypageHide()">닫기</button>
                 <button type="button" class="btn_submit" onclick="mypagepwchk()">확인</button>
             </div>
         </div>
@@ -46,21 +46,48 @@
     <div class="address_whole">
         <div class="address_bg"></div>
         <div class="address_box">
-            <h2>배송지 확인</h2>
-            <div class="address">
-                <input type="text" class="form-control" id="addr" name="addr" readonly>
-                <input type="text" class="form-control" id="streetaddr" name="streetaddr" readonly>
-                <input type="text" class="form-control" id="detailaddr" name="detailaddr" readonly>
-            </div>
-            <div>
-                <button type="button" id="changeAddr" onclick="execDaumPostcode()">배송지 변경</button>
+            <p id="address_title" class="common_pop_txt common_pop_title">다음 주소로 주문하시겠습니까?</p>
+            <div class="address_content_whole">
+                <div class="address_content">
+                    <input type="hidden" id="id" name="id">
+                    <input type="hidden" id="orderItem" name="orderItem">
+                    <input type="hidden" id="price" name="price">
+                    <input type="text" class="form-control" id="addr" name="addr" readonly>
+                    <input type="text" class="form-control" id="streetaddr" name="streetaddr" readonly>
+                    <input type="text" class="form-control" id="detailaddr" name="detailaddr" readonly>
+                </div>
+                <div class="btn_flex change_address_button">
+                    <button type="button" id="changeAddr" onclick="addrChange()" class="btn_submit">배송지 변경</button>
+                </div>
             </div>
             <div class="btn_flex">
-                <input type="hidden" id="address" name="address">
                 <button type="button" class="btn_prev" onclick="addrHide()">취소</button>
-                <button type="button" class="btn_submit" onclick="addrCheck()">확인</button>
+                <button type="button" class="btn_submit" onclick="addressConfirm()">주문하기</button>
             </div>
         </div>
     </div>
     <input type="hidden" id="confirm_message" value="none">
+    <style>
+        .address_content_whole{
+            display:flex;
+        }
+        .address_content{
+            display:block;
+        }
+        .address_content #addr{
+            width: 100px;
+            text-align: center;
+        }
+        .address_content #streetaddr,
+        .address_content #detailaddr{ padding: 6px 0 6px 20px; }
+
+        .address_content input:read-only{
+            opacity:inherit;
+        }
+        .change_address_button .btn_submit{
+            width: 70px;
+            height: -webkit-fill-available;
+            margin: 0 10px;
+        }
+    </style>
 </html>

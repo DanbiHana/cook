@@ -1,6 +1,5 @@
 package com.mbc.cook.service.recipe;
 
-import com.mbc.cook.entity.member.MemberEntity;
 import com.mbc.cook.entity.recipe.CartEntity;
 import com.mbc.cook.entity.recipe.IngreEntity;
 import com.mbc.cook.entity.recipe.RecipeEntity;
@@ -17,7 +16,7 @@ public interface RecipeService {
 
     IngreEntity findIngredientByID(long num);
 
-    long findCartByID(String id);
+    long findCartByID(String id, String status);
 
     void cartSave(String id, String ingredient);
 
@@ -30,4 +29,12 @@ public interface RecipeService {
     void deleteCart(String id, String status);
 
     String findAddress(String id);
+
+    void order(String id, String orderItem, int price, String address);
+
+    List<CartEntity> orderlist(String id, String status);
+
+    List<CartEntity> orderlistall(String status);
+
+    String selectListIngredient(long id, String status);
 }

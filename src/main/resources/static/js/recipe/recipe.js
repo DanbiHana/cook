@@ -60,6 +60,7 @@ function summary(){
     else{delivery=3000;}
 
     var tot = sum + delivery;
+    $('#price').val(tot);
     $('#tot').text(addCommas(sum));
     $('#delivery').text(addCommas(delivery));
     $('#total').text(addCommas(tot));
@@ -82,10 +83,13 @@ function orderItem(){
     var text="";
     $('input[name="ingreid"]').each(function(index){
         var id = $(this).val();
-        text += id + "x"+ $('#num'+id).val();
-        if(index != len-1){text += ",";}
+        var num = $('#num'+id).val();
+        if(num != 0){
+            text += id + "x" +  num;
+            if(index != len-1){text += ",";}
+        }
     });
-    $('#order_item').val(text);
+    $('#orderitem').val(text);
 }
 //재료 삭제
 function deleteIngredient(ingreNum){
@@ -108,9 +112,32 @@ function deleteCart(){
     confirmShow("장바구니를 비우시겠습니까?","","cartClear");
 }
 //주문 전 주소 확인
-function address(){
+function order(){
     var id = $('#id').val();
-    addrCheck(id);
+    var price = $('#price').val();
+    var orderitem = $('#orderitem').val();
+    addrCheck(id,orderitem,price);
+}
+
+function showIngredient(id){
+    console.log(1);
+    $.ajax({
+        type:"post",
+        url:"orderIngredientList",
+        data:{"id":id},
+        success:function(data){
+            for(var i=0 ; i< data.length; i++){
+                var list = data[i].split("x");
+                var cartInfo="";
+                    cartInfo+="<tr>";
+                    cartInfo+="<td>"+list[0]+"</td>";
+                    cartInfo+="<td>"+list[1]+"</td>";
+                    cartInfo+="<td>"+list[2]+"</td>";
+                    cartInfo+="</tr>";
+            }},
+        error:function(){alertShow("오류","");}
+        $("#productList").html(productInfo);
+    });
 }
 $(document).ready(function(){
     if(win_href.includes("recipe/select") && win_search.includes("path=detail")){
@@ -124,7 +151,7 @@ $(document).ready(function(){
         $('#recipeProcess').append(recipe_div);
 
         $('#cartClick').click(function(){
-            confirmShow("해당 상품들을 장바구니에 담으시겠습니까?","","cartOk");
+            confirmShow("선택된 상품들을 장바구니에 담으시겠습니까?","","cartOk");
         });
     }
     if(win_href.includes("recipe/cart")){

@@ -45,13 +45,6 @@ table.summary td{
     color: var(--second-color);
     font-size:20px;
 }
-.btn_flex button{
-    min-width: 240px;
-    max-width: none;
-    width: calc(50% - 10px);
-    height: max-content;
-    padding: 10px 5px;
-}
 .cartbutton{
     display: flex;
     flex-wrap: wrap;
@@ -72,4 +65,14 @@ table.summary td{
 }
 .cartbutton .order{
     width: 100% !important;
+}
+.orderList td:nth-child(5) div p{
+    font-weight: bold;
+}
+.orderList td:nth-child(5) div{
+    display:flex;
+}
+.orderList td{
+    padding: 15px 0;
+    border-top: 1px solid var(--lt-gray);
 }
