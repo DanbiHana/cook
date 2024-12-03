@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <label for="communityId">작성자 : </label>
-                    <input type="text" name="communityId" id="communityId" />
+                    <input type="text" name="communityId" id="communityId" th:value="${#authentication.name}" readonly/>
                 </div>
                 <div>
                     <label for="communityContent">글 내용 : </label>
