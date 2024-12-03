@@ -1,7 +1,10 @@
 package com.mbc.cook.controller;
 
+import com.mbc.cook.dto.community.CommentDTO;
 import com.mbc.cook.dto.community.CommunityDTO;
+import com.mbc.cook.entity.community.CommentEntity;
 import com.mbc.cook.entity.community.CommunityEntity;
+import com.mbc.cook.service.community.CommentService;
 import com.mbc.cook.service.community.CommunityService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -24,6 +27,10 @@ public class CommunityController {
 
     @Autowired
     CommunityService communityService;
+
+//    @Autowired
+//    CommentService commentService;
+
 
     @GetMapping(value = "/list")
     public String communityList(Model model, @RequestParam(required = false, defaultValue = "0", value = "page")int page) {
@@ -112,14 +119,24 @@ public class CommunityController {
         model.addAttribute("community",communityEntity);
         return "community/detail";
     }
-
-    @GetMapping(value = "/commentResister")
-    public String commentResister(Model model, @RequestParam("num") long num, @RequestParam("comment") String comment) {
-        model.addAttribute("cssPath", "/community/detail");//css 패스 경로(바꾸지X)
-        model.addAttribute("pageTitle", "커뮤니티 상세");//타이틀 제목
-        communityService.readcntUp(num);//조회수 증가
-        CommunityEntity communityEntity = communityService.getCommunity(num);
-        model.addAttribute("community",communityEntity);
-        return "redirect:/community/detail?num="+num;
-    }
+    //////////////////////////////////////////////////////////////////////////////////////////////
+//    댓글 등록
+//    @GetMapping(value = "/commentRegister")
+//    public String commentResister(Model model, @RequestParam("num") int num, @RequestParam("id") String id, @RequestParam("comment") String comment, CommentDTO commentDTO) {
+//        model.addAttribute("cssPath", "/community/detail");//css 패스 경로(바꾸지X)
+//        model.addAttribute("pageTitle", "커뮤니티 상세");//타이틀 제목
+//        //댓글 저장
+//        commentDTO.setCommentId(id);
+//        commentDTO.setCommentContent(comment);
+//        LocalDateTime present = LocalDateTime.now();
+//        commentDTO.setCommentDate(present);
+//        commentDTO.setCommentUpdateDate(present);
+//        commentDTO.setCommunityNum(num);
+//        commentDTO.setIndent(0);
+//        commentDTO.setStep(0);
+//        System.out.println("받아온 아이디 : "+commentDTO.getCommentId());
+//        CommentEntity commententity = commentDTO.commentEntity();
+//        commentService.insertcomment(commententity);
+//        return "redirect:/community/detail?num="+num;
+//    }
 }

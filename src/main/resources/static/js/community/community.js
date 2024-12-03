@@ -30,11 +30,14 @@ function confirmOk(value){
 //상세보기 페이지 댓글달기
 function goToComment(communityNum) {
     var comment = $('#plusComment').val();
+    var id = $('#commu_id').val();
+    console.log("받아온 글번호 : "+communityNum);
+    console.log("받아온 아이디 : "+id);
     console.log("받아온 댓글 : "+comment);
     if(comment == "" || comment == null) {
         alertShow('댓글 작성 오류','댓글을 입력해주세요.');
     }
     else {
-        location.href = "/community/commentRegister?num="+communityNum+"&comment="+comment;
+        location.href = "/community/commentRegister?num="+communityNum+"&id="+id+"&comment="+comment;
     }
 }
