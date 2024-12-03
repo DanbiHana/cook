@@ -52,8 +52,8 @@ $(document).ready(function(){
     }
     else if(win_href.includes('/recipe/cart')
     || win_href.includes('/recipe/select')
-    || win_href.includes('/recipe/order')
     && win_search.includes('path=detail')
+    || win_href.includes('/recipe/order')
     ){
         $('head').append('<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>');
         $('head').append('<script src="/js/recipe/recipe.js"></script>');

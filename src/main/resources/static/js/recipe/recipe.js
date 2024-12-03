@@ -120,25 +120,36 @@ function order(){
 }
 
 function showIngredient(id){
-    console.log(1);
+    var cartInfo="";
     $.ajax({
         type:"post",
-        url:"orderIngredientList",
+        url:"/order/ingredientList",
         data:{"id":id},
         success:function(data){
+                cartInfo += "<tr>";
+                cartInfo += "<th>상품번호</th>";
+                cartInfo += "<th>상품명</th>";
+                cartInfo += "<th>상품 단가</th>";
+                cartInfo += "<th>구매 수량</th>";
+                cartInfo += "<th>상품 총액</th>";
+                cartInfo += "</tr>";
             for(var i=0 ; i< data.length; i++){
-                var list = data[i].split("x");
-                var cartInfo="";
-                    cartInfo+="<tr>";
-                    cartInfo+="<td>"+list[0]+"</td>";
-                    cartInfo+="<td>"+list[1]+"</td>";
-                    cartInfo+="<td>"+list[2]+"</td>";
-                    cartInfo+="</tr>";
-            }},
+                var list = data[i].split("@");
+                    cartInfo+="<tr class='ingredient_result'>";
+                    for(var j=0; j<list.length; j++){
+                        if(j>=2){cartInfo+="<td>"+addCommas(list[j])+"</td>";}
+                        else{cartInfo+="<td>"+list[j]+"</td>";}
+                    }
+                    cartInfo+="<td>"+addCommas(parseInt(list[2])*parseInt(list[3]))+"</td>";
+                    cartInfo+="</td>";
+            }
+            $(".ingredient").attr("hidden",false);
+            $(".ingredient").html(cartInfo);
+        },
         error:function(){alertShow("오류","");}
-        $("#productList").html(productInfo);
     });
 }
+
 $(document).ready(function(){
     if(win_href.includes("recipe/select") && win_search.includes("path=detail")){
         var recipe = $('#recipe').val().split("<br>");

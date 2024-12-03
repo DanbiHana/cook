@@ -76,3 +76,6 @@ table.summary td{
     padding: 15px 0;
     border-top: 1px solid var(--lt-gray);
 }
+.orderlist_ingredient{
+    margin: 50px auto 0 auto;
+}
