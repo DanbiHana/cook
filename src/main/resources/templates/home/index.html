@@ -4,7 +4,6 @@
       layout:decorate="~{common/layout}"
       layout:fragment="content">
     <div class="index_whole">
-        <h1>메인</h1>
         <!--커뮤니티-->
         <div class="commu_inner">
             <div class="commu_box commu_box1">
@@ -15,12 +14,12 @@
                         <div class="commu_flex display_flex flex_center flex_align_c">
                             <div class="commu_row">
                                 <p>내가 쓴 글</p>
-                                <p th:text="${commuLen}">0</p>
+                                <p th:text="${commuLen}" onclick="location.href='/home/community'">0</p>
                             </div>
                             <span class="span_between"></span>
                             <div class="commu_row">
-                                <p>내가 쓴 댓글</p>
-                                <p th:text="${commentLen}">0</p>
+                                <p>총 글</p>
+                                <p th:text="${commuWhole.size()}" onclick="location.href='/community/list'">0</p>
                             </div>
                         </div>
                     </div>
@@ -28,13 +27,13 @@
             </div>
             <div class="commu_box commu_box2">
                 <div class="commu_in">
-                    <div class="commu_flex display_flex flex_center flex_align_c">
+                    <div class="commu_flex display_flex flex_center flex_align_str">
                         <div class="commu_row2">
                             <div class="commu_flex2 display_flex flex_nowrap flex_between flex_align_c">
                                 <h2>공지사항</h2>
                                 <a href="/community/list">더보기<img src="/image/icon/common/arrow-next.png" alt="더보기 아이콘"></a>
                             </div>
-                            <a th:href="@{/community/detail(num=${commuA.communityNum})}" class="commu_row" th:each="commuA:${commuAdmin}">
+                            <a th:each="commuA : ${commuAdmin}" th:href="@{/community/detail(num=${commuA.communityNum})}" class="commu_row">
                                 <div class="commu_name">
                                     <p>[관리자]</p>
                                     <p th:text="${commuA.communityTitle}">제목</p>
@@ -52,7 +51,7 @@
                                 <h2>자유게시판</h2>
                                 <a href="/community/list">더보기<img src="/image/icon/common/arrow-next.png" alt="더보기 아이콘"></a>
                             </div>
-                            <a th:href="@{/community/detail(num=${commuO.communityNum})}" class="commu_row" th:each="commuO:${commuOther}">
+                            <a th:each="commuO:${commuOther}" th:if="${commuO.communityId != 'admin'}" th:href="@{/community/detail(num=${commuO.communityNum})}" class="commu_row">
                                 <div class="commu_name">
                                     <p><span>[</span><span th:text="${commuO.communityId}"></span><span>]</span></p>
                                     <p th:text="${commuO.communityTitle}">제목</p>
@@ -62,7 +61,7 @@
                                     <p th:text="${commuO.communityReadcnt}"><img src="/image/icon/recipe/eye-bk.png" alt="조회수 아이콘">0</p>
                                 </div>
                             </a>
-                            <p th:if="${commuOther == null} or ${commuOther.size() == 0}" class="no_data_txt">등록된 자유게시판이 없습니다.</p>
+                            <p th:if="${commuOther == null} or ${commuOther.size() == 0}" class="no_data_txt">등록된 자유게시글이 없습니다.</p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +69,7 @@
         </div>
         <!--레시피-->
         <div class="list_inner">
-            <h2 th:if="${#authentication.name != 'anonymousUser'}" th:text="${#authentication.name}+'님, 이런 요리 어때요?'"></h2>
+            <h1><span th:if="${#authentication.name != 'anonymousUser'}" th:text="${#authentication.name}+'님, '"></span>이런 요리 어때요?</h1>
             <div class="list_flex display_flex flex_start flex_align_c">
                 <div class="display_flex flex_start flex_align_str">
                     <div class="list_row" th:each="recipe:${recipeList}">

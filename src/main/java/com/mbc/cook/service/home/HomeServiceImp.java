@@ -3,6 +3,7 @@ package com.mbc.cook.service.home;
 import com.mbc.cook.entity.community.CommunityEntity;
 import com.mbc.cook.repository.home.HomeCommuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -27,7 +28,12 @@ public class HomeServiceImp implements HomeService {
     }
 
     @Override
-    public HomeInterface countComment(String id) {
-        return homeRepository.countComment(id);
+    public List<CommunityEntity> findMyCommu(String id) {
+        return homeRepository.findMyCommu(id);
+    }
+
+    @Override
+    public List<CommunityEntity> findAll() {
+        return homeRepository.findAll(Sort.by(Sort.Direction.DESC, "communityNum"));
     }
 }

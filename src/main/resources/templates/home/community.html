@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}"
+      layout:fragment="content">
+    <body>
+        <div class="list_whole">
+            <!--커뮤니티-->
+            <div class="commu_inner">
+                <div class="commu_box">
+                    <div class="commu_in">
+                        <div class="commu_flex display_flex flex_center flex_align_c">
+                            <div class="commu_row">
+                                <div class="commu_flex2 display_flex flex_nowrap flex_between flex_align_c">
+                                    <div class="display_flex flex_nowrap flex_start flex_align_c">
+                                        <button type="button" onclick="history.back(-1)">
+                                            <img src="/image/icon/common/arrow-sm-prev.svg">
+                                        </button>
+                                        <h2 th:text="'내 게시글 ('+${Mycommu.size()}+')'">내 게시글</h2>
+                                    </div>
+                                    <a href="/community/list">다른 글 더보기<img src="/image/icon/common/arrow-next.png" alt="더보기 아이콘"></a>
+                                </div>
+                                <a th:href="@{/community/detail(num=${myCommu.communityNum})}" class="commu_row2" th:each="myCommu:${Mycommu}">
+                                    <div class="commu_name">
+                                        <p><span>[</span><span th:text="${#temporals.format(myCommu.communityDate, 'yyyy년 MM월 dd일')}"></span><span>]</span></p>
+                                        <p th:text="${myCommu.communityTitle}">제목</p>
+                                    </div>
+                                    <div>
+                                        <img src="/image/icon/recipe/eye-bk.png" alt="조회수 아이콘">
+                                        <p th:text="${myCommu.communityReadcnt}"><img src="/image/icon/recipe/eye-bk.png" alt="조회수 아이콘">0</p>
+                                    </div>
+                                </a>
+                                <p th:if="${Mycommu == null} or ${Mycommu.size() == 0}" class="no_data_txt">등록된 자유게시판이 없습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

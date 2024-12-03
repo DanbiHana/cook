@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.main_inner{
+    margin-top: 50px;
+}
 .index_whole{
     width: 100%;
     height: auto;
@@ -32,7 +35,7 @@ p.commu_subtitle{
     margin: 10px auto 0 auto;
 }
 .commu_box + .commu_box{
-    margin-top: 15px;
+    margin-top: 0;
 }
 .commu_box p{
     width: 100%;
@@ -203,7 +206,7 @@ p.commu_subtitle{
 .list_inner{
     width: 100%;
     height: auto;
-    margin: 100px auto 0 auto;
+    margin: 70px auto 0 auto;
 }
 .list_flex .display_flex{
     width: calc(100% + 40px);
@@ -212,6 +215,10 @@ p.commu_subtitle{
     overflow: hidden;
     overflow-x: auto;
     padding-bottom: 15px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 .list_flex .display_flex::-webkit-scrollbar{
     width: auto;
@@ -486,16 +493,22 @@ img.dish_spoon{
     .commu_box2 .commu_in .commu_flex span.span_between{
         min-width: 2px;
         width: 2px;
-        height: 100px;
-        margin: 0 100px;
+        height: 150px;
+        margin: auto 100px;
     }
     /*랜덤*/
-    .list_inner h2{
+    .list_inner h1{
         font-size: 20px;
         line-height: 29px;
         font-weight: bold;
         color: var(--second-color);
         margin: 20px auto;
+    }
+    .list_inner h1 span{
+        font-size: 20px;
+        line-height: 29px;
+        font-weight: bold;
+        color: var(--second-color);
     }
     .list_flex .display_flex{
         width: 100%;
@@ -516,7 +529,8 @@ img.dish_spoon{
         flex-wrap: wrap;
         margin-top: 30px;
     }
-    .list_inner h2{
+    .list_inner h1,
+    .list_inner h1 span{
         font-size: 15px;
         line-height: 22px;
     }

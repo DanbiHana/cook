@@ -39,7 +39,25 @@
             </div>
             <div class="btn_flex">
                 <button type="button" class="btn_prev" onclick="location.href='/'">메인으로</button>
-                <button type="button" class="btn_submit" onclick="pwchk()">확인</button>
+                <button type="button" class="btn_submit" onclick="mypagepwchk()">확인</button>
+            </div>
+        </div>
+    </div>
+    <div class="address_whole">
+        <div class="address_bg"></div>
+        <div class="address_box">
+            <h2>배송지 확인</h2>
+            <div class="address">
+                <input type="text" class="form-control" id="addr" name="addr" readonly>
+                <input type="text" class="form-control" id="streetaddr" name="streetaddr" readonly>
+                <input type="text" class="form-control" id="detailaddr" name="detailaddr" readonly>
+            </div>
+            <div>
+                <button type="button" id="changeAddr">배송지 변경</button>
+            </div>
+            <div class="btn_flex">
+                <button type="button" class="btn_prev" onclick="addrHide()">취소</button>
+                <button type="button" class="btn_submit" onclick="addrCheck()">확인</button>
             </div>
         </div>
     </div>
