@@ -108,7 +108,7 @@ p.common_pop_subtitle{
     height: 100vh;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 4;
     display:none;
 }
 .pwchk_bg{
