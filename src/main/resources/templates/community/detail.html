@@ -15,6 +15,7 @@
         </div>
         <div th:each="com:${community}">
             <input type="hidden" id="commu_num" name="commu_num" th:value="${com.communityNum}">
+            <input type="hidden" id="commu_id" name="commu_id" th:value="${com.communityId}">
             <div>
                 <p th:text="${com.communityTitle}"></p>
                 <div>
@@ -32,6 +33,10 @@
             <div>
                 <input type="text" name="plusComment" id="plusComment" placeholder="댓글을 입력하세요.">
                 <button type="button" th:onclick="'goToComment(' + ${com.communityNum} + ')'">댓글달기</button>
+            </div>
+            <!-- 댓글보기 -->
+            <div>
+
             </div>
             <div>
                 <button type="button" th:onclick="location.href='/community/list'">이전으로</button>
