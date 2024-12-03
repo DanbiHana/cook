@@ -14,19 +14,19 @@ import java.util.List;
 @Repository
 public interface CartRepository extends JpaRepository<CartEntity, String> {
     @Transactional
-    @Query(value = "select NVL(count(cart_seq),0) from cart where id = :id ", nativeQuery = true)
-    long findId(@Param("id") String id);
+    @Query(value = "select NVL(count(cart_seq),0) from cart where id = :id and status = :status ", nativeQuery = true)
+    long findId(@Param("id") String id,@Param("status") String status);
 
     @Transactional
     @Modifying
-    @Query(value = "insert into cart (cart_seq, id, order_item, status) values (cart_seq.nextval, :id, :ingredient, 'orderprev')",nativeQuery = true)
+    @Query(value = "insert into cart (cart_seq, id, order_item, status) values (cart_seq.nextval, :id, :ingredient, 'cart')",nativeQuery = true)
     void save(@Param("id") String id, @Param("ingredient") String ingredient);
 
     @Transactional
     @Modifying
     @Query(value = "update cart " +
             "set order_item = order_item || ',' || :ingredient " +
-            "where id = :id", nativeQuery = true)
+            "where id = :id and status='cart'", nativeQuery = true)
     void update(@Param("id") String id, @Param("ingredient") String ingredient);
 
     @Transactional
@@ -46,7 +46,27 @@ public interface CartRepository extends JpaRepository<CartEntity, String> {
     void deleteCart(@Param("id") String id, @Param("status") String status);
 
     @Transactional
-    @Modifying
     @Query(value = "select addr || '+' || streetaddr || '+' || detailaddr from usermember where id = :id",nativeQuery = true)
     String findAddress(@Param("id") String id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update cart set price = :price, order_item = :orderItem, address = :address, status='order', orderdate = sysdate " +
+            "where id = :id and status='cart'",nativeQuery = true)
+    void order(@Param("id") String id, @Param("orderItem") String orderItem, @Param("price") int price, @Param("address") String address);
+
+    @Transactional
+    @Query(value = "select * from cart where id = :id and status = :status order by orderdate desc",nativeQuery = true)
+    List<CartEntity> orderlist(@Param("id") String id, @Param("status") String status);
+
+    @Transactional
+    @Query(value = "select * from cart where status = :status order by orderdate desc",nativeQuery = true)
+    List<CartEntity> orderAll(@Param("status") String status);
+
+
+    @Transactional
+    @Query(value = "select order_item " +
+            "from cart " +
+            "where cart_seq=:id and status=:status",nativeQuery = true)
+    String findingrebyid(long id, String status);
 }

@@ -14,6 +14,7 @@
         </div>
         <div class="detail_content">
             <input type="hidden" id="list" name="list" th:value="${cartList}">
+            <input type="hidden" id="listSize" th:if="${!#lists.isEmpty(cartList)}" th:value="${cartList.size()}">
             <table class="cartlist">
                 <colgroup>
                     <col width="5">
@@ -36,7 +37,7 @@
                     <td th:text="${listStat.index+1}"></td>
                     <td><div><p th:text="${list.name}"></p><button type="button" th:onclick="deleteIngredient([[${list.ingre_seq}]])" class="deleteIngredient"><span><img src="/image/icon/common/delete-gr.png"></span></button></div></td>
                     <td>
-                        <input type="hidden" th:id="'id'+${list.ingre_seq}" name="ingreid" th:value="${list.ingre_seq}">
+                        <input type="hidden" name="ingreid" th:value="${list.ingre_seq}">
                         <input type="hidden" th:id="'eachprice'+${list.ingre_seq}" name="eachprice" th:value="${list.price}">
                         <p th:text="${#numbers.formatInteger(list.price, 3, 'COMMA')}"></p>
                     </td>
@@ -47,7 +48,6 @@
                         <p th:id="'totChange'+${list.ingre_seq}" th:text="${#numbers.formatInteger(list.price * picksize[listStat.index], 3, 'COMMA')}"></p>
                         <input type="hidden" th:id="'total'+${list.ingre_seq}" name="total" th:value="${list.price} * ${picksize[listStat.index]}">
                     </td>
-                    <input type="hidden" id="listSize" name="listSize" th:value="${cartList.size()}">
                 </tr>
             </table>
             <div th:if="${#lists.isEmpty(cartList)}">
@@ -56,34 +56,32 @@
                 </div>
             </div>
             <div th:if="${!#lists.isEmpty(cartList)}">
-                <form action="order" method="post">
-                    <input type="hidden" name="id" id="id" th:value="${#authentication.name}">
-                    <input type="hidden" name="order_item" id="order_item">
-                    <h1>최종결제</h1>
-                    <table class="summary">
-                        <tr>
-                            <th>상 품 금 액</th>
-                            <th>배 송 비<p>(5만원 이상 구매 시 배송비 무료)</p></th>
-                            <th>주 문 금 액(원)</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p th:id="tot"></p>
-                            </td>
-                            <td>
-                                <p th:id="delivery"></p>
-                            </td>
-                            <td>
-                                <p th:id="total"></p>
-                                <input type="hidden" name="price" id="price">
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="btn_flex">
-                        <button type="button" class="btn_prev" onclick="deleteCart()">장바구니 비우기</button>
-                        <button type="button" class="btn_submit" onclick="address()">주문하기</button>
-                    </div>
-                </form>
+                <input type="hidden" name="id" id="id" th:value="${#authentication.name}">
+                <input type="hidden" name="orderitem" id="orderitem">
+                <h1>최종결제</h1>
+                <table class="summary">
+                    <tr>
+                        <th>상 품 금 액</th>
+                        <th>배 송 비<p>(5만원 이상 구매 시 배송비 무료)</p></th>
+                        <th>주 문 금 액(원)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p th:id="tot"></p>
+                        </td>
+                        <td>
+                            <p th:id="delivery"></p>
+                        </td>
+                        <td>
+                            <p th:id="total"></p>
+                            <input type="hidden" name="price" id="price">
+                        </td>
+                    </tr>
+                </table>
+                <div class="btn_flex">
+                    <button type="button" class="btn_prev" onclick="deleteCart()">장바구니 비우기</button>
+                    <button type="button" class="btn_submit" onclick="order()">주문하기</button>
+                </div>
             </div>
         </div>
     </div>

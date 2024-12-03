@@ -2,6 +2,7 @@ package com.mbc.cook.controller;
 
 import com.mbc.cook.entity.info.CategoryEntity;
 import com.mbc.cook.entity.member.MemberEntity;
+import com.mbc.cook.entity.recipe.CartEntity;
 import com.mbc.cook.entity.recipe.IngreEntity;
 import com.mbc.cook.entity.recipe.RecipeEntity;
 import com.mbc.cook.service.info.InfoService;
@@ -57,7 +58,7 @@ public class RecipeController {
     @PostMapping(value="/recipe/cartsave")
     public String cartSave(@RequestParam("id") String id, @RequestParam("ingredient") String ingredient) {
         try {
-            long cart =recipeService.findCartByID(id);
+            long cart =recipeService.findCartByID(id,"cart");
             if (cart == 0) {
                 recipeService.cartSave(id, ingredient);
             }else {
@@ -70,7 +71,7 @@ public class RecipeController {
     }
 
     @GetMapping(value = "/recipe/cart")
-    public String recipeCart(@RequestParam("id") String id,@RequestParam(value = "status",required = false,defaultValue = "orderprev") String status, Model model) {
+    public String recipeCart(@RequestParam("id") String id,@RequestParam(value = "status",required = false,defaultValue = "cart") String status, Model model) {
         pathSet("장바구니","cart", model);
         ArrayList<IngreEntity> list = new ArrayList<IngreEntity>();
         String ingredientArray = recipeService.selectIngredient(id,status);
@@ -95,7 +96,7 @@ public class RecipeController {
     @ResponseBody
     @PostMapping("/cart/ingreDelete")
     public String deleteIngredient(@RequestParam("ingredient") String ingredient, @RequestParam("id") String id){
-        String ingredientArray = recipeService.selectIngredient(id,"orderprev");
+        String ingredientArray = recipeService.selectIngredient(id,"cart");
         String [] ingreNum = ingredientArray.split(",");
             String deleteIngreString = "";
             for(int i=0; i<ingreNum.length; i++){
@@ -110,27 +111,70 @@ public class RecipeController {
     //장바구니 비우기
     @ResponseBody
     @PostMapping("/cart/delete")
-    public void cartDelete(@RequestParam("id") String id,@RequestParam(value = "status",required = false,defaultValue = "orderprev") String status){
+    public void cartDelete(@RequestParam("id") String id,@RequestParam(value = "status",required = false,defaultValue = "cart") String status){
         recipeService.deleteCart(id, status);
     }
     //주소지 확인
     @ResponseBody
     @PostMapping("/cart/orderAddress")
-    public void findAddress(@RequestParam("id") String id){
-        String add = recipeService.findAddress(id);
-        System.out.println("주소: " + add);
+    public String findAddress(@RequestParam("id") String id){
+        return recipeService.findAddress(id);
+    }
+
+    @ResponseBody
+    @PostMapping("/cart/order")
+    public void order(@RequestParam("id") String id, @RequestParam("orderitem") String orderItem, @RequestParam("price") int price, @RequestParam("address") String address){
+        recipeService.order(id,orderItem,price,address);
+        System.out.println("id: "+id);
+        System.out.println("orderItem: "+orderItem);
+        System.out.println("price: "+price);
+        System.out.println("address: "+address);
+    }
+    //주문내역
+    @GetMapping("recipe/order")
+    public String order(@RequestParam("id") String id, @RequestParam(value = "status",required = false,defaultValue = "cart") String status, Model model){
+        pathSet("주문 내역","cart", model);
+        if(id.equals("admin")||id.equals("ADMIN")){
+            List<CartEntity> list = recipeService.orderlistall(status);
+            model.addAttribute("orderlist",list);
+        }else{
+            List<CartEntity> list = recipeService.orderlist(id, status);
+            model.addAttribute("orderlist",list);
+        }
+        return "recipe/order";
+    }
+    @GetMapping("recipe/order/detail")
+    public String orderDetail(){
+
+        return "recipe/orderDetail";
+    }
+
+    @ResponseBody
+    @PostMapping("/orderIngredientList")
+    public String [] orderIngredientList(@RequestParam("id") long id){
+        String ingredientString = recipeService.selectListIngredient(id,"order");
+        String [] ingreEach = ingredientString.split(",");
+        String [] list = new String[ingreEach.length];
+        for(int i =0; i<ingreEach.length; i++){
+            String [] ingreNum = ingreEach[i].split("x");
+            IngreEntity ige = parseIngredient(ingreNum[0]);
+            list[i] = ige.getName()+"@"+ige.getPrice()+"@"+ingreNum[1];
+        }
+        System.out.println(list);
+        return list;
     }
 
     public void pathSet(String title,String path, Model model){
         model.addAttribute("cssPath", "/recipe/"+path);//css 패스 경로(바꾸지X)
         model.addAttribute("pageTitle", title);//타이틀 제목
     }
-
-
     public ArrayList<IngreEntity> parseIngredient(ArrayList<IngreEntity> list, String [] ing_arr){
         for (String s : ing_arr) {
-            list.add(recipeService.findIngredientByID(Long.parseLong(s)));
+            list.add(parseIngredient(s));
         }
         return list;
+    }
+    public IngreEntity parseIngredient(String s){
+            return recipeService.findIngredientByID(Long.parseLong(s));
     }
 }

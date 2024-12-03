@@ -53,6 +53,10 @@ function mypageChk() {
     $("body").css('overflow', 'hidden');
     $('.pwchk_whole').show();
 }
+function mypageHide() {
+    $('body').css('overflow', 'auto');
+    $('.pwchk_whole').hide();
+}
 //mypage 들어갈 때 pwchk
 function mypagepwchk() {
     var chkpw = $("#chkpw").val();
@@ -67,7 +71,6 @@ function mypagepwchk() {
             success:function(data){
                 if(data){
                     if(data=='true'){
-                        console.log(data);
                         location.href="/mypage?id="+id;
                     }else{
                         alertShow("오류","비밀번호가 다릅니다");
@@ -94,4 +97,51 @@ function mypagepwchk() {
              .prev('input').attr('type','password');
          }
      });
+}
+function addrCheck(id,orderitem,price) {
+    $("body").css('overflow', 'hidden');
+    $('.address_whole').show();
+    $('#id').val(id);
+    $('#orderitem').val(orderitem);
+    $('#price').val(price);
+    $.ajax({
+        url:"/cart/orderAddress",
+        type:"post",
+        async:"true",
+        data:{"id":id},
+        success:function(data){
+            var str = data.split('+');
+            $('#addr').val(str[0]);
+            $('#streetaddr').val(str[1]);
+            $('#detailaddr').val(str[2]);
+       },
+       error:function(){alertShow("에러","");}
+    });
+}
+function addrChange(){
+    $('#detailaddr').val("");
+    execDaumPostcode();
+    $('#detailaddr').attr('readonly',false);
+}
+function addressConfirm(){
+    var address = '['+$('#addr').val()+']' + '\t' + $('#streetaddr').val() + "\t" + $('#detailaddr').val();
+    var id = $('#id').val();
+    var orderitem = $('#orderitem').val();
+    var price = $('#price').val();
+    $.ajax({
+        url:"/cart/order",
+        type:"post",
+        async:"true",
+        data:{"id":id,"orderitem":orderitem,"price":price,"address":address},
+        success:function(data){
+            addrHide();
+            $('.btn_hide').hide();
+            confirmShow("주문이 완료되었습니다.","","reloadok");
+       },
+       error:function(){alertShow("에러","");}
+    });
+}
+function addrHide(){
+    $('body').css('overflow', 'auto');
+    $('.address_whole').hide();
 }

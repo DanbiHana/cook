@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}"
+      layout:fragment="content">
+    <div class="cart_whole">
+        <div class="detail_title">
+            <div class="display_flex flex_align_c">
+                <button type="button" onclick="history.back(-1)">
+                    <img src="/image/icon/common/arrow-sm-prev.svg">
+                </button>
+                <h1>주문내역</h1>
+            </div>
+        </div>
+        <div class="detail_content">
+            <table class="orderList">
+                <colgroup>
+                    <col width="10">
+                    <col width="15">
+                    <col width="15">
+                    <col width="15">
+                    <col width="50">
+                    <col width="15">
+                </colgroup>
+                <tr>
+                    <th>주문번호</th>
+                    <th>주문일자</th>
+                    <th>주문상품</th>
+                    <th>주문금액</th>
+                    <th>배송정보</th>
+                    <th>주문 현황</th>
+                </tr>
+                <tr th:if="${#lists.isEmpty(orderlist)}">
+                    <td colspan="6" class="no_list">주문내역이 없습니다.</td>
+                </tr>
+                <tr th:if="${!#lists.isEmpty(orderlist)}" th:each="list : ${orderlist}">
+                    <td><p th:text="${list.cart_seq}"></p></td>
+                    <td><p th:text="${list.orderdate}"></p></td>
+                    <td><button type="button" th:onclick="showIngredient([[${list.cart_seq}]])">목록 보기</button></td>
+                    <td><p th:text="'￦'+${#numbers.formatInteger(list.price, 0, 'COMMA')}"></td>
+                    <td>
+                        <div sec:authorize="hasAuthority('ADMIN')">주문자: <p th:text="${list.id}"></p></div>
+                        <div><p th:text="${list.address}"></p></div>
+                    </td>
+                    <td>
+                        <p th:if="${list.status == 'order'}" th:text="상품준비중"></p>
+                    </td>
+                </tr>
+                <div class="ingredient"></div>
+            </table>
+        </div>
+    </div>
+</html>
