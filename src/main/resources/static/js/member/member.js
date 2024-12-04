@@ -225,4 +225,9 @@
         $('#total_email').val(total_email);
     };
 
-
+    window.onload = function() { //login.html이 실행되면 login url에서 error=true를 찾아옴
+        var error = new URLSearchParams(window.location.search); //login url에 error=true가 있으면 오류 메세지 출력
+        if(error.get('error') === 'true'){
+            alertShow('로그인 실패', '아이디 또는 비밀번호를 확인해주세요');
+        }
+    };
