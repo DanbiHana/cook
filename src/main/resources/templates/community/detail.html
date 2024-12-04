@@ -3,49 +3,116 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}"
       layout:fragment="content">
-<body>
-    <div class="detail_whole">
-        <div class="detail_title">
-            <div class="display_flex flex_align_c">
-                <button type="button" onclick="history.back(-1)">
-                    <img src="/image/icon/common/arrow-sm-prev.svg">
-                </button>
-                <h1>커뮤니티 글 상세</h1>
-            </div>
-        </div>
-        <div th:each="com:${community}">
-            <input type="hidden" id="commu_num" name="commu_num" th:value="${com.communityNum}">
-            <input type="hidden" id="commu_id" name="commu_id" th:value="${com.communityId}">
-            <div>
-                <p th:text="${com.communityTitle}"></p>
-                <div>
-                    <div th:if="${com.communityDate == com.communityUpdateDate}">
-                        작성자: <span th:text="${com.communityId}"></span> | 등록일: <span th:text="${#temporals.format(com.communityDate, 'yyyy-MM-dd')}"></span> | 조회수: <span th:text="${com.communityReadcnt}"></span>
-                    </div>
-                    <div th:if="${com.communityDate != com.communityUpdateDate}">
-                        작성자: <span th:text="${com.communityId}"></span> | 마지막 수정일: <span th:text="${#temporals.format(com.communityUpdateDate, 'yyyy-MM-dd')}"></span> | 조회수: <span th:text="${com.communityReadcnt}"></span>
-                    </div>
+    <body>
+        <div class="detail_whole">
+            <div class="detail_title">
+                <div class="display_flex flex_align_c">
+                    <button type="button" onclick="history.back(-1)">
+                        <img src="/image/icon/common/arrow-sm-prev.svg">
+                    </button>
+                    <h1>커뮤니티 글 상세</h1>
                 </div>
             </div>
-            <div>
-                <p th:text="${com.communityContent}"></p>
-            </div>
-            <div>
-                <input type="text" name="plusComment" id="plusComment" placeholder="댓글을 입력하세요.">
-                <button type="button" th:onclick="'goToComment(' + ${com.communityNum} + ')'">댓글달기</button>
-            </div>
-            <!-- 댓글보기 -->
-            <div>
-
-            </div>
-            <div>
-                <button type="button" th:onclick="location.href='/community/list'">이전으로</button>
-            </div>
-            <div>
-                <button type="button" th:onclick="goToUpdate()">수정</button>
-                <button type="button" th:onclick="goToDelete()">삭제</button>
+            <div class="detail_inner" th:each="commu:${community}">
+                <input type="hidden" id="commu_num" name="commu_num" th:value="${commu.communityNum}">
+                <div class="detail_box">
+                    <p class="commu_title" th:text="${commu.communityTitle}"></p>
+                    <div class="detail_top">
+                        <div class="detail_flex display_flex flex_wrap flex_start flex_align_c">
+                            <div>
+                                <img src="/image/icon/community/people-bk.png" alt="사람 아이콘">
+                                <p th:text="${commu.communityId}"></p>
+                            </div>
+                            <div>
+                                <img src="/image/icon/community/calendar-bk.png" alt="달력 아이콘">
+                                <p th:if="${commu.communityDate == commu.communityUpdateDate}" th:text="${#temporals.format(commu.communityDate, 'yyyy년 MM월 dd일')}">등록일</p>
+                                <p th:if="${commu.communityDate != commu.communityUpdateDate}" th:text="${#temporals.format(commu.communityUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                            </div>
+                            <div>
+                                <img src="/image/icon/recipe/eye-bk.png" alt="조회수 아이콘">
+                                <p th:text="${commu.communityReadcnt}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="commu_content" th:text="${commu.communityContent}"></p>
+                </div>
+                <div th:if="${commu.communityId != 'admin'}">
+                    <div class="comment_input">
+                        <input type="text" name="comment_content" id="comment_content" placeholder="댓글을 입력하세요.">
+                        <button type="button" onclick="sendComment(this)" th:data-commu="${commu.communityNum}" data-type="comment">댓글달기</button>
+                    </div>
+                    <p class="comment_len">댓글(<span th:text="${commentList.size()}">0</span>)</p>
+                    <div class="comment_inner">
+                        <div class="comment_row" th:each="comment:${commentList}">
+                            <div class="comment_div">
+                                <div class="display_flex flex_wrap flex_start flex_align_c">
+                                    <div>
+                                        <img src="/image/icon/community/people-bk.png" alt="사람 아이콘">
+                                        <p th:text="${comment.commentId}">댓글작성자</p>
+                                    </div>
+                                    <div>
+                                        <img src="/image/icon/community/calendar-bk.png" alt="달력 아이콘">
+                                        <p th:if="${comment.commentDate == comment.commentUpdateDate}" th:text="${#temporals.format(comment.commentDate, 'yyyy년 MM월 dd일')}">등록일</p>
+                                        <p th:if="${comment.commentDate != comment.commentUpdateDate}" th:text="${#temporals.format(comment.commentUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                                    </div>
+                                    <div>
+                                        <img src="/image/icon/community/comment-bk.png" alt="댓글 아이콘">
+                                        <p th:text="${comment.step}">대댓글수</p>
+                                    </div>
+                                </div>
+                                <div class="comment_change">
+                                    <p th:text="${comment.commentContent}">댓글 내용</p>
+                                    <input type="text" th:id="'comment_input'+${comment.commentNum}" th:data-seq="${comment.commentNum}" th:value="${comment.commentContent}" readonly hidden="hidden">
+                                    <div class="comment_btn" th:if="${comment.commentId == #authentication.name}">
+                                        <button type="button" class="comment_update" onclick="commentChange(this)" data-type="off" th:data-id="'comment_input'+${comment.commentNum}" th:data-seq="${comment.commentNum}" th:data-value="${comment.commentContent}">수정</button>
+                                        <button type="button" class="comment_delete" th:onclick="commentDeleteChk(this)" data-type="comment" th:data-seq="${comment.commentNum}" th:data-indent="${comment.indent}">삭제</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment_input">
+                                <!--대댓글-->
+                                <input type="hidden" name="comment_seq" th:id="'comment_seq'+${comment.commentNum}" th:value="${comment.commentNum}">
+                                <input type="text" name="recomment" th:id="'recomment'+${comment.commentNum}" placeholder="대댓글을 입력하세요.">
+                                <button type="button" onclick="sendComment(this)" th:data-commu="${commu.communityNum}" th:data-comment="${comment.commentNum}" data-type="recomment">대댓글달기</button>
+                            </div>
+                            <div class="recomment_box">
+                                <div class="recomment_div" th:if="${comment.commentNum==recomment.indent}" th:each="recomment:${recommentList}">
+                                    <p>└</p>
+                                    <div class="recomment_inner">
+                                        <div class="display_flex flex_wrap flex_start flex_align_c">
+                                            <div>
+                                                <img src="/image/icon/community/people-bk.png" alt="사람 아이콘">
+                                                <p th:text="${recomment.commentId}">대댓글작성자</p>
+                                            </div>
+                                            <div>
+                                                <img src="/image/icon/community/calendar-bk.png" alt="달력 아이콘">
+                                                <p th:if="${recomment.commentDate == recomment.commentUpdateDate}" th:text="${#temporals.format(recomment.commentDate, 'yyyy년 MM월 dd일')}">등록일</p>
+                                                <p th:if="${recomment.commentDate != recomment.commentUpdateDate}" th:text="${#temporals.format(recomment.commentUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                                            </div>
+                                        </div>
+                                        <div class="recomment_change">
+                                            <p th:text="${recomment.commentContent}">대댓글 내용</p>
+                                            <input type="text" th:id="'comment_input'+${recomment.commentNum}" th:data-seq="${recomment.commentNum}" th:value="${recomment.commentContent}" readonly hidden="hidden">
+                                            <div class="comment_btn" th:if="${recomment.commentId == #authentication.name}">
+                                                <button type="button" class="comment_update" onclick="commentChange(this)" data-type="off" th:data-id="'comment_input'+${recomment.commentNum}" th:data-seq="${recomment.commentNum}" th:data-value="${recomment.commentContent}">수정</button>
+                                                <button type="button" class="comment_delete" th:onclick="commentDeleteChk(this)" data-type="recomment" th:data-seq="${recomment.commentNum}" th:data-indent="${recomment.indent}">삭제</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_flex">
+                    <button type="button" class="btn_prev" th:onclick="location.href='/community/list'">이전으로</button>
+                    <button type="button" class="btn_prev" th:if="${commu.communityId == #authentication.name}" th:onclick="goToUpdate()">수정</button>
+                    <button type="button" class="btn_submit" th:if="${commu.communityId == #authentication.name}" th:onclick="goToDelete()">삭제</button>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+        <input type="hidden" id="comment_num">
+        <input type="hidden" id="comment_type">
+        <input type="hidden" id="comment_indent">
+    </body>
 </html>

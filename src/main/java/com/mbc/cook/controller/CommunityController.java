@@ -1,10 +1,9 @@
 package com.mbc.cook.controller;
 
-import com.mbc.cook.dto.community.CommentDTO;
 import com.mbc.cook.dto.community.CommunityDTO;
 import com.mbc.cook.entity.community.CommentEntity;
 import com.mbc.cook.entity.community.CommunityEntity;
-import com.mbc.cook.service.community.CommentService;
+import com.mbc.cook.service.community.CommentInterface;
 import com.mbc.cook.service.community.CommunityService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartRequest;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -120,26 +117,12 @@ public class CommunityController {
         communityService.readcntUp(num);//조회수 증가
         CommunityEntity communityEntity = communityService.getCommunity(num);//시퀀스에 해당하는 정보 가져오기
         model.addAttribute("community",communityEntity);
+        //댓글 리스트
+        List<CommentEntity> commentList = communityService.getComment(num);
+        model.addAttribute("commentList",commentList);
+        //대댓글 리스트
+        List<CommentEntity> recommentList = communityService.getRecomment(num);
+        model.addAttribute("recommentList",recommentList);
         return "community/detail";
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////
-//    댓글 등록
-//    @GetMapping(value = "/commentRegister")
-//    public String commentResister(Model model, @RequestParam("num") int num, @RequestParam("id") String id, @RequestParam("comment") String comment, CommentDTO commentDTO) {
-//        model.addAttribute("cssPath", "/community/detail");//css 패스 경로(바꾸지X)
-//        model.addAttribute("pageTitle", "커뮤니티 상세");//타이틀 제목
-//        //댓글 저장
-//        commentDTO.setCommentId(id);
-//        commentDTO.setCommentContent(comment);
-//        LocalDateTime present = LocalDateTime.now();
-//        commentDTO.setCommentDate(present);
-//        commentDTO.setCommentUpdateDate(present);
-//        commentDTO.setCommunityNum(num);
-//        commentDTO.setIndent(0);
-//        commentDTO.setStep(0);
-//        System.out.println("받아온 아이디 : "+commentDTO.getCommentId());
-//        CommentEntity commententity = commentDTO.commentEntity();
-//        commentService.insertcomment(commententity);
-//        return "redirect:/community/detail?num="+num;
-//    }
 }

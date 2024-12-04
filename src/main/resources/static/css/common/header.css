@@ -36,6 +36,8 @@
     margin-right: 10px;
 }
 .header_logo p{
+    width: max-content;
+    max-width: 100%;
     font-size: 18px;
     line-height: 27px;
     color: var(--all-white);

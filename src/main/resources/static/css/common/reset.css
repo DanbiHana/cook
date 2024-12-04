@@ -60,7 +60,7 @@ body::-webkit-scrollbar{
     font-style: normal;
     text-decoration: none;
     outline: 0;
-    word-break: keep-all;
+    word-break: break-word;
     background-color: var(--bg-none);
 }
 img{

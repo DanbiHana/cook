@@ -36,3 +36,7 @@ function execDaumPostcode(){
         }
     }).open();
 }
+
+function pageReload(){
+    location.reload(true);
+}
