@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Configuration
 @AllArgsConstructor
@@ -90,7 +91,8 @@ public class SecurityConfiguration {
                 .failureHandler(new AuthenticationFailureHandler() {
                     @Override
                     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                        response.sendRedirect("/login");
+                        String error = "/login?error=true"; //로그인 실패시 login url에 error=true 를 보냄
+                        response.sendRedirect(error);
                     }
                 })
                 .and()
