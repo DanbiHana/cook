@@ -12,7 +12,6 @@
                 <h1>로그인</h1>
             </div>
         </div>
-        <div th:if="${param.error}">사용자 이름 및 암호가 잘못되었습니다.</div>
         <div th:if="${param.logout}">로그아웃 되었습니다.</div>
         <form th:action="@{/loginProcess}" method="post">
             <div class="login-main">
