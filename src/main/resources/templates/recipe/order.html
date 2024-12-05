@@ -36,7 +36,7 @@
                 <tr th:if="${!#lists.isEmpty(orderlist)}" th:each="list : ${orderlist}">
                     <td><p th:text="${list.cart_seq}"></p></td>
                     <td><p th:text="${list.orderdate}"></p></td>
-                    <td><button type="button" th:onclick="showIngredient([[${list.cart_seq}]])">목록 보기</button></td>
+                    <td><button type="button" class="listshow" th:onclick="showIngredient([[${list.cart_seq}]], this)" data-type="off">목록 보기</button></td>
                     <td><p th:text="'￦'+${#numbers.formatInteger(list.price, 0, 'COMMA')}"></td>
                     <td>
                         <div sec:authorize="hasAuthority('ADMIN')">주문자: <p th:text="${list.id}"></p></div>
@@ -47,9 +47,7 @@
                     </td>
                 </tr>
             </table>
-            <div class="orderlist_ingredient">
-                <h1>주문 목록</h1>
-                <table class="ingredient" hidden></table>
+            <div class="orderlist_ingredient" hidden>
             </div>
         </div>
     </div>

@@ -119,36 +119,58 @@ function order(){
     addrCheck(id,orderitem,price);
 }
 
-function showIngredient(id){
-    var cartInfo="";
+function showIngredient(id,ths){
+    var type = ths.dataset.type;
+    hideOrderList('.listshow');
+    (type == 'off') ? showOrderList(id, ths) : hideOrderList(ths);
+}
+function showOrderList(id, ths){
+    var orderlist="<h1>주문 목록</h1>";
+    $(ths).text('목록 숨기기');
     $.ajax({
         type:"post",
         url:"/order/ingredientList",
         data:{"id":id},
         success:function(data){
-                cartInfo += "<tr>";
-                cartInfo += "<th>상품번호</th>";
-                cartInfo += "<th>상품명</th>";
-                cartInfo += "<th>상품 단가</th>";
-                cartInfo += "<th>구매 수량</th>";
-                cartInfo += "<th>상품 총액</th>";
-                cartInfo += "</tr>";
+            orderlist += "<table class='orderItemList'>";
+            orderlist +=    "<colgroup>";
+            orderlist +=        "<col width='10'>";
+            orderlist +=        "<col width='50'>";
+            orderlist +=        "<col width='10'>";
+            orderlist +=        "<col width='10'>";
+            orderlist +=        "<col width='10'>";
+            orderlist +=    "</colgroup>";
+            orderlist +=    "<tr>";
+            orderlist +=        "<th>상품번호</th>";
+            orderlist +=        "<th>상품명</th>";
+            orderlist +=        "<th>상품 단가</th>";
+            orderlist +=        "<th>구매 수량</th>";
+            orderlist +=        "<th>상품 총액</th>";
+            orderlist +=    "</tr>";
             for(var i=0 ; i< data.length; i++){
                 var list = data[i].split("@");
-                    cartInfo+="<tr class='ingredient_result'>";
+                    orderlist+="<tr class='ingredient_result'>";
                     for(var j=0; j<list.length; j++){
-                        if(j>=2){cartInfo+="<td>"+addCommas(list[j])+"</td>";}
-                        else{cartInfo+="<td>"+list[j]+"</td>";}
+                        if(j>=2){orderlist+="<td>"+addCommas(list[j])+"</td>";}
+                        else{orderlist+="<td>"+list[j]+"</td>";}
                     }
-                    cartInfo+="<td>"+addCommas(parseInt(list[2])*parseInt(list[3]))+"</td>";
-                    cartInfo+="</td>";
+                    orderlist += "<td>"+addCommas(parseInt(list[2])*parseInt(list[3]))+"</td>";
+                    orderlist += "</tr>";
             }
-            $(".ingredient").attr("hidden",false);
-            $(".ingredient").html(cartInfo);
+            orderlist+="</table>";
+            $(".orderlist_ingredient").attr("hidden",false);
+            $(".orderlist_ingredient").html(orderlist);
         },
         error:function(){alertShow("오류","");}
     });
+    $(ths).attr("data-type","on");
 }
+function hideOrderList(ths){
+    $(ths).text('목록 보기');
+    $(ths).attr("data-type","off");
+    $('.orderlist_ingredient').attr("hidden",true);
+}
+
 
 $(document).ready(function(){
     if(win_href.includes("recipe/select") && win_search.includes("path=detail")){
