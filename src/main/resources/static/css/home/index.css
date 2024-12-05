@@ -45,6 +45,9 @@ p.commu_subtitle{
 .commu_box p.commu_header:hover{
     text-decoration: underline;
 }
+.commu_box p.no_data_txt{
+    padding: 48px 0;
+}
 .commu_in{
     width: 100%;
     height: auto;
