@@ -63,7 +63,10 @@ public class SecurityConfiguration {
                 "/pwupdate",
                 "/pwUpdate",
                 "/subCategoryGet",
-                "/recipe/search"
+                "/recipe/search",
+                "/info/list",
+                "/info/info",
+                "/faq/list"
         };
         /* @formatter:off */
         http

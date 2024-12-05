@@ -34,8 +34,7 @@
     height: auto;
 }
 .info_member{
-    width: 50%;
-    height: auto;
+    width: 100%;
     margin-bottom: 30px;
 }
 .info_member img{
@@ -61,6 +60,13 @@ p.info_copyright{
     line-height: 20px;
     color: var(--dp-gray);
     margin: 10px auto 0 auto;
+}
+@media (min-width: 500px){
+    .info_member{
+        width: 50%;
+        height: auto;
+        margin-bottom: 30px;
+    }
 }
 @media (min-width: 768px){
     .info_member{

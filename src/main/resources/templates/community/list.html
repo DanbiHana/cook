@@ -24,7 +24,7 @@
                         </div>
                         <p class="no_data_txt" th:if="${adminList == null} or ${adminList.size() == 0}">등록된 공지사항이 없습니다.</p>
                     </div>
-                    <button type="button" th:if="${adminList.size() >= 3}" onclick="adminReadMore(this)" data-type="off" class="admin_readmore" id="admin_readmore">공지 더보기</button>
+                    <button type="button" th:if="${adminList.size() > 3}" onclick="adminReadMore(this)" data-type="off" class="admin_readmore" id="admin_readmore">공지 더보기</button>
                 </div>
                 <div class="commu_other">
                     <div class="community_row" th:onclick="'goToDetail(' + ${commu.communityNum} + ')'" th:each="commu:${otherList}">

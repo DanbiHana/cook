@@ -73,7 +73,7 @@ function passwordCheck(){
     var pwcheck = $("#pwcheck").val();
     var pw_message = document.getElementById("pw_message");	//확인 메세지
     var correctColor = "#3d7797";	//맞았을 때 출력되는 색깔.
-    var wrongColor = "#ff0000";		//틀렸을 때 출력되는 색깔
+    var wrongColor = "#bb0000";		//틀렸을 때 출력되는 색깔
     if(pw == pwcheck){ //password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
         if(pw.length<6 ||pw.length>16){
             pw_message.style.color = wrongColor;

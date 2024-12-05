@@ -9,41 +9,131 @@
                 <button type="button" onclick="history.back(-1)">
                     <img src="/image/icon/common/arrow-sm-prev.svg">
                 </button>
-                <h1>Recipe</h1>
+                <h1>COOK:EAT</h1>
             </div>
         </div>
         <div class="info_inner">
             <div class="info_row info_title">
-                <p class="info_txt info_border">[Recipe]에 대한 설명</p>
+                <p class="info_txt info_border">
+                    <b>[이름 소개]</b>
+                    <br/>
+                    COOK: - 요리하다&ensp;/&ensp;EAT - 먹다
+                    <br/>
+                    '내가 요리한 음식을 내가 먹는다'는 뜻으로, 1인 가구가 타겟층.
+                    <br/>
+                    <br/>
+                    <b>[개요]</b>
+                    <br/>
+                    COOK:EAT은 {1인 가구}를 위한 레시피 소개 웹페이지입니다.
+                    <br/>
+                    한식, 중식, 일식, 양식으로 나누어 다양한 요리를 소개합니다.
+                    <br/>
+                    <br/>
+                    <b>[페이지 구성]</b>
+                    <br/>
+                    1. 레시피
+                    <br/>
+                    &ensp;- 등록: 관리자가 레시피를 등록 가능.(파이썬을 이용한 쿠팡 웹 크롤링 이용)
+                    <br/>
+                    &ensp;- 리스트: 관리자가 등록한 레시피 리스트업.(검색 기능 부여)
+                    <br/>
+                    &ensp;- 상세: 레시피의 재료와 방법을 볼 수 있음.(필요한 재료 장바구니 추가 기능, 로그인 후 이용 가능)
+                    <br/>
+                    &ensp;- 수정: 관리자가 레시피를 수정.
+                    <br/>
+                    &ensp;- 삭제: 관리자가 레시피를 삭제.
+                    <br/>
+                    <br/>
+                    2. 커뮤니티(로그인 후 이용 가능)
+                    <br/>
+                    &ensp;- 등록: 제목, 내용을 등록
+                    <br/>
+                    &ensp;- 리스트: 관리자/일반 유저가 등록한 게시글이 리스트업.(관리자: 공지사항 / 일반 유저: 자유게시판)
+                    <br/>
+                    &ensp;- 상세: 클릭한 게시글의 상세 글을 볼 수 있음.(댓글/대댓글 기능 추가)
+                    <br/>
+                    &ensp;- 수정: 게시글을 쓴 유저만 게시글 수정 기능 부여.
+                    <br/>
+                    &ensp;- 삭제: 게시글을 쓴 유저만 게시글 삭제 기능 부여.
+                    <br/>
+                    &ensp;- 공지: 관리자가 쓴 글이 공지로 등록되며 목록 화면 상단에 표출.
+                    <br/>
+                    <br/>
+                    3. 뭐 먹지?
+                    <br/>
+                    &ensp;- 오늘 뭐 먹을지 고민하는 분들을 위한 랜덤 뽑기.
+                    <br/>
+                    <br/>
+                    4. 설정
+                    <br/>
+                    &ensp;- 문의: FAQ로 자주 묻는 질문을 관리자가 리스트업.
+                    <br/>
+                    &ensp;- 카테고리: 관리자가 한식/중식/일식/양식의 하위 카테고리를 추가/수정/삭제 가능.
+                    <br/>
+                    <br/>
+                    &ensp;5. 장바구니/주문내역
+                    <br/>
+                    &ensp;- 장바구니: 장바구니에 담긴 상품을 수정/결제.
+                    <br/>
+                    &ensp;- 주문내역: 결제된 주문 내역 리스트업. (관리자는 전체아이디 리스트)
+                    <br/>
+                    <br/>
+                    <br/>
+                    6. 회원관리
+                    <br/>
+                    &ensp;- 회원 가입: 개인 정보 입력으로 회원가입 가능.(비밀번호 암호화, 다음 API, 아이디 중복확인, 관리자는 'admin'으로 회원가입을 해야 진입 가능)
+                    <br/>
+                    &ensp;- 마이페이지: 비밀번호 확인을 통한 마이페이지.(아이디를 제외한 개인정보 수정 가능)
+                    <br/>
+                    &ensp;- 회원 목록: 사이트에 가입한 회원 목록 리스트업.(관리자 기능)
+                    <br/>
+                    <br/>
+                    7.로그인
+                    <br/>
+                    &ensp;- 로그인: Security를 활용한 로그인, 이용 가능 사이트 제한.
+                    <br/>
+                    &ensp;- 아이디 찾기/비밀번호 찾기: 간단한 회원 정보 입력으로 아이디 및 비밀번호 찾기 기능 부여.
+                    <br/>
+
+
+                </p>
             </div>
             <div class="info_row info_project">
                 <p>프로젝트 인원 소개</p>
                 <div class="info_border">
-                    <div class="display_flex flex_wrap flex_start flex_align_c">
+                    <div class="display_flex flex_wrap flex_start flex_align_str">
                         <div class="info_member">
                             <img th:src="@{/image/icon/info/profile-default.png}" alt="프로필 이미지">
-                            <p>이름</p>
-                            <p>역할</p>
+                            <p>이혜린[조장]</p>
+                            <p>
+                                thymeleaf 레이아웃 및 밑작업
+                                <br/>
+                                레시피 리스트
+                                <br/>
+                                레시피 등록, 수정, 삭제
+                                <br/>
+                                커뮤니티 댓글/대댓글
+                            </p>
                         </div>
                         <div class="info_member">
                             <img th:src="@{/image/icon/info/profile-default.png}" alt="프로필 이미지">
-                            <p>이름</p>
-                            <p>역할</p>
+                            <p>김규리</p>
+                            <p>레시피 상세<br/>장바구니<br/>주문내역</p>
                         </div>
                         <div class="info_member">
                             <img th:src="@{/image/icon/info/profile-default.png}" alt="프로필 이미지">
-                            <p>이름</p>
-                            <p>역할</p>
+                            <p>천시아</p>
+                            <p>회원가입<br/>마이페이지<br/>랜덤뽑기</p>
                         </div>
                         <div class="info_member">
                             <img th:src="@{/image/icon/info/profile-default.png}" alt="프로필 이미지">
-                            <p>이름</p>
-                            <p>역할</p>
+                            <p>박현준</p>
+                            <p>로그인<br/>아이디/비밀번호 찾기<br/>관리자 회원목록<br/>faq</p>
                         </div>
                         <div class="info_member">
                             <img th:src="@{/image/icon/info/profile-default.png}" alt="프로필 이미지">
-                            <p>이름</p>
-                            <p>역할</p>
+                            <p>김민성</p>
+                            <p>커뮤니티</p>
                         </div>
                     </div>
                 </div>
@@ -51,10 +141,10 @@
             <div class="info_row info_project">
                 <p>프로젝트 개발 기간</p>
                 <div class="info_txt info_border">
-                    <p>2024.11.11 ~ 2024.11.29(예상)</p>
+                    <p>2024.11.11 ~ 2024.12.06</p>
                 </div>
             </div>
-            <p class="info_copyright">ⓒMBC ACADEMY - 요리이름몰라</p>
+            <p class="info_copyright">ⓒMBC ACADEMY - COOK:EAT</p>
         </div>
     </div>
 </html>
