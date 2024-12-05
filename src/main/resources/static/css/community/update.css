@@ -1,1 +1,18 @@
 @charset "UTF-8";
+.communtyInput{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.communtyInput div{
+    width: 100%;
+    height: auto;
+    margin: 20px auto 0 auto;
+}
+.communtyInput div label{
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.communtyInput div textarea{
+    height: 180px;
+}

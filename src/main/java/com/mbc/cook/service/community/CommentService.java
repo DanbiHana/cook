@@ -17,4 +17,6 @@ public interface CommentService {
     void commentup(long comment_num);
 
     void commentdw(int commuIndent);
+
+    void recommentDelete(long commuNum);
 }

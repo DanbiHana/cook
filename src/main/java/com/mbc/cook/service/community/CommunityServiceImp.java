@@ -44,8 +44,8 @@ public class CommunityServiceImp implements CommunityService {
     }
 
     @Override
-    public void deleteCommunity(long num) {
-        communityRepository.deleteById(num);
+    public void deleteCommunity(long commu_num) {
+        communityRepository.deleteById(commu_num);
     }
 
     @Override
@@ -61,5 +61,10 @@ public class CommunityServiceImp implements CommunityService {
     @Override
     public List<CommentEntity> getRecomment(long num) {
         return commentRepository.getRecomment(num);
+    }
+
+    @Override
+    public void deleteAllComment(long commu_num) {
+        commentRepository.deleteAllComment(commu_num);
     }
 }

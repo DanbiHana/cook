@@ -70,6 +70,7 @@ public class CommentController {
         if(commu_indent!=0){
             commentService.commentdw(commu_indent);
         }
+        commentService.recommentDelete(commu_num);
         commentService.commentDelete(commu_num);
     }
 }

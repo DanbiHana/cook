@@ -16,8 +16,9 @@ function confirmOk(value){
     //글 삭제
     if(value == 'commu_delete'){
         var commu_num = $('#commu_num').val();
-        location.href = '/community/delete?num='+commu_num;
-        return alertShow('삭제 확인','삭제되었습니다.');
+        location.href = '/community/delete?commu_num='+commu_num;
+        $('.common_btn.btn_confirm').hide();
+        return alertShow("삭제 확인", "삭제되었습니다.");
     }
     //글 수정
     else if(value == 'commu_update'){
@@ -87,7 +88,6 @@ function commentChange(object){
             },
             error : function(jqXHR, textStatus, errorThrown) {
                 const responseText = JSON.parse(jqXHR.responseText);
-                console.log("에러 발생\nException : " + responseText.exception);
                 alertShow('오류 발생', '잠시만 기다려주세요.');
             }
         });
@@ -119,7 +119,6 @@ function commentDelete(commu_num,commu_type,commu_indent){
         },
         error : function(jqXHR, textStatus, errorThrown) {
             const responseText = JSON.parse(jqXHR.responseText);
-            console.log("에러 발생\nException : " + responseText.exception);
             alertShow('오류 발생', '잠시만 기다려주세요.');
         }
     });

@@ -36,4 +36,9 @@ public class CommentServiceImp implements CommentService {
     public void commentdw(int commuIndent) {
         commentRepository.commentDw(commuIndent);
     }
+
+    @Override
+    public void recommentDelete(long commuNum) {
+        commentRepository.recommentDelete(commuNum);
+    }
 }

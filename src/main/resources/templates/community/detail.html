@@ -25,8 +25,8 @@
                             </div>
                             <div>
                                 <img src="/image/icon/community/calendar-bk.png" alt="달력 아이콘">
-                                <p th:if="${commu.communityDate == commu.communityUpdateDate}" th:text="${#temporals.format(commu.communityDate, 'yyyy년 MM월 dd일')}">등록일</p>
-                                <p th:if="${commu.communityDate != commu.communityUpdateDate}" th:text="${#temporals.format(commu.communityUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                                <p th:if="${commu.communityDate == commu.communityUpdateDate}" th:text="${#temporals.format(commu.communityDate, 'yyyy년 MM월 dd일 HH:mm:ss')}">등록일</p>
+                                <p th:if="${commu.communityDate != commu.communityUpdateDate}" th:text="${#temporals.format(commu.communityUpdateDate, 'yyyy년 MM월 dd일 HH:mm:ss')}">수정일</p>
                             </div>
                             <div>
                                 <img src="/image/icon/recipe/eye-bk.png" alt="조회수 아이콘">
@@ -37,11 +37,11 @@
                     <p class="commu_content" th:text="${commu.communityContent}"></p>
                 </div>
                 <div th:if="${commu.communityId != 'admin'}">
+                    <p class="comment_len">댓글(<span th:text="${commentList.size()}">0</span>)</p>
                     <div class="comment_input">
                         <input type="text" name="comment_content" id="comment_content" placeholder="댓글을 입력하세요.">
                         <button type="button" onclick="sendComment(this)" th:data-commu="${commu.communityNum}" data-type="comment">댓글달기</button>
                     </div>
-                    <p class="comment_len">댓글(<span th:text="${commentList.size()}">0</span>)</p>
                     <div class="comment_inner">
                         <div class="comment_row" th:each="comment:${commentList}">
                             <div class="comment_div">
@@ -52,8 +52,8 @@
                                     </div>
                                     <div>
                                         <img src="/image/icon/community/calendar-bk.png" alt="달력 아이콘">
-                                        <p th:if="${comment.commentDate == comment.commentUpdateDate}" th:text="${#temporals.format(comment.commentDate, 'yyyy년 MM월 dd일')}">등록일</p>
-                                        <p th:if="${comment.commentDate != comment.commentUpdateDate}" th:text="${#temporals.format(comment.commentUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                                        <p th:if="${comment.commentDate == comment.commentUpdateDate}" th:text="${#temporals.format(comment.commentDate, 'yyyy년 MM월 dd일 HH:mm:ss')}">등록일</p>
+                                        <p th:if="${comment.commentDate != comment.commentUpdateDate}" th:text="${#temporals.format(comment.commentUpdateDate, 'yyyy년 MM월 dd일 HH:mm:ss')}">수정일</p>
                                     </div>
                                     <div>
                                         <img src="/image/icon/community/comment-bk.png" alt="댓글 아이콘">
@@ -69,12 +69,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment_input">
-                                <!--대댓글-->
-                                <input type="hidden" name="comment_seq" th:id="'comment_seq'+${comment.commentNum}" th:value="${comment.commentNum}">
-                                <input type="text" name="recomment" th:id="'recomment'+${comment.commentNum}" placeholder="대댓글을 입력하세요.">
-                                <button type="button" onclick="sendComment(this)" th:data-commu="${commu.communityNum}" th:data-comment="${comment.commentNum}" data-type="recomment">대댓글달기</button>
-                            </div>
                             <div class="recomment_box">
                                 <div class="recomment_div" th:if="${comment.commentNum==recomment.indent}" th:each="recomment:${recommentList}">
                                     <p>└</p>
@@ -86,8 +80,8 @@
                                             </div>
                                             <div>
                                                 <img src="/image/icon/community/calendar-bk.png" alt="달력 아이콘">
-                                                <p th:if="${recomment.commentDate == recomment.commentUpdateDate}" th:text="${#temporals.format(recomment.commentDate, 'yyyy년 MM월 dd일')}">등록일</p>
-                                                <p th:if="${recomment.commentDate != recomment.commentUpdateDate}" th:text="${#temporals.format(recomment.commentUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                                                <p th:if="${recomment.commentDate == recomment.commentUpdateDate}" th:text="${#temporals.format(recomment.commentDate, 'yyyy년 MM월 dd일 HH:mm:ss')}">등록일</p>
+                                                <p th:if="${recomment.commentDate != recomment.commentUpdateDate}" th:text="${#temporals.format(recomment.commentUpdateDate, 'yyyy년 MM월 dd일 HH:mm:ss')}">수정일</p>
                                             </div>
                                         </div>
                                         <div class="recomment_change">
@@ -100,6 +94,12 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="comment_input">
+                                <!--대댓글-->
+                                <input type="hidden" name="comment_seq" th:id="'comment_seq'+${comment.commentNum}" th:value="${comment.commentNum}">
+                                <input type="text" name="recomment" th:id="'recomment'+${comment.commentNum}" placeholder="대댓글을 입력하세요.">
+                                <button type="button" onclick="sendComment(this)" th:data-commu="${commu.communityNum}" th:data-comment="${comment.commentNum}" data-type="recomment">대댓글달기</button>
                             </div>
                         </div>
                     </div>

@@ -103,10 +103,9 @@ public class CommunityController {
     }
 
     @GetMapping(value = "/delete")
-    public String communityDelete(Model model, @RequestParam("num") long num) {
-        model.addAttribute("cssPath", "/community/delete");//css 패스 경로(바꾸지X)
-        model.addAttribute("pageTitle", "커뮤니티 삭제");//타이틀 제목
-        communityService.deleteCommunity(num);//게시물 삭제
+    public String communityDelete(@RequestParam("commu_num") long commu_num) {
+        communityService.deleteCommunity(commu_num);//게시물 삭제
+        communityService.deleteAllComment(commu_num);//해당 게시글의 댓글 삭제
         return "redirect:/community/list";
     }
 

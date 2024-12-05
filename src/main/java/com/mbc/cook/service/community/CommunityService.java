@@ -20,11 +20,13 @@ public interface CommunityService {
 
     void readcntUp(long num);
 
-    void deleteCommunity(long num);
+    void deleteCommunity(long commu_num);
 
     void updateCommunity(long num, String title, String content, LocalDateTime update_date);
 
     List<CommentEntity> getComment(long num);
 
     List<CommentEntity> getRecomment(long num);
+
+    void deleteAllComment(long commu_num);
 }
