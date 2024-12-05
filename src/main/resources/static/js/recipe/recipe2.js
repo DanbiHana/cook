@@ -24,9 +24,6 @@ function recipeListSearch(){
         if(food_val == '' || food_val == null){
             food_val = 'none';
         }
-        console.log(category_val1);
-        console.log(category_val2);
-        console.log(food_val);
         location.href='/recipe/search?category1='+category_val1+'&category2='+category_val2+'&food='+food_val;
     }
 }

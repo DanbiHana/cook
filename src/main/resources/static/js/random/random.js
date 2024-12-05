@@ -24,7 +24,7 @@ function randomClick() {
             }, 1600);
         },
          error: function (request, status, error) {
-            console.log("message: " + request.responseText)
+            alertShow('랜덤 오류','다시 시도해주세요.');
         }
     });
 }
