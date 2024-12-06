@@ -7,7 +7,6 @@ from datetime import datetime
 import bcrypt
 import os
 import hashlib
-print(hashlib.md5(b"test").hexdigest())
 
 # 비밀번호 해싱
 password = "test1234"
@@ -301,8 +300,6 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('기꼬만 코이다시 혼쯔유, 500ml, 1개',6250,'돈코츠 라멘'))
 #90 쌈장
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('해찬들 사계절 쌈장, 500g, 1개',2250,'돈코츠 라멘'))
-
-
 
 
 ###############recipe
@@ -659,8 +656,6 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #           'EAT!',0))#EAT은 항상 붙이기
 
 
-
-
 ##########cookcommunity
 ##공지사항
 c.execute('insert into cookcommunity (community_num, community_id, community_title, community_content, community_date, community_update_date, community_readcnt)' +
@@ -678,9 +673,5 @@ c.execute('insert into cookcomment (comment_num, comment_id, comment_content, co
 c.execute('insert into cookcomment (comment_num, comment_id, comment_content, comment_date, comment_update_date, community_num, indent, step)' +
           'values(comment_num_seq.nextval, :1, :2, :3, :4, :5, :6, :7)',('test1234','ㅋㅋㅋㅋㅋㅋㅋ셀프홍보다!!!',today,today,10004,10001,0))
 
-
 connect.commit()
-c.close()
-connect.close()
-
 print('완료')
