@@ -27,6 +27,7 @@ public class PythonScriptRunner implements CommandLineRunner {
             int exitCode = process.waitFor();
             System.out.println("Python 스크립트 종료 코드: " + exitCode);
             System.out.println("종료 코드 0: 문제 없음");
+            System.out.println("종료 코드 1: 뭔가 문제 있음");
         }
     }
 }
