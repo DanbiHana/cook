@@ -7,6 +7,7 @@ from datetime import datetime
 import bcrypt
 import os
 import hashlib
+print(hashlib.md5(b"test").hexdigest())
 
 # 비밀번호 해싱
 password = "test1234"
@@ -14,10 +15,11 @@ hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
 # 오라클 라이브러리 경로 설정
-oracledb.init_oracle_client(lib_dir="C:\\project\\cook\\instantclient-basic-windows.x64-11.2.0.4.0\\instantclient_11_2")
+oracledb.init_oracle_client(lib_dir="C:\\project\\cook\\instantclient_11_2")
 
 # 오라클 데이터베이스 연결
-connect = oracledb.connect(user='lhr', password='1234', dsn='localhost')
+#각자 계정 연결
+connect = oracledb.connect(user='', password='', dsn='')
 c = connect.cursor()  # 커서 생성
 
 today = datetime.today()
@@ -50,7 +52,7 @@ c.execute('insert into recipecategory (categorynum, maincategory, subcategory) v
 c.execute('insert into recipecategory (categorynum, maincategory, subcategory) values(category_seq.nextval, :1, :2)',('양식', '요리'))
 
 ##########ingredient
-#####1. 치킨덮밥마요
+#####1. 치킨마요덮밥
 ##치킨(1),계란(2),깐양파(3),밥(4),마요네즈(5),진간장(6),설탕(7)
 #1 치킨
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('야들리애 100% 닭다리 순살 후라이드 가라아게 치킨, 250g, 1개',8900,'치킨마요덮밥'))
@@ -211,7 +213,7 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('귤, 5kg, 1개',15000,'탕수육'))
 
 #####14. 동파육
-##통삼겹(61),식용유(35),진간장(6),맛술(40),물엿(62),설탕(7),춘장(63),통후추(64),통마늘(65),양파(3),생강(66),대파(67),팔각(68)
+##통삼겹(61),식용유(35),진간장(6),맛술(40),물엿(62),설탕(7),춘장(63),통후추(64),통마늘(65),양파(3),생강(66),대파(11),팔각(68)
 #61 통삼겹
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 한돈 삼겹살 수육용 (냉장), 1000g, 1개',25130,'동파육'))
 #62 물엿
@@ -224,8 +226,6 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 통마늘, 1kg, 1개',8980,'동파육'))
 #66 생강
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 깐 생강, 50g, 1개',1610,'동파육'))
-#67 대파
-c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 절단 대파, 300g, 1개',1800,'동파육'))
 #68 팔각
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('한방선생 팔각, 100g, 1개',4990,'동파육'))
 
@@ -236,6 +236,8 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 
 #####16. 해물짬뽕{
 ##홍합(67),오징어(68),흰다리새우(69),중화면(66),양파(3),애호박(47),양배추(65),사골곰탕(70),고추기름(71),다진마늘(14),굴소스(72),고춧가루(21),소금(17),후추,MSG(64),치킨파우더(73)
+#67 홍합
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('바다자리 생물 홍합 (냉장), 3kg, 1개',11950,'해물짬뽕'))
 #70 사골곰탕
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('비비고 사골곰탕, 500g, 6개',6040,'해물짬뽕'))
 #71 고추기름
@@ -270,16 +272,41 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('아산율림 국산 생땅콩, 250g, 1봉',9900,'탄탄면'))
 
 #####19. 중식볶음밥
-##대파(67),당근(31),계란(2),밥(4),식용유(35),소금(17)
+##대파(11),당근(31),계란(2),밥(4),식용유(35),소금(17)
 #추가 재료 없음
 
 #####20. 새우볶음밥
-##계란(2),대파(67),냉동새우(69),진간장(6),참기름(37),통깨(26)
+##계란(2),대파(11),냉동새우(69),진간장(6),참기름(37),통깨(26)
 #추가 재료 없음
 
+#####21. 스팸 돈부리 덮밥
+##양파(3),계란(2),밥(4),간장(6),설탕(7),대파(11),맛술(40),참기름(37),후추(27),스팸(84)
+#84 스팸
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('스팸 클래식, 340g, 3개',10630,'스팸 돈부리 덮밥'))
 
-##########recipe
-#####한식
+#####22. 규동 소고기 덮밥
+##불고기용 소고기(38),계란(2),쪽파(39),양파(3),밥(4),모란봉 규동소스(85)
+#85 모란봉 규동소스
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('이엔푸드 돈부리노타레 소스, 900ml, 1개',5660,'규동 소고기 덮밥'))
+
+#####23. 돈코츠 라멘
+##삼겹살(61),숙주나물(86),사골곰탕(70),소면(87),김(88),계란(2),소금(17),후추(27),다진마늘(14),쯔유(89),간장(6),맛술(40),쌈장(90)
+#86 숙주나물
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 아삭한 숙주나물, 300g, 1봉',1100,'돈코츠 라멘'))
+#87 소면
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('오뚜기옛날 국수 소면, 900g, 1개',3190,'돈코츠 라멘'))
+#88 김
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('광천김 도시락김, 5g, 16개',5990,'돈코츠 라멘'))
+#89 쯔유
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('기꼬만 코이다시 혼쯔유, 500ml, 1개',6250,'돈코츠 라멘'))
+#90 쌈장
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('해찬들 사계절 쌈장, 500g, 1개',2250,'돈코츠 라멘'))
+
+
+
+
+###############recipe
+##########한식
 ###탕/찌개
 #####청국장
 ##청국장(8),된장(9),양파(3),김치(10),대파(11),멸치(12),물(13),다진마늘(14),두부(15)
@@ -328,7 +355,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####제육볶음
 ##돼지고기 앞다리살(23),양파(3),청양고추(18),대파(11),고추장(24),고춧가루(21),다진마늘(14),설탕(7),매실액(25),간장(6),통깨(26),후추(27)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('제육볶음','한식','반찬','jaeyuk.jfif','16,14,6,9,17',
+          ('제육볶음','한식','반찬','jaeyuk.jfif','23,3,18,11,24,21,14,7,25,6,26,27',
            '재료를 준비한다.<br>'+
            '고추장(3큰술),고춧가루(2큰술),다진마늘(1큰술),설탕(2큰술),간장(1큰술),통깨(약간),후추(약간)을 모두 넣고 섞어준다.<br>'+
            '대파와 청양고추는 어슷썰어주고 양파는 먹기 좋은 크기로 잘라준다.<br>'+
@@ -345,14 +372,14 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####잡채
 ##당면(28),소고기(29),양파(3),파프리카(30),당근(31),느타리버섯(32),시금치(33),다진마늘(14),소금(17),후춧가루(27),생강가루(34),식용유(35),간장(6),올리고당(36),참기름(37),통깨(26)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('잡채','한식','반찬','jabchae.jfif','',
+          ('잡채','한식','반찬','jabchae.jfif','28,29,3,30,31,32,33,14,17,27,34,35,6,36,37,26',
            '소고기는 다진마늘 0.5,후춧가루,소금,생강가루 적당량을 넣어 고기의 밑간을 해준다.<br>'+
            '잡채에 넣을 채소 당근,파프리카,양파를 채썰어주고 느타리 버섯은 가닥가닥 떼어 준비한다.<br>'+
            '시금치는 물에 씻어 물기를 빼고 준비한다.<br>'+
            '달군 팬에 식용유를 두르고 양파와 소금,후춧가루를 조금씩 넣어 볶아준다.<br>'+
            '같은 방법으로 소금,후춧가루로 간을 하고 느타리버섯을 볶아준다.<br>'+
            '시금치 역시 소금 간을 하고 살짝 볶아준다.<br>'+
-           '마지막으로 밑간을 해놓은 소고기를 볶아준다..<br>'+
+           '마지막으로 밑간을 해놓은 소고기를 볶아준다.<br>'+
            '각각 재료를 볶아 준비해준다.<br>'+
            '냄비에 물을 담고 물이 팔팔 끓으면 당면을 넣고 10-11분 정도 삶아준다.<br>'+
            '삶아낸 당면은 찬물에 행군다.<br>'+
@@ -362,9 +389,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
            'EAT!',0))
 
 #####소불고기
-##소불고기(38),식용유(35),물(13),후추(27),쪽파(39),간장(6),설탕(7),청주(40),다진파(41),다진마늘(14),다진생강(42),참기름(37)
+##소불고기(38),식용유(35),물(13),후추(27),쪽파(39),간장(6),설탕(7),맛술(40),다진파(41),다진마늘(14),다진생강(42),참기름(37)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('소불고기','한식','반찬','sobulgogi.jfif','',
+          ('소불고기','한식','반찬','sobulgogi.jfif','38,35,13,27,39,6,7,40,41,14,42,37',
            '불고기를 먹기 좋은 크기로 썬다.<br>'+
            '양념장을 만든다(간장3t,물2t,설탕2t,청주2t,다진파1t,다진마늘1t,다진생각1/4t,참기름약간).<br>'+
            '불고기에 양념장을 넣고 잘 섞는다.<br>'+
@@ -377,7 +404,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####꼬막무침
 ##새꼬막(43),쪽파(39),소금(17),다진마늘(14),고춧가루(21),간장(6),설탕(7),식초(44),멸치액젓(45),참기름(37),참깨(46)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('꼬막무침','한식','반찬','ggomakmuchim.jfif','',
+          ('꼬막무침','한식','반찬','ggomakmuchim.jfif','43,39,17,14,21,6,7,44,45,37,46',
            '소금 1스푼을 넣고 꼬막을 깨끗하게 닦아준다.<br>'+
            '끓는물에 소금 1스푼 넣고 꼬막을 삶아준다.<br>'+
            '꼬막이 입을 벌리면 건져낸다.<br>'+
@@ -392,7 +419,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####비빔밥
 ##돼지고기목살(19),애호박(47),양파(3),당근(31),고추장(24),간장(6),설탕(7),깨소금(48),참기름(37),식초(44)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('비빔밥','한식','밥','bibimbab.jfif','',
+          ('비빔밥','한식','밥','bibimbab.jfif','19,47,3,31,24,6,7,48,37,44',
            '양파,당근,애호박을 채썰어서 준비한다.<br>'+
            '비빔밥에 비벼먹을 양념장을 준비한다.(고추장2T,간장2T,설탕1.5T,깨소금,참기름,식초1T)<br>'+
            '먼저 당근을 소금 1꼬집 넣고 색깔이 나게 볶아준다.<br>'+
@@ -405,7 +432,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####김치볶음밥
 ##김치(10),설탕(7),간장(6),고춧가루(21),참기름(37),마요네즈(5),된장(9),파(39)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('김치볶음밥','한식','밥','kimchibab.jfif','',
+          ('김치볶음밥','한식','밥','kimchibab.jfif','10,7,6,21,37,5,9,39',
            '김치를 잘게 썬다.<br>'+
            '김치에 양념을 넣고 잘 비벼준다.(고춧가루1스푼,설탕1스푼,진간장1스푼,참기름2스푼,마요네즈1스푼,된장1/3스푼,다진대파2큰술)<br>'+
            '식용유 3스푼을 붓고 달군 팬에 재료를 고루 펴서 부어준다.<br>'+
@@ -417,7 +444,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #간장계란밥
 ##밥(4),달걀(2),물(13),햄(49),다진대파(50),피자치즈(51),슬라이스치즈(52),간장(6),소금(17),후추(27)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('간장계란밥','한식','밥','ganjangbab.jfif','',
+          ('간장계란밥','한식','밥','ganjangbab.jfif','4,2,13,49,50,51,52,6,17,27',
            '햄,대파는 다져서 준비한다.<br>'+
            '전자레인지용 그릇에 달걀을 풀고, 물,후추,소금을 넣고 섞는다.(달걀1개,물100ml,소금후추 약간).<br>'+
            '달걀 물에 밥,햄,대파,간장(1/2T)를 넣어 잘 섞는다.<br>'+
@@ -442,7 +469,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
            'EAT!',0))
 
 
-#####중식
+##########중식
 ###요리
 #####탕수육
 ##돼지 안심(57),전분가루(58),계란(2),식용유(35),소금(17),후추(27),튀김유(59),양파(3),당근(31),귤(60),식초(44),간장(6),설탕(7)
@@ -460,9 +487,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
         ))
 
 #####동파육
-##통삼겹(61),식용유(35),진간장(6),맛술(40),물엿(62),설탕(7),춘장(63),통후추(64),통마늘(65),양파(3),생강(66),대파(67),팔각(68)
+##통삼겹(61),식용유(35),진간장(6),맛술(40),물엿(62),설탕(7),춘장(63),통후추(64),통마늘(65),양파(3),생강(66),대파(11),팔각(68)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('동파육','중식','면','dongpayuk.jpg','61,35,6,40,62,7,63,64,65,3,66,67,68',
+          ('동파육','중식','면','dongpayuk.jpg','61,35,6,40,62,7,63,64,65,3,66,11,68',
            '삼겹살을 정사각형 모양으로 자른 뒤 비계에 십자모양으로 칼집을 낸다.<br>'+
            '프라이팬에 식용유를 두르고 삽겹살을 여섯방면 골고루 구워준다.(속까지 익히지 않아도 OK)<br>'+
            '삼겹살을 구운 냄비에 물 3컵과 함께 나머지 재료를 털어 넣어준다.<br>'+
@@ -487,7 +514,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####해물짬뽕
 ##홍합(67),오징어(68),흰다리새우(69),중화면(66),양파(3),애호박(47),양배추(65),사골곰탕(70),고추기름(71),다진마늘(14),굴소스(72),고춧가루(21),소금(17),후추,MSG(64),치킨파우더(73)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('해물짬뽕','중식','면','haemuljjambbong.jpg','68,69,66,3,47,65,70,71,14,72,21,17,64,73',
+          ('해물짬뽕','중식','면','haemuljjambbong.jpg','67,68,69,66,3,47,65,70,71,14,72,21,17,64,73',
            '끓는물에 중화면을 4분정도 삶아 찬물에 헹궈둔다.(강불)<br>'+
            '고추기름에 다진마늘을 약불에 볶다가 마늘이 노릇해지면 적당한 크기로 썬 양파, 애호박, 양배추를 넣어 중불에서 볶아준다.(약불→중불)<br>'+
            '채소의 숨이 죽으면 적당한 크기로 썬 오징어와 새우, 고춧가루, 굴소스, msg, 치킨파우더(없으면 패스)를 넣는다.<br>'+
@@ -524,9 +551,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 
 ###밥
 #####중식볶음밥
-##대파(67),당근(31),계란(2),밥(4),식용유(35),소금(17)
+##대파(11),당근(31),계란(2),밥(4),식용유(35),소금(17)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('중식볶음밥','중식','밥','jungsikbab.jpg','67,31,2,4,35,17',
+          ('중식볶음밥','중식','밥','jungsikbab.jpg','11,31,2,4,35,17',
            '당근은 1~2 센치 간격으로 세조각 썰어서 잘게 다진다.(밥은 고슬하게)<br>'+
            '식용유 8스푼을 냄비에 붓고 중~강불로 예열한다.<br>'+
            '계란 2개를 투입한다.<br>'+
@@ -540,9 +567,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
         ))
 
 #####새우볶음밥
-##계란(2),대파(67),냉동새우(69),진간장(6),참기름(37),통깨(26)
+##계란(2),대파(11),냉동새우(69),진간장(6),참기름(37),통깨(26)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('새우볶음밥','중식','밥','saeubab.jpg','2,67,69,6,37,26',
+          ('새우볶음밥','중식','밥','saeubab.jpg','2,11,69,6,37,26',
            '팬에 올리브 기름을 살짝 두르고 파를 볶아 파기름을 준비한다.<br>'+
            '볶은 파를 한쪽으로 치우고 계란 2개를 올린다.<br>'+
            '계란은 스크램블로 만든다.<br>'+
@@ -551,13 +578,15 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
            '새우와 파와 스크램블을 함께 섞어주고 간을 맞추기 위해서 간장으로 간을 맞춰준다.<br>'+
            '간이 골고루 베이도록 잘 섞어준다.<br>'+
            '고소함을 더해 주기 위해서 참기름도 1t 추가한다.<br>'+
-           '그릇에 담아 위에 통깨를 살짝 뿌린다..<br>'+
+           '그릇에 담아 위에 통깨를 살짝 뿌린다.<br>'+
            'EAT!',0
         ))
 
 
-#####일식
+##########일식
 ###밥
+#####치킨마요덮밥
+##치킨(1),계란(2),깐양파(3),밥(4),마요네즈(5),진간장(6),설탕(7)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
           ('치킨마요덮밥','일식','밥','chickenmayo.jpg','1,2,3,4,5,6,7',
            '계란 2개를 풀어 계란물을 만든다.<br>'+
@@ -571,27 +600,65 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
            '양파가 투명해질때 간장 1스푼, 설탕 0.5스푼을 넣고 마저 볶아준다.<br>'+
            '밥위에 볶음 양파, 치킨을 올리고 마요네즈를 뿌린다.<br>'+
            'EAT!',0))
+#####스팸 돈부리 덮밥
+##양파(3),계란(2),밥(4),간장(6),설탕(7),대파(11),맛술(40),참기름(37),후추(27),스팸(84)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+          ('스팸 돈부리 덮밥','일식','밥','spamdonburi.jpg','3,2,4,6,7,11,40,37,27,84',
+           '스팸을 1cm 두께로 자른다.<br>'+
+           '스팸을 팬에 넣고 중불에 노릇노릇하게 익을 때까지 굽는다.<br>'+
+           '잘게 다진 양파 0.5개와 대파 0.5개를 넣고 투명해질 때까지 볶는다.<br>'+
+           '계란 2개에 소금과 후추를 넣고 풀어준다.<br>'+
+           '팬에 기름을 두르고 젓가락을 이용하여 스크램블을 만든다.<br>'+
+           '작은 그릇에 간장 2큰술, 설탕 1큰술, 맛술 2큰술, 참기름 0.5큰술을 넣고 섞는다.<br>'+
+           '소스를 스팸 볶음에 넣고 끓여준다.<br>'+
+           '밥을 그릇에 담는다.<br>'+
+           '밥 위에 스팸 볶음과 스크램블 에그를 올린 후 소스를 뿌려준다.<br>'+
+           'EAT!',0))
+#####규동 소고기 덮밥
+##불고기용 소고기(38),계란(2),쪽파(39),양파(3),밥(4),모란봉 규동소스(85)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+          ('규동 소고기 덮밥','일식','밥','gudongbab.jpg','38,2,39,3,4,85',
+           '양파 0.5개는 길게, 쪽파 2줄은 잘게 썰어 준다.<br>'+
+           '소고기는 먹기 좋은 크기로 썰어준다.<br>'+
+           '규동소스 30g에 물 50g을 희석하여 소스를 만든다.<br>'+
+           '팬에 소고기를 굽는다.<br>'+
+           '소고기가 거의 다 구워졌으면 양파를 넣고 같이 살짝만 볶아준다.<br>'+
+           '물에 희석시킨 규동소스를 붓고 섞어준 후 센 불에서 끓여준다.<br>'+
+           '소스가 조금 남을때까지 졸인 후 밥 위에 얹는다.<br>'+
+           'EAT!',0))
 
-
-#####양식
 ###면
+#####돈코츠 라멘
+##삼겹살(61),숙주나물(86),사골곰탕(70),소면(87),김(88),계란(2),소금(17),후추(27),다진마늘(14),쯔유(89),간장(6),맛술(40),쌈장(90)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+          ('돈코츠 라멘','일식','면','donkozramen.jpg','61,86,70,87,88,2,17,27,14,89,6,40,90',
+           '끓는 물에 삼겹살을 잠길정도로 넣는다.<br>'+
+           '맛술 2큰술, 쯔유 1큰술, 간장 1큰술을 넣는다.<br>'+
+           '뚜껑을 덮고 중불로 졸여준다.<br>'+
+           '냄비에 물과 소금을 넣고 달걀을 2개 넣어 9~10분 정도 삶아 반숙으로 준비한다.<br>'+
+           '달군 후라이팬에 김을 앞뒤로 구워준다.<br>'+
+           '김을 먹기 좋은 사이즈로 잘라준다.<br>'+
+           '고명으로 올릴 대파도 잘게 썰어준다.<br>'+
+           '끓는 물에 소면을 삶아준다.(찬물을 부어가며 끓인다.)<br>'+
+           '냄비에 사골 곰탕을 넣고 끓인다.<br>'+
+           '국물이 끓으면 쌈장 1작은술을 넣고 소금과 후추로 간을 해준다.<br>'+
+           '그릇에 다진 마늘 1큰술, 숙주 한줌을 넣어준다.<br>'+
+           '그 위에 소면 → 육수 → 대파 → 고기 → 계란 → 김 순으로 올려준다.<br>'+
+           'EAT!',0))
 
+
+##########양식
+###면
 ###밥
-
-###요리
+#####요리
 ##음식이름
-#필요한 재료:당면(28),소고기(29),양파(3),파프리카(30),당근(31),느타리버섯(32),시금치(33),다진마늘(14),소금(17),후춧가루(27),생강가루(34),식용유(35),간장(6),올리고당(36),참기름(37),통깨(26)
+##재료
 #c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-#          ('음식이름','양식','2차 카테고리','음식사진src','재료시퀀스번호만나열',
-#           '.<br>'+
-#           '.<br>'+
-#           '.<br>'+
-#           '.<br>'+
-#           '.<br>'+
-#           '.<br>'+
-#           '.<br>'+
+#          ('음식이름','양식','2차 카테고리','음식사진src','재료시퀀스번호만나열,필수',
 #           '.<br>'+
 #           'EAT!',0))#EAT은 항상 붙이기
+
+
 
 
 ##########cookcommunity
@@ -613,5 +680,7 @@ c.execute('insert into cookcomment (comment_num, comment_id, comment_content, co
 
 
 connect.commit()
+c.close()
+connect.close()
 
 print('완료')
