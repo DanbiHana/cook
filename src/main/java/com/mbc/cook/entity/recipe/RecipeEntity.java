@@ -29,9 +29,9 @@ public class RecipeEntity {
     String food;
     @Column
     String image;
-    @Column
+    @Column(length = 4000)
     String ingredient;
-    @Column
+    @Column(length = 4000)
     String recipe;
     @Column
     int hits;
