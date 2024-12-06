@@ -178,7 +178,7 @@ $(document).ready(function(){
         var recipe_div = "";
         for (var i in recipe){
             recipe_div += "<div class='recipeProcess'>"
-            recipe_div +=   "<p>"+ (Number(i)+1) +"</p><input type='text' id='recipeProcess_"+i+"' name='recipeProcess_"+i+"' value='"+recipe[i]+"' readonly>";
+            recipe_div +=   "<p>"+ (Number(i)+1) +".</p><input type='text' id='recipeProcess_"+i+"' name='recipeProcess_"+i+"' value='"+recipe[i]+"' readonly>";
             recipe_div += "</div>";
         }
         $('#recipeProcess').append(recipe_div);
