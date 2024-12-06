@@ -13,15 +13,21 @@ function randomClick() {
             var listnum=sublist.recipeRandom.length;
             var ranrdom = Math.floor(Math.random()*listnum);
             var random_div="";
-            random_div+="<div class='random_div' data-seq='"+sublist.recipeRandom[ranrdom].recipeseq+"' onclick='recipeGo(this)'>";
-            random_div+="   <img src='/image/upload/"+sublist.recipeRandom[ranrdom].image+"' alt='"+sublist.recipeRandom[ranrdom].food+" 이미지'>";
-            random_div+="   <p>"+sublist.recipeRandom[ranrdom].food+"</p>";
-            random_div+="</div>";
-            setTimeout(function() {
-                $('#random_place').html(random_div);
-                $('.random_dish').removeClass('random_on');
-                randomPopShow();
-            }, 1600);
+            if(listnum == 0){
+                setTimeout(function() {
+                    alertShow('레시피 오류', '현재 등록되어 있는 레시피가 없습니다.');
+                }, 1600);
+            }else{
+                random_div+="<div class='random_div' data-seq='"+sublist.recipeRandom[ranrdom].recipeseq+"' onclick='recipeGo(this)'>";
+                random_div+="   <img src='/image/upload/"+sublist.recipeRandom[ranrdom].image+"' alt='"+sublist.recipeRandom[ranrdom].food+" 이미지'>";
+                random_div+="   <p>"+sublist.recipeRandom[ranrdom].food+"</p>";
+                random_div+="</div>";
+                setTimeout(function() {
+                    $('#random_place').html(random_div);
+                    $('.random_dish').removeClass('random_on');
+                    randomPopShow();
+                }, 1600);
+            }
         },
          error: function (request, status, error) {
             alertShow('랜덤 오류','다시 시도해주세요.');
