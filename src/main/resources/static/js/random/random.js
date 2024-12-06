@@ -16,6 +16,7 @@ function randomClick() {
             if(listnum == 0){
                 setTimeout(function() {
                     alertShow('레시피 오류', '현재 등록되어 있는 레시피가 없습니다.');
+                    $('.random_dish').removeClass('random_on');
                 }, 1600);
             }else{
                 random_div+="<div class='random_div' data-seq='"+sublist.recipeRandom[ranrdom].recipeseq+"' onclick='recipeGo(this)'>";
