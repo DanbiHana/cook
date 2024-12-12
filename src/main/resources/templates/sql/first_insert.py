@@ -18,7 +18,7 @@ oracledb.init_oracle_client(lib_dir="C:\\project\\cook\\instantclient_11_2")
 
 # 오라클 데이터베이스 연결
 #각자 계정 연결
-connect = oracledb.connect(user='', password='1234', dsn='localhost')
+connect = oracledb.connect(user='hjun8342', password='1234', dsn='localhost')
 c = connect.cursor()  # 커서 생성
 
 today = datetime.today()
@@ -48,7 +48,7 @@ c.execute('insert into recipecategory (categorynum, maincategory, subcategory) v
 c.execute('insert into recipecategory (categorynum, maincategory, subcategory) values(category_seq.nextval, :1, :2)',('중식', '요리'))
 c.execute('insert into recipecategory (categorynum, maincategory, subcategory) values(category_seq.nextval, :1, :2)',('양식', '면'))
 c.execute('insert into recipecategory (categorynum, maincategory, subcategory) values(category_seq.nextval, :1, :2)',('양식', '밥'))
-c.execute('insert into recipecategory (categorynum, maincategory, subcategory) values(category_seq.nextval, :1, :2)',('양식', '요리'))
+c.execute('insert into recipecategory (categorynum, maincategory, subcategory) values(category_seq.nextval, :1, :2)',('양식', '사이드'))
 
 ##########ingredient
 #####1. 치킨마요덮밥
@@ -225,22 +225,24 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 통마늘, 1kg, 1개',8980,'동파육'))
 #66 생강
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 깐 생강, 50g, 1개',1610,'동파육'))
+#67 홍합
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('바다자리 생물 홍합 (냉장), 3kg, 1개',11950,'해물짬뽕'))
 #68 팔각
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('한방선생 팔각, 100g, 1개',4990,'동파육'))
 
 #####15. 짜장면
-##식용유(35),다진생강(42),돼지고기(57),양파(3),주키니 호박(69),볶은 춘장(63),굴소스(72),설탕(7),MSG(64),양배추(65),전분물(58),중화면(66)
+##식용유(35),다진생강(42),돼지고기(57),양파(3),주키니 호박(69),볶은 춘장(63),굴소스(72),설탕(7),MSG(64),양배추(105),전분물(58),중화면(66)
 #69 주키니 호박
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 주키니호박, 1개입, 1개',2980,'짜장면'))
 
 #####16. 해물짬뽕{
-##홍합(67),오징어(68),흰다리새우(69),중화면(66),양파(3),애호박(47),양배추(65),사골곰탕(70),고추기름(71),다진마늘(14),굴소스(72),고춧가루(21),소금(17),후추,MSG(64),치킨파우더(73)
-#67 홍합
-c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('바다자리 생물 홍합 (냉장), 3kg, 1개',11950,'해물짬뽕'))
+##홍합(67),오징어(68),흰다리새우(69),중화면(66),양파(3),애호박(47),양배추(105),사골곰탕(70),고추기름(71),다진마늘(14),굴소스(72),고춧가루(21),소금(17),후추,MSG(64),치킨파우더(73)
 #70 사골곰탕
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('비비고 사골곰탕, 500g, 6개',6040,'해물짬뽕'))
 #71 고추기름
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('오뚜기옛날 고추맛 기름, 80ml, 3개',5880,'해물짬뽕'))
+#72 굴소스
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('이금기 팬더 굴소스, 510g, 1개',4250,'해물짬뽕'))
 #73 치킨 파우더
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('이금기 치킨 파우더, 273g, 1개',6200,'해물짬뽕'))
 
@@ -302,7 +304,7 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('해찬들 사계절 쌈장, 500g, 1개',2250,'돈코츠 라멘'))
 
 #####24. 야끼소바
-##### 불고기(38), 양파(3), 양배추(65), 숙주나물(86), 우동사리(91), 느타리버섯(32), 생강(66), 식용유(35), 간장(6), 맛술(40), 설탕(7), 스리랏차소스(92)
+##### 불고기(38), 양파(3), 양배추(105), 숙주나물(86), 우동사리(91), 느타리버섯(32), 생강(66), 식용유(35), 간장(6), 맛술(40), 설탕(7), 스리랏차소스(92)
 #91 우동 사리
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('풀무원 냉장_수타식 우동사리면 1인분, 210g, 1개',1380,'야끼소바'))
 #92 스리라차
@@ -318,7 +320,7 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('청정원 생와사비, 40g, 1개',2980,'메밀소바'))
 
 ##### 26. 오코노미야키
-##### 양배추(65), 베이컨(96), 계란(2), 튀김가루(97), 가쓰오부시(98), 데리야끼소스(99), 마요네즈(5), 식용유(35)
+##### 양배추(105), 베이컨(96), 계란(2), 튀김가루(97), 가쓰오부시(98), 데리야끼소스(99), 마요네즈(5), 식용유(35)
 #96 베이컨
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 담백한 베이컨, 130g, 1개',2150,'오코노미야키'))
 #97 튀김가루
@@ -343,6 +345,125 @@ c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_se
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('배대감 국산 찹쌀가루, 500g, 1개',4600,'당고'))
 #104 옥수수 전분
 c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('배대감 옥수수전분, 350g, 1개',2180,'당고'))
+#105 양배추
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('작아도 맛있는 양배추, 800g, 1개입, 1개',3780,'짜장면'))
+
+
+##### 29. 토마토 디마레 파스타
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 꽃게(107), 모시조개(108), 홍가리비(109), 흰다리새우(69), 쭈꾸미(110), 토마토소스(111), 굴소스(72), 혼다시(112), 파마산치즈(113)
+##### 파슬리(114), 파르미지아노치즈(115), 고추기름(71), 파스타 면(116), 루꼴라(117)
+#106 새송이 버섯
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('친환경 새송이버섯, 400g, 1개',1340,'토마토 디마레 파스타'))
+#107 꽃게
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('바다미식회 살이꽉찬 국내산 손질꽃게 2절, 500g, 1개',10500,'토마토 디마레 파스타'))
+#108 모시조개
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국산 모시조개, 500g, 1팩',11220,'토마토 디마레 파스타'))
+#109 홍가리비
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('아라보감 국산 생물 홍가리비(냉장), 1kg, 1개',10690,'토마토 디마레 파스타'))
+#110 쭈꾸미
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('바이오션 쭈꾸미(냉동), 500g(20~25마리), 1개',8920,'토마토 디마레 파스타'))
+#111 토마토소스
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('폰타나 나폴리 뽀모도로 토마토 파스타소스, 600g, 1개',4300,'토마토 디마레 파스타'))
+#112 혼다시
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('혼다시 조미료, 120g, 1개',3550,'토마토 디마레 파스타'))
+#113 파마산치즈
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('비셰프 파마산 블렌드골드, 227g, 1개',6560,'토마토 디마레 파스타'))
+#114 파슬리
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('내츄럴스파이스 파슬리 후레이크, 11g, 1개',2800,'토마토 디마레 파스타'))
+#115 파르미지아노치즈
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('안티노카세이피초 파르미지아노 레지아노 치즈, 150g, 1개',9800,'토마토 디마레 파스타'))
+#116 파스타 면(116)
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('청정원 이탈리아 정통 스파게티, 500g, 2개',4830,'토마토 디마레 파스타'))
+#117 루꼴라
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('와일드 루꼴라, 50g, 1개',2100,'토마토 디마레 파스타'))
+
+##### 30. 크림 디마레 파스타
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 꽃게(107), 모시조개(108), 홍가리비(109), 흰다리새우(69), 쭈꾸미(110), 크림(118), 굴소스(72), 혼다시(112), 파마산치즈(113)
+##### 파슬리(114), 파르미지아노치즈(115), 식용유(35), 파스타 면(116), 새싹(119)
+#118 크림
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('폰타나 카르니아 베이컨 앤 머쉬룸 크림 파스타 소스, 430g, 1개',6090,'크림 디마레 파스타'))
+#119 새싹
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('새싹 채소, 50g, 1개',1490,'크림 디마레 파스타'))
+
+##### 31. 새우 알리오올리오
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 애호박(120), 굴소스(72), 파마산치즈(113), 파슬리(114), 파르미지아노치즈(115)
+##### 루꼴라(117), 올리브유(55), 파스타 면(116), 방울토마토(121), 마늘쫑(122), 무염버터(146)
+#120 애호박
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('새싹 채소, 50g, 1개',1490,'새우 알리오올라오'))
+#121 방울 토마토
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 방울토마토, 500g, 1개',6880,'새우 알리오올리오'))
+#122 마늘쫑
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('알싸한 향이 살아 있는 마늘쫑, 100g, 1개',4490,'새우 알리오올리오'))
+#146 무염버터
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('알라 무염버터, 400g, 1개',7590,'새우 알리오올리오'))
+
+##### 32. 토마토 디마레 리조또
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 꽃게(107), 모시조개(108), 홍가리비(109), 흰다리새우(69), 쭈꾸미(110), 토마토소스(111), 굴소스(72), 혼다시(112), 파마산치즈(113)
+##### 파슬리(114), 파르미지아노치즈(115), 식용유(35), 루꼴라(117), 애호박(120), 밥(4), 스위트 콘(123)
+#123 스위트 콘
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('오뚜기 스위트콘 통조림, 340g, 1개',1300,'토마토 디마레 리조또'))
+
+##### 33. 상하이 크림 스테이크 리조또
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 크림(118), 굴소스(72), 혼다시(112), 파마산치즈(113),부채살(124),베이컨(96)
+##### 파슬리(114), 애호박(120), 파르미지아노치즈(115), 고추기름(71), 밥(4), 루꼴라(117), 브로콜리(125), 스위트 콘(123)
+#124 부채살
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('호주산 메가 소고기 부채살 스테이크용(냉장), 600g, 1개',21060,'상하이 크림 스테이크 리조또'))
+#125 브로콜리
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 브로콜리, 1kg, 1개',4490,'상하이 크림 스테이크 리조또'))
+
+##### 34. 명란베이컨크림리조또
+##### 새송이 버섯(106), 양파(3), 애호박(120), 통마늘(65), 크림(118), 굴소스(72), 파마산치즈(113), 파슬리(114), 파르미지아노치즈(115), 식용유(35), 밥(4), 루꼴라(117), 브로콜리(124), 스위트 콘(123)
+##### 명란(126), 칵테일 새우(100),베이컨(96)
+#126 명란
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 백명란, 400g, 1개',9680,'명란베이컨크림리조또'))
+
+##### 35. 바베큐 샐러드
+##### 새송이 버섯(106), 양파(3), 애호박(120), 마늘쫑(122), 브로콜리(124), 양배추(105), 적근대(127), 케일(128), 새싹(119), 부채살(124), 방울토마토(121), 만다린(129), 파인애플(130)
+##### 사과(131), 샤인머스켓(132), 바나나(133), 크래미(134), 스위트 콘(123), 계란(2), 감자튀김(135), 치킨텐더(136), 리코타치즈(137)
+#127 적근대
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('야채왕 적근대, 2kg, 1개',19000,'바베큐 샐러드'))
+#128 케일
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('케일, 500g, 1개',5690,'바베큐 샐러드'))
+#129 만다린
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('해울찬 만다린 오렌지 통조림, 3kg, 1개',20390,'바베큐 샐러드'))
+#130 파인애플
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('리치스 파인애플 슬라이스 통조림, 836g, 1개',3530,'바베큐 샐러드'))
+#131 사과
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 세척 사과, 2kg, 1개',17980,'바베큐 샐러드'))
+#132 샤인머스켓
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('GAP 인증 옹골찬 샤인머스켓 2~3수, 1.5kg, 1개',10930,'바베큐 샐러드'))
+#133 바나나
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('델몬트 필리핀 바나나, 1.4kg, 1개',4980,'바베큐 샐러드'))
+#134 크래미
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('크래미, 90g, 1개',1100,'바베큐 샐러드'))
+#135 감자튀김
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('곰곰 크링클컷 감자튀김(냉동), 650g, 1개',3870,'바베큐 샐러드'))
+#136 치킨텐더
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('하림 텐더스틱(냉동), 1.2kg, 1개',13800,'바베큐 샐러드'))
+#137 리코타 치즈
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('덴마크 리코타 치즈, 500g, 1개',9800,'바베큐 샐러드'))
+
+##### 36. 버팔로스틱플래터
+##### 버팔로스틱(138), 감자튀김(135), 나쵸칩(139), 케찹(140), 칠리소스(141), 체다치즈소스(142), 바질(143).파슬리(114)
+#138 버팔로스틱
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('사세 버팔로스틱 플러스, 1kg, 1개',15100,'버팔로스틱플래터'))
+#139 나쵸칩
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('리코스 라운드 나쵸 칩, 454g, 1개',4990,'버팔로스틱플래터'))
+#140 케찹
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('오뚜기 토마토 케찹, 800g, 1개',4040,'버팔로스틱플래터'))
+#141 칠리소스
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('MORN 스위트 칠리소스, 240g, 1개',2900,'버팔로스틱플래터'))
+#142 체다치즈소스
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('코다노 숙성 체다치즈 소스, 2kg, 1개',10990,'버팔로스틱플래터'))
+#143 바질
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('국내산 바질, 20g, 1개',2790,'버팔로스틱플래터'))
+
+##### 37. 리코타치즈 샐러드
+#####  양배추(105), 적근대(127), 케일(128), 새싹(119),방울토마토(121), 만다린(129), 리코타치즈(137), 스위트 콘(123), 유자 드레싱(144), 발사믹 식초(145)
+#144 유자 드레싱
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('백설 유자 드레싱, 250g, 1개',3380,'리코타치즈 샐러드 '))
+#145 발사믹 식초
+c.execute('insert into ingredient (ingre_seq,name,price,keyword) values(ingre_seq.nextval,:1,:2,:3)',('폰타나 모데나 발사믹 식초 실버라벨, 250ml, 1개',6880,'리코타치즈 샐러드'))
 
 ###############recipe
 ##########한식
@@ -513,7 +634,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 #####탕수육
 ##돼지 안심(57),전분가루(58),계란(2),식용유(35),소금(17),후추(27),튀김유(59),양파(3),당근(31),귤(60),식초(44),간장(6),설탕(7)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('음식이름','중식','요리','tangsuyuk.jpg','57,58,2,35,17,27,59,3,31,60,44,6,7',
+          ('탕수육','중식','요리','tangsuyuk.jpg','57,58,2,35,17,27,59,3,31,60,44,6,7',
            '전분가루가 충분히 잠기도록 물을 붓고 1시간이상 기다린다.<br>'+
            '전분가루 위의 물을 따라낸 후 계란과 식용유 5스푼과 섞어준다.(마요네즈 질감처럼 될 때까지)<br>'+
            '탕수육 크기로 썬 돼지고기를 섞는다.(취향에 따라 고기에 소금, 후추로 간 해주기)<br>'+
@@ -539,9 +660,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 
 ###면
 #####짜장면
-##식용유(35),다진생강(42),돼지고기(57),양파(3),주키니 호박(69),볶은 춘장(63),굴소스(72),설탕(7),MSG(64),양배추(65),전분물(58),중화면(66)
+##식용유(35),다진생강(42),돼지고기(57),양파(3),주키니 호박(69),볶은 춘장(63),굴소스(72),설탕(7),MSG(64),양배추(105),전분물(58),중화면(66)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('짜장면','중식','면','jjajangmyun.jpg','35,42,57,3,69,63,72,7,64,65,58,66',
+          ('짜장면','중식','면','jjajangmyun.jpg','35,42,57,3,69,63,72,7,64,105,58,66',
            '웍에 기름을 넉넉히 두르고 다진 생강, 고기, 큼직히 썬 양파, 호박을 넣고 볶아준다.<br>'+
            '고기가 반쯤 익었다싶으면 설탕, msg를 넣고 더 볶아준다.<br>'+
            '큼직히 썬 양배추도 넣고 볶아준다.<br>'+
@@ -551,9 +672,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
         ))
 
 #####해물짬뽕
-##홍합(67),오징어(68),흰다리새우(69),중화면(66),양파(3),애호박(47),양배추(65),사골곰탕(70),고추기름(71),다진마늘(14),굴소스(72),고춧가루(21),소금(17),후추,MSG(64),치킨파우더(73)
+##홍합(67),오징어(68),흰다리새우(69),중화면(66),양파(3),애호박(47),양배추(105),사골곰탕(70),고추기름(71),다진마늘(14),굴소스(72),고춧가루(21),소금(17),후추,MSG(64),치킨파우더(73)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('해물짬뽕','중식','면','haemuljjambbong.jpg','67,68,69,66,3,47,65,70,71,14,72,21,17,64,73',
+          ('해물짬뽕','중식','면','haemuljjambbong.jpg','67,68,69,66,3,47,105,70,71,14,72,21,17,64,73',
            '끓는물에 중화면을 4분정도 삶아 찬물에 헹궈둔다.(강불)<br>'+
            '고추기름에 다진마늘을 약불에 볶다가 마늘이 노릇해지면 적당한 크기로 썬 양파, 애호박, 양배추를 넣어 중불에서 볶아준다.(약불→중불)<br>'+
            '채소의 숨이 죽으면 적당한 크기로 썬 오징어와 새우, 고춧가루, 굴소스, msg, 치킨파우더(없으면 패스)를 넣는다.<br>'+
@@ -637,7 +758,7 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
            '치킨이 다 구워지면 가위를 이용하여 먹기 좋게 잘라준다.<br>'+
            '팬에 기름을 두르고 양파를 볶아준다.<br>'+
            '양파가 투명해질때 간장 1스푼, 설탕 0.5스푼을 넣고 마저 볶아준다.<br>'+
-           '밥위에 볶음 양파, 치킨을 올리고 마요네즈를 뿌린다.<br>'+
+           '밥 위에 볶음 양파, 치킨을 올리고 마요네즈를 뿌린다.<br>'+
            'EAT!',0))
 #####스팸 돈부리 덮밥
 ##양파(3),계란(2),밥(4),간장(6),설탕(7),대파(11),맛술(40),참기름(37),후추(27),스팸(84)
@@ -686,9 +807,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
            'EAT!',0))
 
 ##### 야끼소바
-##### 불고기 200g (38), 양파1/4(3),양배추1/2주먹(65),숙주나물150g(86),우동사리 200g(91),느타리버섯(32), 생강 엄지 한마디(66), 식용유(35), 간장1T(6),맛술1/2T(40), 설탕1/2T(7), 스리랏차소스3T(92)
+##### 불고기 200g (38), 양파1/4(3),양배추1/2주먹(105),숙주나물150g(86),우동사리 200g(91),느타리버섯(32), 생강 엄지 한마디(66), 식용유(35), 간장1T(6),맛술1/2T(40), 설탕1/2T(7), 스리랏차소스3T(92)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('야끼소바','일식','면','yakisoba.jpg','38,3,65,86,91,32,66,35,6,40,7,92',
+          ('야끼소바','일식','면','yakisoba.jpg','38,3,105,86,91,32,66,35,6,40,7,92',
            '양파 1/4개, 양배추 1/2주먹을 채썰고 숙주나물 150g, 느타리버섯을 다듬는다.<br>'+
            '우동사리 200g을 끓는 물에 2분 삶아준다.<br>'+
            '식용유로 달군 팬에 생강을 넣어 향을 입힌다.<br>'+
@@ -713,9 +834,9 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 
 ### 간식
 ##### 오코노미야키
-##### 양배추(65), 베이컨(96), 계란(2), 튀김가루(97), 가쓰오부시(98), 데리야끼소스(99), 마요네즈(5), 식용유(35)
+##### 양배추(105), 베이컨(96), 계란(2), 튀김가루(97), 가쓰오부시(98), 데리야끼소스(99), 마요네즈(5), 식용유(35)
 c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
-          ('오코노미야키','일식','간식','okonomiyaki.jpg','65,96,2,97,98,99,5,35',
+          ('오코노미야키','일식','간식','okonomiyaki.jpg','105,96,2,97,98,99,5,35',
            '양배추 200g을 채 썰어 물로 행군 후 물기를 빼준다.<br>'+
            '물기가 빠진 양배추에 튀김가루 2컵(400ml), 계란 1개를 넣어 준다.<br>'+
            '베이컨 130g을 취향껏 잘라 넣어주고 물을 100ml정도 넣어준다.<br>'+
@@ -760,8 +881,120 @@ c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredie
 
 ##########양식
 ###면
+##### 토마토 디마레 파스타
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 꽃게(107), 모시조개(108), 홍가리비(109), 흰다리새우(69), 쭈꾸미(110), 토마토소스(111), 굴소스(72), 혼다시(112), 파마산치즈(113)
+##### 파슬리(114), 파르미지아노치즈(115), 고추기름(71), 파스타 면(116), 루꼴라(117)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+          ('토마토 디마레 파스타','양식','파스타','tomatodemarepasta.png','106,3,65,100,107,108,109,69,110,111,72,112,113,114,115,71,116,117',
+           '끓는 물에 파스타 면을 넣어 5분간 삶아주고 찬물에 헹궈 놔둔다.<br>'+
+           '새송이버섯 반개 어스 썰기, 양파 작게 채썰기, 마늘 슬라이스로 썰기, 꽃게 반개, 새우는 머리 제외 껍질 까준다.<br>'+
+           '프라이펜에 고추기름 1.5T 두르고 버섯과 양파, 마늘 슬라이스 3~4조각, 칵테일 새우, 꽃게 반개, 모시조개 4개, 홍가리비 1개, 새우 1개, 쭈꾸미 1개를 30초간 볶아준다.<br>'+
+           '물 2국자 넣은 뒤 굴 소스 1T, 혼다 시 1/4t, 파마산 치즈 1T, 파슬리 1/4t, 토마토소스 한 국자를 넣어주고 끓인다.<br>'+
+           '끓기 시작하면 헹궈놨던 파스타 면을 넣어 5분간 삶아준다.<br>'+
+           '파르미지아노 치즈를 파스타 위에 갈아주고 루꼴라 잎 4장을 올려준다.<br>'+
+           'EAT!',0))
+
+##### 30. 크림 디마레 파스타
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 꽃게(107), 모시조개(108), 홍가리비(109), 흰다리새우(69), 쭈꾸미(110), 크림(118), 굴소스(72), 혼다시(112), 파마산치즈(113)
+##### 파슬리(114), 파르미지아노치즈(115), 식용유(35), 파스타 면(116), 새싹(119)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('크림 디마레 파스타','양식','파스타','creamdimarepasta.png','106,3,65,100,107,108,109,69,110,118,72,112,113,114,115,35,116,119',
+         '끓는 물에 파스타 면을 넣어 5분간 삶아주고 찬물에 헹궈 놔둔다.<br>'+
+         '새송이버섯 반개 어스 썰기, 양파 작게 채썰기, 마늘 슬라이스로 썰기, 꽃게 반개, 새우는 머리 제외 껍질 까준다.<br>'+
+         '프라이펜에 식용유 1.5T 두르고 버섯과 양파, 마늘 슬라이스 3~4조각, 칵테일 새우, 꽃게 반개, 모시조개 4개, 홍가리비 1개, 새우 1개, 쭈꾸미 1개를 30초간 볶아준다.<br>'+
+         '물 한 국자 넣은 뒤 굴 소스 1T, 혼다 시 1/4t, 파마산치즈 1T, 파슬리 1/4t, 크림소스 두 국자를 넣어주고 끓인다.<br>'+
+         '끓기 시작하면 헹궈놨던 파스타 면을 넣어 5분간 삶아준다.<br>'+
+         '파르미지아노 치즈를 파스타 위에 갈아주고 새싹을 올려준다.<br>'+
+         'EAT!',0))
+
+##### 31. 새우 알리오올리오
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 애호박(120), 굴소스(72), 파마산치즈(113), 파슬리(114), 파르미지아노치즈(115)
+##### 루꼴라(117), 올리브유(55), 파스타 면(116), 방울토마토(121), 마늘쫑(122), 무염버터(146)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('새우 알리오올리오','양식','파스타','seauolioeolio.png','106,3,65,100,120,72,113,114,115,117,55,116,121,122,146',
+         '끓는 물에 파스타 면을 넣어 5분간 삶아주고 찬물에 헹궈 놔둔다.<br>'+
+         '올리브유 3T에 통마늘 3~4개를 넣고 마늘이 노랗게 변할때까지 끓여준다.<br>'+
+         '새송이버섯 반개 어 스썰기, 양파 작게 채썰기, 마늘종 3cm 크기로 썰기, 애호박 채썰기, 새우 머리 제외 껍질 까기<br>'+
+         '버섯, 양파, 오일마늘, 마늘쫑 3개, 애호박 3개, 칵테일 새우 6개, 새우 3개, 페퍼 1/4t, 올리브유 1T를 넣어 30초 간 볶아준다.<br>'+
+         '물 두 국자를 넣고 굴 소스 2T, 파슬리 1/4t, 버터 1/4t를 넣고 끓인다.<br>'+
+         '끓기 시작하면 헹궈놨던 파스타 면을 넣어 5분간 삶아준다.<br>'+
+         '파르미지아노 치즈를 파스타 위에 갈아주고 루꼴라 4장을 올려준다.<br>'+
+         'EAT!',0))
+
 ###밥
-#####요리
+##### 32. 토마토 디마레 리조또
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 칵테일 새우(100), 꽃게(107), 모시조개(108), 홍가리비(109), 흰다리새우(69), 쭈꾸미(110), 토마토소스(111), 굴소스(72), 혼다시(112), 파마산치즈(113)
+##### 파슬리(114), 파르미지아노치즈(115), 식용유(35), 루꼴라(117), 애호박(120), 밥(4), 스위트 콘(123)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('토마토 디마레 리조또','양식','밥','tomatodemarerisotto.png','106,3,65,100,107,108,109,69,110,111,72,112,113,114,115,35,117,120,4,123',
+         '새송이버섯 반개 어스 썰기, 양파 작게 채썰기, 마늘 슬라이스로 썰기, 애호박 먹기 좋은 크기로 썰어주기, 꽃게 반개, 새우 머리 제외 껍질 줍니다.<br>'+
+         '프라이펜에 버섯과 양파, 마늘 슬라이스 3~4조각, 애호박 3개, 칵테일 새우 3개, 꽃게 반개, 모시조개 4개, 홍가리비 1개, 새우 1개, 쭈꾸미 1개, 스위트 콘 1/4t, 식용유 1.5T를 넣어주고 30초간 볶아줍니다.<br>'+
+         '물 한 국자를 넣어주고 굴 소스 1T, 혼다 시 1/4t, 파마산 치즈 1T, 파슬리 1/4t, 토마토소스 1국자를 넣어주고 끓여줍니다.<br>'+
+         '물이 끓기 시작하면 밥 150g를 넣어 걸쭉하게 끓여줍니다. 이때 프라이펜에 밥이 달라붙지 않도록 계속 휘저어줍니다.<br>'+
+         '걸쭉하게 끓여졌다면 파르미지아노 치즈를 리조또 위에 갈아주고 루꼴라 잎 4장을 올려줍니다.<br>'+
+         'EAT!',0))
+
+##### 33. 상하이 크림 스테이크 리조또
+##### 새송이 버섯(106), 양파(3), 통마늘(65), 크림(118), 굴소스(72), 혼다시(112), 파마산치즈(113),부채살(124),베이컨(96)
+##### 파슬리(114), 애호박(120), 파르미지아노치즈(115), 고추기름(71), 밥(4), 루꼴라(117), 브로콜리(125), 스위트 콘(123)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('상하이 크림 스테이크 리조또','양식','밥','shanghaicreamsteakrisotto.png','106,3,65,118,72,112,113,124,96,114,120,115,71,4,117,125,123',
+         '새송이버섯 반개 어스 썰기, 양파 작게 채썰기, 마늘 슬라이스로 썰기, 베이컨 정사각형 모양으로 자르기, 부채살 한입에 먹기 좋은 크기로 썰어주기, 애호박 먹기 좋은 크기로 썰어 줍니다. <br>'+
+         '프라이펜에 버섯과 양파, 마늘 3~4조각, 베이컨 4개, 애호박 3개, 스위트 콘 1/4t, 고추기름 1.5T를 넣어주고 30초간 볶아줍니다.<br>'+
+         '물 한 국자를 넣어주고 굴 소스 1.5T, 파마산 치즈 1T, 파슬리 1/4t, 크림소스 2국자를 넣어주고 끓여줍니다.<br>'+
+         '부채살을 8~9조각 프라이펜에 구워줍니다.<br>'+
+         '물이 끓기 시작하면 밥 150g를 넣어 걸쭉하게 끓여줍니다. 이때 프라이펜에 밥이 달라붙지 않도록 계속 휘저어줍니다.<br>'+
+         '걸쭉하게 끓여졌다면 리조또 위에 스테이크를 올려주고 파르미지아노 치즈를 갈아주고 루꼴라 잎 4장을 올려줍니다.<br>'+
+         'EAT!',0))
+
+##### 34. 명란베이컨크림리조또
+##### 새송이 버섯(106), 양파(3), 애호박(120), 통마늘(65), 크림(118), 굴소스(72), 파마산치즈(113), 파슬리(114), 파르미지아노치즈(115), 식용유(35), 밥(4), 루꼴라(117), 브로콜리(124), 스위트 콘(123)
+##### 명란(126), 칵테일 새우(100),베이컨(96)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('명란 베이컨 크림 리조또','양식','밥','myeongranbaconcreamrisotto.png','106,3,120,65,118,72,113,114,115,35,4,117,124,123,126,100,96',
+         '새송이버섯 반개 어스 썰기, 양파 작게 채썰기, 마늘 슬라이스로 썰기, 베이컨 정사각형 모양으로 자르기, 애호박 먹기 좋은 크기로 썰고 명란을 다져줍니다. <br>'+
+         '프라이펜에 버섯과 양파, 마늘 3~4조각, 베이컨 4개, 애호박 3개, 칵테일 새우 3개, 스위트 콘 1/4t, 식용유 1.5T를 넣어주고 30초간 볶아줍니다.<br>'+
+         '물 한 국자를 넣어주고 굴 소스 0.5T, 파마산치즈 1T, 파슬리 1/4t, 크림 소스 2국자를 넣어주고 끓여줍니다.<br>'+
+         '물이 끓기 시작하면 밥 150g, 명란 1T를 넣어 걸쭉하게 끓여줍니다. 이때 프라이펜에 밥이 달라붙지 않도록 계속 휘저어줍니다.<br>'+
+         '걸쭉하게 끓여졌다면 리조또 위에 파르미지아노 치즈를 갈아주고 루꼴라 잎 4장을 올려줍니다.<br>'+
+         'EAT!',0))
+
+#####사이드
+##### 35. 바베큐 샐러드
+##### 새송이 버섯(106), 양파(3), 애호박(120), 마늘쫑(122), 브로콜리(124), 양배추(105), 적근대(127), 케일(128), 새싹(119), 부채살(124), 방울토마토(121), 만다린(129), 파인애플(130)
+##### 사과(131), 샤인머스켓(132), 바나나(133), 크래미(134), 스위트 콘(123), 계란(2), 감자튀김(135), 치킨텐더(136), 리코타치즈(137)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('바베큐 샐러드','양식','사이드','barbecuesalad.png','106,3,120,122,124,105,127,128,119,124,121,129,130,131,132,133,134,123,2,135,136,137',
+         '계란 한개를 끓는 물에 약 10분간 삶아 줍니다.<br>'+
+         '새송이버섯 반개 어스 썰기, 양파 정사각형 모양으로 채썰기, 애호박 먹기 좋은 크기로 썰기, 마늘쫑 3cm 크기로 썰기, 양배추와 적근대, 케일은 한입 크기로 썰기, 방울 토마토 반으로 썰기, 패인애플 4조각으로 썰기<br>'+
+         '쟁반위에 양배추, 케일, 적근대, 새싹을 잘 섞어 먹을만큼 담아주고 방울토마토 4개, 만다린 4개, 파인애플 4조각, 사과 반개, 샤인머스켓 4개, 바나나 반개, 게맛살 한줌, 스위트 콘 1T, 삶은 계란 1개를 담아줍니다.<br>'+
+         '프라이펜에 버섯, 양파, 마늘쫑, 애호박, 브로콜리를 담아 식용유 1T에 양파가 노릇해 질때까지 볶아줍니다.<br>'+
+         '볶은 야채를 쟁반 한쪽에 담아주고 부채살을 먹기 좋은 크기로 썰어 구워줍니다.<br>'+
+         '감자튀김 한주 먹과 치킨텐더 2개를 에어프라이기에 180도에서 10분간 돌려줍니다.<br>'+
+         '볶은 야채 위에 부채살을 올려주고 기호에 맞게 스테이크 소르를 뿌려 먹어주면 더 맛있게 드실 수 있습니다.<br>'+
+         'EAT!',0))
+
+##### 36. 버팔로스틱플래터
+##### 버팔로스틱(138), 감자튀김(135), 나쵸칩(139), 케찹(140), 칠리소스(141), 체다치즈소스(142), 바질(143), 파슬리(114)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('버팔로스틱플래터','양식','사이드','buffalostickplatter.png','106,3,120,122,124,105,127,128,119,124,121,129,130,131,132,133,134,123,2,135,136,137',
+         '버팔로스틱 8개를 에어프라이어에 190도에 15분 정도 조리해줍니다.<br>'+
+         '감자튀김 두 주먹을 에어프라이어에 180도에 10분 정도 조리해줍니다.<br>'+
+         '쟁반에 나쵸칩을 두 주먹 담아 준 다음 감자튀김과 버팔로스틱을 한쪽에 담아줍니다.<br>'+
+         '바질을 잘게 잘라 준 다음 버팔로스틱 위에 올려줍니다.<br>'+
+         '버팔로스틱위에 파르미지아노 치즈를 갈아 올려준 뒤 감자튀김 위에 파슬리를 뿌려줍니다.<br>'+
+         '기호에 맞게 케찹과 칠리소스, 체다치즈소스를 같이 먹으면 더 맜있게 드실 수 있습니다.<br>'+
+         'EAT!',0))
+
+##### 37. 리코타치즈 샐러드
+#####  양배추(105), 적근대(127), 케일(128), 새싹(119),방울토마토(121), 만다린(129), 리코타치즈(137), 스위트 콘(123), 유자 드레싱(144), 발사믹 식초(145)
+c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
+         ('리코타치즈 샐러드','양식','사이드','reicottacheesesalad.jfif','105,127,128,119,121,129,137,123,144,145',
+         '케일과 적근대, 양배추를 먹기 좋은 크기로 썰어줍니다.<br>'+
+         '그릇에 케일과 적근대, 양배추, 새싹을 적당히 담아 준 다음 그 위에 리코타 치즈와 스위트 콘을 올려줍니다.<br>'+
+         '샐러드 위에 유자 드레싱과 발사믹 식초를 뿌려줍니다.<br>'+
+         'EAT!',0))
+
 ##음식이름
 ##재료
 #c.execute('insert into recipe (recipeseq,food,category1,category2,image,ingredient,recipe,hits) values(recipe_seq.nextval,:1,:2,:3,:4,:5,:6,:7)',
