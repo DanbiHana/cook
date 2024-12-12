@@ -171,14 +171,17 @@ function hideOrderList(ths){
     $('.orderlist_ingredient').attr("hidden",true);
 }
 
-
+function autoResize(recipe) {
+    recipe.style.height = 'auto' // 높이를 자동으로 초기화
+    recipe.style.height = recipe.scrollHeight + 'px' // 스크롤 높이에 맞게 높이 설정
+}
 $(document).ready(function(){
     if(win_href.includes("recipe/select") && win_search.includes("path=detail")){
         var recipe = $('#recipe').val().split("<br>");
         var recipe_div = "";
         for (var i in recipe){
             recipe_div += "<div class='recipeProcess'>"
-            recipe_div +=   "<p>"+ (Number(i)+1) +".</p><input type='text' id='recipeProcess_"+i+"' name='recipeProcess_"+i+"' value='"+recipe[i]+"' readonly>";
+            recipe_div +=   "<p>"+ (Number(i)+1) +".</p><textarea id='recipeProcess_"+i+"'name='recipeProcess_"+i+"' readonly  oninput='autoResize(this)'>"+recipe[i]+"</textarea>";
             recipe_div += "</div>";
         }
         $('#recipeProcess').append(recipe_div);
