@@ -20,7 +20,7 @@ ingredient = sys.argv[1]
 oracledb.init_oracle_client(lib_dir="C:\\project\\cook\\instantclient_11_2")
 
 # 오라클 데이터베이스 연결
-connect = oracledb.connect(user='', password='', dsn='')
+connect = oracledb.connect(user='kkr', password='1234', dsn='localhost')
 c = connect.cursor()  # 커서 생성
 
 # 크롬 옵션 설정
@@ -39,7 +39,7 @@ wait = WebDriverWait(driver, 10)
 try:
     # 쿠팡 메인 페이지 접속
     driver.get('https://www.coupang.com/')
-    
+
     # 검색창 로드 대기 후 입력
     search_box = wait.until(EC.presence_of_element_located((By.ID, "headerSearchKeyword")))
     search_box.clear()
@@ -69,7 +69,7 @@ try:
                 numeric_price = re.sub(r'[^0-9]', '', price.text.strip())
 
                 # 데이터베이스에 저장
-                c.execute('INSERT INTO INGREDIENT (ingre_seq, name, price, keyword) VALUES (ingre_seq.NEXTVAL, :1, :2, :3)', 
+                c.execute('INSERT INTO INGREDIENT (ingre_seq, name, price, keyword) VALUES (ingre_seq.NEXTVAL, :1, :2, :3)',
                            (title.text.strip(), numeric_price, ingredient))
                 connect.commit()
 finally:
