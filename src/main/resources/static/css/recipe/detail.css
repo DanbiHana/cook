@@ -87,10 +87,15 @@
 .recipeProcess p{
     margin : 0;
 }
-.recipeProcess input[type="text"]:read-only{
-    border:none;
+.recipeProcess textarea:read-only{
+    border: none;
+    padding: 5px;
     background-color: var(--bg-none);
-    opacity:1.0;
+    opacity: 1.0;
     font-weight: bold;
-
+    padding: 0;
+    margin: 0 0 0 10px;
+    overflow: hidden;
+    align-content: center;
 }
+
