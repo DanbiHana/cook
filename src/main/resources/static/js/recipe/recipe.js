@@ -4,7 +4,7 @@ function confirmOk(object){
     if(object=='cartOk'){
         var length = $("input[name='ingredient']:checked").length;
         var ingredient = "";
-        if(length > 1){
+        if(length >= 1){
             $("input[name='ingredient']:checked").each(function(index){
                 var value = $(this).val();
                 if(length-1 == index){
@@ -13,19 +13,19 @@ function confirmOk(object){
                     ingredient += value + ",";
                 }
             });
-        }
-        $.ajax({
-            url:"/recipe/cartsave",
-            type:"post",
-            async:"true",
-            data:{"id":id,"ingredient":ingredient},
-            success:function(data){
-                confirmShow(data,"","cartgo");
-                $('.btn_hide').text("확인");
-                $('#pop_confirm_btn').text("장바구니로 가기");
-            },
-            error:function(){alertShow("에러","");}
-        });
+            $.ajax({
+                url:"/recipe/cartsave",
+                type:"post",
+                async:"true",
+                data:{"id":id,"ingredient":ingredient},
+                success:function(data){
+                    confirmShow(data,"","cartgo");
+                    $('.btn_hide').text("확인");
+                    $('#pop_confirm_btn').text("장바구니로 가기");
+                },
+                error:function(){alertShow("에러","");}
+            });
+        }else{ alertShow("선택된 상품이 없습니다.","");}
     }
     if(object == 'cartgo'){
         location.href="/recipe/cart?id="+id;
