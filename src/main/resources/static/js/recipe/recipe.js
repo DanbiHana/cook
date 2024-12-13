@@ -48,6 +48,9 @@ function confirmOk(object){
     if(object == 'reloadok'){
         location.reload();
     }
+    if(object == 'goOrderList'){
+        location.href="order?id="+id+"&status=order";
+    }
 }
 //장바구니 요약 창 구성
 function summary(){

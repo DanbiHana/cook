@@ -136,7 +136,7 @@ function addressConfirm(){
         success:function(data){
             addrHide();
             $('.btn_hide').hide();
-            confirmShow("주문이 완료되었습니다.","","reloadok");
+            confirmShow("주문이 완료되었습니다.","","goOrderList");
        },
        error:function(){alertShow("에러","");}
     });
