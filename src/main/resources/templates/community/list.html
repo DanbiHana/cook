@@ -19,7 +19,7 @@
                                 <p th:text="${#temporals.format(commu.communityDate, 'yy년 MM월 dd일')}">등록일</p>
                             </th:block>
                             <th:block th:if="${commu.communityDate != commu.communityUpdateDate}">
-                                <p th:text="${#temporals.format(commu.communityUpdateDate, 'yyyy년 MM월 dd일')}">수정일</p>
+                                <p th:text="${#temporals.format(commu.communityUpdateDate, 'yy년 MM월 dd일')}">수정일</p>
                             </th:block>
                         </div>
                         <p class="no_data_txt" th:if="${adminList == null} or ${adminList.size() == 0}">등록된 공지사항이 없습니다.</p>
