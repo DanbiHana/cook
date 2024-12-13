@@ -45,7 +45,7 @@
     function checkform(){ //유효성 검사
         if(win_href.includes('/pwsearch')){ //pwsearch가 포함되어있으면 실행
             var id = $('#id').val();
-            var cid = /^[a-zA-Z0-9]{4,10}$/;
+            var cid = /^[a-zA-Z0-9]{4,16}$/;
             if(id==""){
                 alertShow('아이디를 입력해주세요','');
                 $('#id').focus();
