@@ -67,27 +67,6 @@ $(document).ready(function(){
         });
     });
 });
-//비밀번호 일치 유무
-function passwordCheck(){
-    var pw = $("#pw").val();
-    var pwcheck = $("#pwcheck").val();
-    var pw_message = document.getElementById("pw_message");	//확인 메세지
-    var correctColor = "#3d7797";	//맞았을 때 출력되는 색깔.
-    var wrongColor = "#bb0000";		//틀렸을 때 출력되는 색깔
-    if(pw == pwcheck){ //password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
-        if(pw.length<6 ||pw.length>16){
-            pw_message.style.color = wrongColor;
-            pw_message.innerHTML = "비밀번호는 6~16자 이내로 입력해주세요.";
-        }
-        else{
-            pw_message.style.color = correctColor;/* span 태그의 ID(confirmMsg) 사용  */
-            pw_message.innerHTML = " 비밀번호가 일치합니다.";/* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
-        }
-    }else{
-        pw_message.style.color = wrongColor;
-        pw_message.innerHTML = " 비밀번호가 일치하지 않습니다.";
-    }
-}
 //중복확인 후 아이디 수정 시 다시 중복확인 구현
 function idcheck_reset(){
     $('#idcheck2').val(1);
