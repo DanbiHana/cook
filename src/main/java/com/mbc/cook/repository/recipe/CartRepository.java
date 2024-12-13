@@ -68,5 +68,5 @@ public interface CartRepository extends JpaRepository<CartEntity, String> {
     @Query(value = "select order_item " +
             "from cart " +
             "where cart_seq=:id and status=:status",nativeQuery = true)
-    String findingrebyid(long id, String status);
+    String findingrebyid(@Param("id") long id, @Param("status") String status);
 }
