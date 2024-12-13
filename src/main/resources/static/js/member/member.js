@@ -3,13 +3,13 @@
     $('#is').click(function(){ //아이디 찾기 팝업창
         var windowFeatures = "top=300, popup=yes";
         var popup = window.open('idsearch', "_blank", windowFeatures);
-        popup.resizeTo(650,500);
+        popup.resizeTo(650,550);
     });
 
     $('#ps').click(function(){ //비밀번호 찾기 팝업창
         var windowFeatures = "top=300, popup=yes";
         var popup = window.open('pwsearch', "_blank", windowFeatures);
-        popup.resizeTo(650,500);
+        popup.resizeTo(650,700);
     });
 
     $(document).ready(function() {
@@ -102,9 +102,8 @@
         return true;
     };
 
-    function checkform1(){ //패스워드 유효성 검사
-        var pw=$('#pw').val();
-        var pwcheck =$('#pwcheck').val();
+    function checkform1(pw,pwcheck){ //패스워드 유효성 검사
+        var vpw =/^[a-zA-Z0-9]{6,16}$/;
         var vpw =/^[a-zA-Z0-9]{6,16}$/;
         if(pw==""){
             alertShow('오류','비밀번호를 입력해주세요');
@@ -126,7 +125,7 @@
             $('#pwcheck').focus();
             return false;
         }
-        else{return true};
+        else{return true;}
     };
 
     function findID() { //아이디 찾기
@@ -188,7 +187,10 @@
         var id= $('#id').val();
         var pw = $('#pw').val();
         var pwcheck = $('#pwcheck').val();
-        if(checkform1()){
+        if(pw != pwcheck){
+            alertShow("오류",'비밀번호가 일치하지 않습니다.');
+        }
+        else if(checkform1(pw, pwcheck)){
             $.ajax({
                 type: "post",
                 url: "/pwUpdate",

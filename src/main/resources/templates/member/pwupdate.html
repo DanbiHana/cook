@@ -9,16 +9,17 @@
         <input type="hidden" name="id" id="id" th:value="${id}">
         <label>비밀번호</label>
         <div>
-            <input type="password" name="pw" id="pw" placeholder="새로운 비밀번호를 입력해주세요">
+            <input type="password" name="pw" id="pw" placeholder="새로운 비밀번호를 6~16자 이내로 입력해주세요">
             <i class="fa fa-eye-slash fa-lg"></i>
         </div>
     </div>
-    <div>
+    <div class="pw">
         <label>비밀번호 확인</label>
         <div class="pw1">
-            <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인">
+            <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인" onkeyup="passwordCheck()">
             <i class="fa fa-eye-slash fa-lg"></i>
         </div>
+        <span id="pw_message"></span>
     </div>
     <div class="btn_flex">
         <button type="button" value="비밀번호 수정" id="check" onclick="check()" class="btn_submit">
