@@ -18,7 +18,7 @@ oracledb.init_oracle_client(lib_dir="C:\\project\\cook\\instantclient_11_2")
 
 # 오라클 데이터베이스 연결
 #각자 계정 연결
-connect = oracledb.connect(user='', password='1234', dsn='localhost')
+connect = oracledb.connect(user='', password='', dsn='localhost')
 c = connect.cursor()  # 커서 생성
 
 today = datetime.today()
