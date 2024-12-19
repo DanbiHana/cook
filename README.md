@@ -1,16 +1,13 @@
-## MBC 아카데미 Spring Boot 프로젝트 with 김규리, 김민성, 박현준, 이혜린, 천시아
-<br>
-# 1인 가구를 위한 레시피 추천 사이트 < COOK:EAT >
-<br>
-<br>
+# COOK:EAT
+### MBC 아카데미 Spring Boot 프로젝트 with 김규리, 김민성, 박현준, 이혜린, 천시아<br><br>
 ## 🍴 프로젝트 소개
 <br>
-&nbsp;&nbsp;- 이름 소개
+&nbsp;&nbsp;<b>< 이름 소개 ></b>
 COOK: - 요리하다&ensp;/&ensp;EAT - 먹다
 <br/>
 '내가 요리한 음식을 내가 먹는다'는 뜻으로, 1인 가구가 타겟층입니다.
-&nbsp;&nbsp;- 개요
-COOK:EAT은 {1인 가구}를 위한 레시피 소개 웹페이지입니다.
+&nbsp;&nbsp;<b>< 개요 ></b>
+COOK:EAT은 <b>1인 가구</b>를 위한 레시피 소개 웹페이지입니다.
 <br/>
 한식, 중식, 일식, 양식으로 나누어 다양한 요리를 소개합니다.
 <br><br><br>
