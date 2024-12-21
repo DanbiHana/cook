@@ -1,7 +1,7 @@
 # 🍽 COOK:EAT
 MBC 아카데미 Spring Boot 프로젝트 with 김규리, 김민성, 박현준, 이혜린, 천시아
 <br>
-pdf 다운로드: [COOK_EAT.pdf](https://github.com/user-attachments/files/18210368/COOK_EAT.pdf)
+pdf 다운로드: [COOK_EAT.pdf](https://github.com/user-attachments/files/18217895/COOK_EAT.pdf)
 <br><br>
 ## 🍴 프로젝트 소개
 &nbsp;<b>< 이름 소개 ></b>
@@ -39,7 +39,7 @@ COOK:EAT은 <b>1인 가구</b>를 위한 레시피 소개 웹페이지입니다.
 ✔️ Java, SpringBoot<br>
 ✔️ Git<br>
 ✔️ Python<br><br>
-![004](https://github.com/user-attachments/assets/6de1ee40-4c3e-4a33-ba3a-01aca1750ef3)
+![COOK_EAT-004](https://github.com/user-attachments/assets/5790c08f-6d2b-4b49-ada6-a8228d50e220)
 <br>
 <br>
 <br>
